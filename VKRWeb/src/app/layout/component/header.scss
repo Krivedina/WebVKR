@@ -1,0 +1,28 @@
+.navigation {
+  margin-top: 60px;
+  background: linear-gradient(
+    0deg,
+    rgba(183, 253, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 38%
+  );
+  align-items: right;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+  }
+  li a {
+    display: block;
+    padding: 14px 17px;
+    text-decoration: none;
+    &:hover {
+      background: linear-gradient(
+        0deg,
+        rgb(158, 218, 219) 0%,
+        rgba(255, 255, 255, 1) 38%
+      );
+    }
+  }
+}

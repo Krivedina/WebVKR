@@ -1,0 +1,23 @@
+.student-list {
+  border-radius: 30px;
+  // background-color: rgb(226, 225, 208);
+  width: 800px;
+  height: 160px;
+  padding: 10px;
+  &__wrapper {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    div:last-child {
+      border-bottom: 1px solid black;
+    }
+  }
+  &__field-block {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,42 @@
+<div class="registration registration__form-bolck">
+  <h2 class="registration__title">Регистрация</h2>
+  <form [formGroup]="registrationForm" class="registration__form">
+    <label for="email">Адрес электронной почты</label>
+    <input id="email" type="email" formControlName="email" class="control" />
+    <label for="name">Имя</label>
+    <input type="text" formControlName="name" id="name" class="control" />
+    <label for="surename">Фамилия</label>
+    <input
+      type="text"
+      formControlName="surename"
+      id="surename"
+      class="control"
+    />
+    <label for="second-name">Отчество</label>
+    <input
+      type="text"
+      formControlName="second_name"
+      id="second-name"
+      class="control"
+    />
+    <label for="password">Пароль</label>
+    <input
+      type="text"
+      formControlName="password"
+      id="password"
+      class="control"
+    />
+    <label for="password-confirm">Повторите пароль</label>
+    <input
+      type="text"
+      formControlName="password_confirm"
+      id="password-confirm"
+      class="control"
+    />
+    <label for="group">Группа</label>
+    <input type="text" formControlName="group" id="group" class="control" />
+    <button type="submit" class="registration__submit">
+      Зарегистрироваться
+    </button>
+  </form>
+</div>
