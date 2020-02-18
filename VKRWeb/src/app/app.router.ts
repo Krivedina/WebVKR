@@ -9,23 +9,39 @@ const routers: Routes = [
   {
     path: "",
     redirectTo: "/student-list",
-    pathMatch: 'full'
+    pathMatch: "full"
   },
   {
     path: "student-list",
-    component: StudentListComponent
+    loadChildren: () =>
+      import("./student-list/components/student-list.components").then(
+        file => file.StudentListComponent
+      )
+    // component: StudentListComponent
   },
   {
     path: "profile",
-    component: ProfileComponent
+    loadChildren: () =>
+      import("./profile/components/profile.component").then(
+        file => file.ProfileComponent
+      )
+    // component: ProfileComponent
   },
   {
     path: "registration",
-    component: RegistrationComponent
+    loadChildren: () =>
+      import("./registration/components/registration.component").then(
+        file => file.RegistrationComponent
+      )
+    // component: RegistrationComponent
   },
   {
     path: "login",
-    component: LoginComponent
+    loadChildren: () =>
+    import("./login/components/login.component").then(
+      file => file.LoginComponent
+    )
+    // component: LoginComponent
   }
 ];
 
