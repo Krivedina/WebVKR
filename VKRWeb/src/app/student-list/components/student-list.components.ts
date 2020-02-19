@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { StudentListBaseService } from "../data/student-list.base.service";
-import { HttpService } from 'src/app/http/http.service';
+import { HttpService } from "src/app/http/http.service";
 
 @Component({
   selector: "student-list",
@@ -8,11 +8,7 @@ import { HttpService } from 'src/app/http/http.service';
   styleUrls: ["./student-list.scss"]
 })
 export class StudentListComponent extends StudentListBaseService {
-
-    constructor(httpService: HttpService){
-        super(httpService);
-        this.getListStudents()
-    }
-
-  
+  constructor(httpService: HttpService) {
+    super(httpService);
+  }
 }
