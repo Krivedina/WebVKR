@@ -1,34 +1,53 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpEventType } from "@angular/common/http";
 import { publishReplay, refCount, map } from "rxjs/operators";
-import { Observable } from 'rxjs';
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class HttpService {
-  private _listStudentsCache;
-
   constructor(private http: HttpClient) {}
 
+  public sub = new Subject<any>();
   private _cache = {};
   public requestGet(url: string): any {
     return this.http.get(url);
   }
 
-  public requestListStudents(): Observable<any> {
-    if (!this._listStudentsCache) {
-      this._listStudentsCache = this.requestGet(
-        "http://localhost:5000/user/1f4a0cc8b33c43c3beddfe6181c1b8c5"
-      ).pipe(
-        publishReplay(1),
-        refCount()
-      )
+  public requestListStudents(): void {
+    if (!this._cache["ListStudents"]) {
+      this.http
+        .get(
+          "http://localhost:5000/user/profile/1f4a0cc8b33c43c3beddfe6181c1b8c5"
+        )
+        .subscribe(data => {
+          this.sub.next(data);
+          this.sub.complete();
+          this._cache["ListStudents"] = data;
+        });
     }
-    return this._listStudentsCache;
+  }
+
+  public signIn(data: any): void {
+    this.http
+      .post("http://localhost:5000/signIn", data)
+      .subscribe(data => console.log(data));
+  }
+
+  public signUp(data: any) {
+    this.http
+      .post("http://localhost:5000/signUp", data)
+      .subscribe(data => console.log(data));
+  }
+
+  public getUserData() {
+    this.http
+      .get(
+        "http://localhost:5000/user/profile/4c53f1ba-e3e4-45c0-96d2-01e7be8e21fb"
+      )
+      .subscribe(data => console.log(data));
   }
 
   public getListStudents() {
-    let a = null;
-    this.requestListStudents().subscribe(data =>{a = data});
-    return a;
+    return this._cache["ListStudents"];
   }
 }

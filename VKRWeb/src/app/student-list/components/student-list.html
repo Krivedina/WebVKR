@@ -1,8 +1,8 @@
-<div class="student-list student-list__wrapper">
-  <div>
+<section class="student-list student-list__wrapper">
+  <div *ngIf="!requestIsDone()">
     <span>{{listStudents.name}}</span>
     <span>{{listStudents.surname}}</span>
     <span>{{listStudents.educationGroupId}}</span>
     <span>Сделано задач 1</span>
   </div>
-</div>
+</section>

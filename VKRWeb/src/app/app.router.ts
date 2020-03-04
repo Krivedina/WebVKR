@@ -9,7 +9,7 @@ import { NotFoundPageComponent } from './http/not-found-page/not-found-page.comp
 const routers: Routes = [
   {
     path: "",
-    redirectTo: "/student-list",
+    redirectTo: "/profile",
     pathMatch: 'full'
   },
   {

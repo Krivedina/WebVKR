@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private route: Router,private httpService: HttpService) {}
 
   public ngOnInit() {
-    this.httpService.requestListStudents();
+    
   }
 
 }

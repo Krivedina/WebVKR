@@ -9,6 +9,7 @@ import { StudentListModule } from './student-list/student-list.module';
 import { HeaderModule } from './layout/header.module';
 import { DirectiveModule } from './directives/directive.module';
 import { HttpModule } from './http/http.module';
+import { TaskListModule } from './task-list/task-list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { HttpModule } from './http/http.module';
     StudentListModule,
     HeaderModule,
     DirectiveModule,
-    HttpModule
+    HttpModule,
+    TaskListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
