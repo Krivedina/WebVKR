@@ -29,7 +29,7 @@ export class HttpService {
 
   public signIn(data: any): void {
     this.http
-      .post("http://localhost:5000/signIn", data)
+      .post("http://localhost:5000/signIn", data, { withCredentials: true })
       .subscribe(data => console.log(data));
   }
 
