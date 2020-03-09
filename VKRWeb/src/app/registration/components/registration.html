@@ -3,39 +3,39 @@
   <form [formGroup]="registrationForm" class="registration__form">
     <label for="email">Адрес электронной почты</label>
     <input id="email" type="email" formControlName="email" class="control" />
-    <label for="name">Имя</label>
-    <input type="text" formControlName="name" id="name" class="control" />
-    <label for="surename">Фамилия</label>
+    <label for="firstName">Имя</label>
+    <input type="text" formControlName="firstName" id="firstName" class="control" />
+    <label for="surname">Фамилия</label>
     <input
       type="text"
-      formControlName="surename"
-      id="surename"
+      formControlName="surname"
+      id="surname"
       class="control"
     />
-    <label for="second-name">Отчество</label>
+    <label for="secondName">Отчество</label>
     <input
       type="text"
-      formControlName="second_name"
+      formControlName="secondName"
       id="second-name"
       class="control"
     />
     <label for="password">Пароль</label>
     <input
-      type="text"
+      type="password"
       formControlName="password"
       id="password"
       class="control"
     />
-    <label for="password-confirm">Повторите пароль</label>
+    <label for="passwordConfirm">Повторите пароль</label>
     <input
-      type="text"
-      formControlName="password_confirm"
-      id="password-confirm"
+      type="password"
+      formControlName="passwordConfirm"
+      id="passwordConfirm"
       class="control"
     />
     <label for="group">Группа</label>
     <input type="text" formControlName="group" id="group" class="control" />
-    <button (click)="registrationRequest()" class="registration__submit">
+    <button (click)="registrationRequest()" [disabled]="registrationForm.invalid" class="registration__submit">
       Зарегистрироваться
     </button>
   </form>

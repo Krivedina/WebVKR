@@ -11,8 +11,4 @@ export class ProfileComponent extends ProfileBaseService implements OnInit {
   constructor(httpService: HttpService) {
     super(httpService);
   }
-
-  public ngOnInit() {
-    this.getUserProfile();
-  }
 }

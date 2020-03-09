@@ -1,6 +1,7 @@
 import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { Injectable } from "@angular/core";
 import { HttpService } from "src/app/http/http.service";
+import { RequestPathList } from 'src/app/http/routing-path-list';
 
 @Injectable()
 export class LoginBaseService {
@@ -13,15 +14,14 @@ export class LoginBaseService {
       Validators.maxLength(25)
     ];
     this.LoginForm = new FormGroup({
-      email: new FormControl("azakov31@gmail.com", [Validators.required, Validators.email]),
-      password: new FormControl("qwerty321", textValidators)
+      email: new FormControl("krivedina@gmail.com", [Validators.required, Validators.email]),
+      password: new FormControl("123456", textValidators)
     });
   }
 
   public submitData() {
     const data = this.LoginForm.value;
-    console.log(data);
-    this.httpService.signIn(data);
+    this.httpService.postRequest(RequestPathList.signIn, data, { withCredentials: true });
   }
   
 }

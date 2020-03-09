@@ -3,6 +3,7 @@
   <form class="login__form" [formGroup]="LoginForm">
     <input formControlName="email" class="control" placeholder="Email" type="email" />
     <input formControlName="password" class="control" placeholder="Password" type="password" />
+    <a href="">Github</a>
     <button
       (click)="submitData()"
       [disabled]="LoginForm.invalid"
