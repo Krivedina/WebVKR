@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { LoginComponent } from "./components/login.component";
-import { LoginBaseService } from './data/login.base.service';
+import { LoginBaseService } from "./data/login.base.service";
 
 @NgModule({
   declarations: [LoginComponent],

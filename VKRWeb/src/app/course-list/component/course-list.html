@@ -1,0 +1,50 @@
+<section>
+    <h1 class="page__title">Курсы</h1>
+    <section class="content-window">
+        <article class="course-list-head__wrapper">
+            <span class="course-list-head__title">Скрипты</span>
+            <div class="middle-block">
+                <div class="progress-bar">
+                    <span style="width: 50%"></span>
+                </div>
+                <span class="course-list-head__score">10/30</span>
+            </div>
+            <div class="right-block">
+                <span class="course-list-head__status">Незачет</span>
+                <button class="course-list-head__show-button" (click)='openCourse()'></button>
+            </div>
+        </article>
+        <article *ngIf="isOpen" class="course-list-body__wrapper">
+            <div class="course-list-body__row-title">
+                <span class="course-list-body__element-title">Задача</span>
+                <span class="course-list-body__middle-block">Требования</span>
+                <span class="course-list-body__rigth-block">Входные данные</span>
+            </div>
+            <div class="course-list-body__row-element">
+                <a class="course-list-body__element-title" [routerLink]="['scripts', 'entropy']">
+                    <span>Энтропия</span>
+                </a>
+                <div class=" course-list-body__middle-block">
+                    <div [ngStyle]="{'background-color': '#00B7DF'}" class="point">
+                        <span></span>
+                    </div>
+                    <div class="point">
+                    </div>
+                    <div class="point">
+                    </div>
+                    <div class="point">
+                    </div>
+                    <div class="point">
+                    </div>
+                    <div class="point">
+                    </div>
+                    <div class="point">
+                    </div>
+                </div>
+                <button class=" 
+                    course-list-body__rigth-block 
+                    low-press-button">Скачать</button>
+            </div>
+        </article>
+    </section>
+</section>

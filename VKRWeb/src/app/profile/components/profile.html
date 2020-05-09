@@ -1,27 +1,70 @@
-<div class="profile__wrapper profile">
-  <div class="profile__image-block">
-    <img
-      class="profile__image"
-      src="https://www.burkemuseum.org/sites/default/files/images/biology/herpetology/washington/northern-red-legged-frog1-1100x555.jpg"
-      alt="Аватар пользователя"
-    />
+<section class="profile">
+  <h1 class="page__title">Профиль</h1>
+  <div class="profile__info">
+
+    <div>
+      <img class="profile__image" src="https://memepedia.ru/wp-content/uploads/2018/07/576552d6e73f015563cb97a3.png"
+        alt="kumamon">
+    </div>
+
+    <article *ngIf="!isEditProfile" class="profile__data">
+      <div class="profile__value-data">
+        <span class='field-name'>ФИО</span>
+        <span>Чебурген Виссарионович Кумамонов</span>
+      </div>
+      <div class="profile__value-data">
+        <span class='field-name'>Группа</span>
+        <span>ЛУЛ-111111</span>
+      </div>
+      <div class="profile__value-data">
+        <span class='field-name'>Email</span>
+        <span>shachlo@popyachsya.com</span>
+      </div>
+      <button (click)="editProfile()" class="press-button profile__change-button">
+        Редактировать данные
+      </button>
+    </article>
+
+    <form *ngIf="isEditProfile" [formGroup]="profileForm" class="profile__data">
+      <article class="profile__edit-wrapper">
+        <span class="field-name profile__edit-title">ФИО</span>
+        <div class="profile__edit-value-data">
+          <label class="custom-input">
+            <input formControlName="surname" type="text" placeholder="&nbsp;" class="control-input" />
+            <span>Фамилия</span>
+          </label>
+          <label class="custom-input">
+            <input formControlName="firstName" type="text" placeholder="&nbsp;" class="control-input" />
+            <span>Имя</span>
+          </label>
+          <label class="custom-input">
+            <input formControlName="secondName" type="text" placeholder="&nbsp;" class="control-input" />
+            <span>Отчество</span>
+          </label>
+        </div>
+      </article>
+      <article class="profile__edit-wrapper">
+        <span class="field-name">Группа</span>
+        <div class="profile__edit-value-data">
+          <label class="custom-input">
+            <input formControlName="group" type="text" placeholder="&nbsp;" class="control-input" />
+            <span>Группа</span>
+          </label>
+        </div>
+      </article>
+      <article class="profile__edit-wrapper">
+        <span class="field-name">Email</span>
+        <div class="profile__edit-value-data">
+          <label class="custom-input">
+            <input formControlName="email" type="email" placeholder="&nbsp;" class="control-input" />
+            <span>Email</span>
+          </label>
+        </div>
+      </article>
+      <button (click)="saveChanges()" class="press-button profile__change-button">
+        Сохранить
+      </button>
+    </form>
+
   </div>
-  <div class="profile__info info">
-    <div class="info__field-block">
-      <span class="info__title">Имя</span>
-      <span class="info__field">Миша</span>
-    </div>
-    <div class="info__field-block">
-      <span class="info__title">Фамилия</span>
-      <span class="info__field">Казаков</span>
-    </div>
-    <div class="info__field-block">
-      <span class="info__title">Email</span>
-      <span class="info__field">sobaka@deputata.mail.com</span>
-    </div>
-    <div class="info__field-block">
-      <span class="info__title">Группа</span>
-      <span class="info__field">КН-402</span>
-    </div>
-  </div>
-</div>
+</section>

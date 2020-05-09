@@ -1,40 +1,84 @@
-.profile {
-  border: 2px black;
-  border-radius: 30px;
-  // background-color: rgb(226, 225, 208);
-  width: 800px;
-  height: 200px;
-  padding: 10px;
+$line-distance: 40px;
 
-  &__wrapper {
-    padding: 20px;
+.profile {
+  &__title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 43px;
+  }
+
+  &__info {
+    margin-bottom: 10px;
     display: flex;
   }
 
   &__image {
-    border-radius: 90px;
-    width: 128px;
-    height: 128px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
   }
-
-  &__info {
+  &__data {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
-    width: 100%;
+    margin-left: 70px;
+  }
+
+  .field-name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    display: inline;
+  }
+
+  &__value-data {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 22px;
+    :last-child {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      position: inherit;
+      left: 113px;
+      top: -25px;
+    }
+  }
+  
+  &__edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+   &__edit-title{
+    margin-top: 15px;
+  }
+  &__edit-value-data {
+    position: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    top: -45px;
+    left: 85px;
+    label{
+      margin-left: 22px;
+      margin-bottom: 22px;
+    }
+  }
+
+  &__change-button {
+    margin: auto;
   }
 }
-.info {
-  &__field-block {
-    display: flex;
-    margin-bottom: 30px;
-    justify-content: space-between;
+
+//overload
+.custom-input{
+  span{
+    bottom: 35%;
   }
-  &__title {
-    font-weight: 700;
-  }
-  &__field {
-  }
-  &__email {
-  }
+}
+.custom-input input:placeholder-shown:focus ~ span,
+.custom-input input:not(:placeholder-shown) ~ span {
+  bottom: 70%;
 }

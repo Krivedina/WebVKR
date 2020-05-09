@@ -1,0 +1,6 @@
+<div [@fadeInOut] class="requirements-block__score">
+    <span class="requirements-block__score-text">{{requirement}}
+    </span>
+    <ng-content></ng-content>
+    <div (click)="deleteLog()" class="closeMark requirements-block__score-point"> </div>
+</div>

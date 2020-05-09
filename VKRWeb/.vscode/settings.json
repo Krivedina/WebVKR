@@ -1,0 +1,28 @@
+{
+  "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.autoSave": "off",
+  "editor.fontFamily": "JetBrains Mono Regular, Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "prettier.printWidth": 80,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 4,
+  "prettier.useTabs": true,
+  "explorer.confirmDelete": false,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "prettier.trailingComma": "es5",
+  "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "timeline.excludeSources": [
+      "git-history"
+  ],
+  "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

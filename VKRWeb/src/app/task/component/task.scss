@@ -1,0 +1,144 @@
+.task-block-title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.task-content-window {
+  padding: 0;
+}
+
+.deadline-block {
+  position: relative;
+  display: flex;
+  padding: 25px 30px 20px 30px;
+  border-bottom: 1px solid #d0d0d0;
+  align-items: center;
+  &__title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    margin-right: 10px;
+  }
+
+  &__score {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  &__status {
+    @extend .deadline-block__score;
+    font-weight: bold;
+    opacity: 50%;
+    position: absolute;
+    right: 50px;
+  }
+
+  &__progress-bar {
+    width: 120px;
+
+  }
+  &__progress-bar-wrapper{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 300px;
+  }
+}
+
+.requirements-block {
+  @extend .deadline-block;
+  flex-direction: column;
+  align-items: flex-start;
+  &__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 30px;
+  }
+
+  &__score {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__score-text {
+    margin-left: 20px;
+    max-width: 900px;
+    max-height: 200px;
+    word-wrap: break-word;
+    overflow: auto;
+    font-size: 18px;
+  }
+
+  &__score-point {
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
+}
+
+.description-block {
+  @extend .deadline-block;
+  align-items: flex-start;
+  &__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 30px;
+  }
+
+  &__wrapper-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__text {
+    // width: 670px;
+    // height: 235px;
+    // border: 1px red solid;
+
+    max-width: 670px;
+    word-wrap: break-word;
+    overflow: auto;
+
+    span {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  &__wrapper-load {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 50px;
+  }
+}
+
+.solution-block {
+  @extend .deadline-block;
+  flex-direction: column;
+  align-items: flex-start;
+  &__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 30px;
+  }
+}
+
+.file-name{
+  margin-left: 20px;
+}

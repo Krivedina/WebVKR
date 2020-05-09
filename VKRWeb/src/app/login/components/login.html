@@ -1,14 +1,15 @@
 <div class="login login__form-block">
-  <h2 class="login__title">Войти</h2>
+  <h1 class="login__title">Войти</h1>
   <form class="login__form" [formGroup]="LoginForm">
-    <input formControlName="email" class="control" placeholder="Email" type="email" />
-    <input formControlName="password" class="control" placeholder="Password" type="password" />
-    <a href="">Github</a>
-    <button
-      (click)="submitData()"
-      [disabled]="LoginForm.invalid"
-      class="login__submit"
-    >
+    <label class="custom-input">
+      <input formControlName="email" type="email" placeholder="&nbsp;" class="control-input" />
+      <span>Email</span>
+    </label>
+    <label class="custom-input">
+      <input formControlName="password" type="password" placeholder="&nbsp;" class="control-input" />
+      <span>Пароль</span>
+    </label>
+    <button (click)="submitData()" [disabled]="LoginForm.invalid" class="press-button login__submit">
       Вход
     </button>
   </form>

@@ -1,0 +1,63 @@
+<section>
+    <h1 class="page__title">Энтропия</h1>
+    <section class="content-window task-content-window">
+        <article class="deadline-block">
+            <span class="deadline-block__title">Дедлайн </span>
+            <span class="deadline-block__title">22.04.2020</span>
+            <div class="deadline-block__progress-bar-wrapper">
+                <div class="progress-bar deadline-block__progress-bar">
+                    <span style="width: 50%"></span>
+                </div>
+                <span class="deadline-block__score">10 / 30</span>
+            </div>
+            <span class="deadline-block__status">В работе</span>
+        </article>
+        <article class="requirements-block">
+            <span class="requirements-block__title">Требования</span>
+            <div>
+                <div class="requirements-block__score">
+                    <!-- <p>{{mark}}</p> -->
+                    <div [ngStyle]="{'background-image': getUrl()}" class="requirements-block__score-point">
+                    </div>
+                    <span class="requirements-block__score-text">Требование 1
+                    </span>
+                </div>
+                <div class="requirements-block__score">
+                    <div [ngStyle]="{'background-image': getUrl()}" class="requirements-block__score-point">
+                    </div>
+                    <span class="requirements-block__score-text">Требование 2
+                    </span>
+                </div>
+                <div class="requirements-block__score">
+                    <div [ngStyle]="{'background-image': getUrl()}" class="requirements-block__score-point">
+                    </div>
+                    <span class="requirements-block__score-text">Требование 3
+                    </span>
+                </div>
+            </div>
+        </article>
+        <article class="description-block">
+            <div class="description-block__wrapper-text">
+                <span class="description-block__title">Описание</span>
+                <div class="description-block__text">
+                    <span>Кумамон - медведь</span>
+                </div>
+            </div>
+            <div class="description-block__wrapper-load ">
+                <span class="description-block__title">Входные данные</span>
+                <button class="low-press-button">Скачать</button>
+            </div>
+        </article>
+        <article class="solution-block">
+            <span class="solution-block__title">Решение</span>
+            <div>
+                <label class="low-press-button" for="uploaded-file">Загрузить</label>
+                <input class="snatch" id="uploaded-file" name="file" type="file" title="Загрузить" (change)="getFileName()">
+                <span class="file-name" id="file-name"></span>
+            </div>
+        </article>
+        <!-- <article>
+            <span>Чат</span>
+        </article>  -->
+    </section>
+</section>

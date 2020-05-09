@@ -1,42 +1,48 @@
-<div class="registration registration__form-bolck">
-  <h2 class="registration__title">Регистрация</h2>
-  <form [formGroup]="registrationForm" class="registration__form">
-    <label for="email">Адрес электронной почты</label>
-    <input id="email" type="email" formControlName="email" class="control" />
-    <label for="firstName">Имя</label>
-    <input type="text" formControlName="firstName" id="firstName" class="control" />
-    <label for="surname">Фамилия</label>
-    <input
-      type="text"
-      formControlName="surname"
-      id="surname"
-      class="control"
-    />
-    <label for="secondName">Отчество</label>
-    <input
-      type="text"
-      formControlName="secondName"
-      id="second-name"
-      class="control"
-    />
-    <label for="password">Пароль</label>
-    <input
-      type="password"
-      formControlName="password"
-      id="password"
-      class="control"
-    />
-    <label for="passwordConfirm">Повторите пароль</label>
-    <input
-      type="password"
-      formControlName="passwordConfirm"
-      id="passwordConfirm"
-      class="control"
-    />
-    <label for="group">Группа</label>
-    <input type="text" formControlName="group" id="group" class="control" />
-    <button (click)="registrationRequest()" [disabled]="registrationForm.invalid" class="registration__submit">
-      Зарегистрироваться
-    </button>
+<article class="registration registration__form-bolck">
+  <h1 class="registration__title">Регистрация</h1>
+  <form [formGroup]="registrationForm">
+    <div class="registration__form">
+      <label class="custom-input">
+        <input formControlName="firstName" type="text" placeholder="&nbsp;" class="control-input" />
+        <span>Имя</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="surname" type="text" placeholder="&nbsp;" class="control-input" />
+        <span>Фамилия</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="secondName" type="text" placeholder="&nbsp;" class="control-input" />
+        <span>Отчество</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="email" type="email" placeholder="&nbsp;" class="control-input" />
+        <span>Email</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="password" type="password" placeholder="&nbsp;" class="control-input" />
+        <span>Пароль</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="passwordConfirm" type="password" placeholder="&nbsp;" class="control-input" />
+        <span>Повторите пароль</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="group" type="text" placeholder="&nbsp;" class="control-input" />
+        <span>Группа</span>
+      </label>
+      <div class="registration__checkbox-group">
+        <div>
+          <input formControlName="student" type="checkbox" id="student" class="control-checkbox" />
+          <label for="student">Студент</label>
+        </div>
+        <div>
+          <input formControlName="admin" type="checkbox" id="admin" class="control-checkbox" />
+          <label for="admin">Преподаватель</label>
+        </div>
+      </div>
+      <button (click)="registrationRequest()" class="registration__submit-button press-button">
+        Создать аккаунт
+      </button>
+    </div>
   </form>
-</div>
+</article>

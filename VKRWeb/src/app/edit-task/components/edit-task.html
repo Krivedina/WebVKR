@@ -1,0 +1,56 @@
+<section>
+    <div class="edit-title">
+        <h1 class="page__title">Энтропия</h1>
+        <button #editTitleButton (click)="editTitle()" class="confirm-press-button">Изменить название</button>
+        <div #editTitleWindow>
+            <edit-window *ngIf="isEditTitle" class="edit-title-window" buttonName="Сохранить" inputName="Название">
+            </edit-window>
+        </div>
+    </div>
+
+    <section class="content-window task-content-window">
+        <article class="deadline-block">
+            <span class="deadline-block__title">Дедлайн </span>
+            <span class="deadline-block__title">22.04.2020</span>
+            <span class="deadline-block__status">В работе</span>
+            <button #editDeadlineButton (click)="editDeadline()" class="low-press-button">Задать дедлайн</button>
+            <div #editDeadlineWindow>
+                <edit-window *ngIf="isEditDeadline" class="edit-deadline-window" buttonName="Сохранить"
+                    inputName="Дедлайн задачи">
+                </edit-window>
+            </div>
+        </article>
+        <article class="requirements-block">
+            <textarea #requirementsTextArea spellcheck="true" class="control-input" name="requirements-textarea"
+                cols="30" rows="10"></textarea>
+            <button (click)="addRequirements()" class="requirements-block__add-button low-press-button">Добавить</button>
+            <span class="requirements-block__title">Требования</span>
+            <requirement-text *ngFor="let requirementData of requirementsList" [requirement]=requirementData.text
+                (deleteElement)="deleteRequirement($event)">
+            </requirement-text>
+        </article>
+        <article class="description-block">
+            <div class="description-block__wrapper-text">
+                <span class="description-block__title">Описание</span>
+                <div class="description-block__text">
+                    <span>Кумамон - медведь</span>
+                </div>
+                <textarea #requirementsTextArea spellcheck="true" class="control-input" name="requirements-textarea"
+                cols="30" rows="10"></textarea>
+                <button class="description-block__button-change-description low-press-button">Изменить описание</button>
+            </div>
+            <div class="description-block__wrapper-load ">
+                <span class="description-block__title">Входные данные</span>
+                <div class="description-block__upload">
+                    <label class="low-press-button" for="uploaded-file">Загрузить</label>
+                    <input class="snatch" id="uploaded-file" name="file" type="file" title="Загрузить"
+                        (change)="getFileName()">
+                    <span class="file-name" id="file-name"></span>
+                </div>
+            </div>
+        </article>
+        <!-- <article>
+            <span>Чат</span>
+        </article>  -->
+    </section>
+</section>

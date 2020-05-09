@@ -1,12 +1,6 @@
-label {
-  margin-top: 10px;
-  cursor: pointer;
-}
 .registration {
-  border: 2px black;
-  border-radius: 30px;
-  // background-color: rgb(226, 225, 208);
-  width: 350px;
+  max-width: 350px;
+  margin: auto;
   padding: 10px;
 
   &__form-block {
@@ -16,31 +10,31 @@ label {
 
   &__title {
     display: flex;
+    font-size: 36px;
     justify-content: center;
   }
 
   &__form {
-    padding: 0 15px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    & input {
+      margin-bottom: 22px;
+    }
   }
-  &__submit {
+
+  &__submit-button {
     margin: auto;
-    margin-top: 10px;
-    cursor: pointer;
-    width: 150px;
-    height: 35px;
+  }
+
+  &__checkbox-group {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+    & div {
+      margin-bottom: 22px;
+    }
   }
 }
 
-.control {
-  border: 0;
-  // background-color: rgb(226, 225, 208);
-  border-bottom: 1px solid;
-  &:focus {
-    outline: 0;
-  }
-  &:active {
-    // background-color: rgb(226, 225, 208);
-  }
-}

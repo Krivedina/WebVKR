@@ -20,8 +20,7 @@ export class LoginBaseService {
   }
 
   public submitData() {
-    const data = this.LoginForm.value;
-    this.httpService.postRequest(RequestPathList.signIn, data, { withCredentials: true });
+    this.httpService.postRequest(RequestPathList.signIn, this.LoginForm.value, { withCredentials: true });
   }
   
 }

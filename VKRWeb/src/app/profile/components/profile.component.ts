@@ -7,8 +7,15 @@ import { HttpService } from "src/app/http/http.service";
   templateUrl: "./profile.html",
   styleUrls: ["./profile.scss"]
 })
-export class ProfileComponent extends ProfileBaseService implements OnInit {
+export class ProfileComponent extends ProfileBaseService{
+  public isEditProfile: boolean;
+
   constructor(httpService: HttpService) {
     super(httpService);
+    this.isEditProfile = false;
+  }
+  
+  public editProfile() {
+    this.isEditProfile = !this.isEditProfile;
   }
 }

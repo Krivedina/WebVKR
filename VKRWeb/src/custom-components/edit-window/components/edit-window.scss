@@ -1,0 +1,9 @@
+.custom-input {
+	span {
+		bottom: 35%;
+	}
+}
+.custom-input input:placeholder-shown:focus ~ span,
+.custom-input input:not(:placeholder-shown) ~ span {
+	bottom: 70%;
+}
