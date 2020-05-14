@@ -10,15 +10,15 @@
     <article *ngIf="!isEditProfile" class="profile__data">
       <div class="profile__value-data">
         <span class='field-name'>ФИО</span>
-        <span>Чебурген Виссарионович Кумамонов</span>
+        <span>{{modelProfileForm.surname}} {{modelProfileForm.firstName}} {{modelProfileForm.secondName}}</span>
       </div>
       <div class="profile__value-data">
         <span class='field-name'>Группа</span>
-        <span>ЛУЛ-111111</span>
+        <span>{{modelProfileForm.group}}</span>
       </div>
       <div class="profile__value-data">
         <span class='field-name'>Email</span>
-        <span>shachlo@popyachsya.com</span>
+        <span>{{modelProfileForm.email}}</span>
       </div>
       <button (click)="editProfile()" class="press-button profile__change-button">
         Редактировать данные

@@ -7,7 +7,7 @@
   "editor.fontLigatures": true,
   "prettier.printWidth": 80,
   "prettier.singleQuote": true,
-  "prettier.tabWidth": 4,
+  "prettier.tabWidth": 2,
   "prettier.useTabs": true,
   "explorer.confirmDelete": false,
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",

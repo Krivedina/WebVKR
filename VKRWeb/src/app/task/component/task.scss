@@ -25,9 +25,10 @@
 
   &__score {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
+    margin-left: 25px;
   }
 
   &__status {
@@ -77,12 +78,12 @@
     font-size: 18px;
   }
 
-  &__score-point {
-    background-repeat: no-repeat;
-    width: 18px;
-    height: 18px;
-    margin: 0;
-  }
+	&__status {
+		background-repeat: no-repeat;
+		width: 30px;
+		height: 30px;
+		border-radius: 15px;
+	}
 }
 
 .description-block {

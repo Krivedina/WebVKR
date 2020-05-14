@@ -1,6 +1,7 @@
 <div [@fadeInOut] class="requirements-block__score">
+    <div [ngStyle]="{'background-color': status ? '#00B7DF': '#cbf6ff'}" class="requirements-block__status">
+    </div>
     <span class="requirements-block__score-text">{{requirement}}
     </span>
-    <ng-content></ng-content>
     <div (click)="deleteLog()" class="closeMark requirements-block__score-point"> </div>
 </div>

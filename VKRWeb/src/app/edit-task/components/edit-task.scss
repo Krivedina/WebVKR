@@ -83,6 +83,13 @@
 		margin: 0;
 	}
 
+	&__textarea {
+		font-size: 18px;
+		width: 400px;
+		max-width: 875px;
+		max-height: 400px;
+	}
+
 	&__add-button {
 		margin-top: 35px;
 		margin-bottom: 50px;
@@ -104,13 +111,10 @@
 	&__wrapper-text {
 		display: flex;
 		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	&__text {
-		// width: 670px;
-		// height: 235px;
-		// border: 1px red solid;
-
 		max-width: 670px;
 		word-wrap: break-word;
 		overflow: auto;
@@ -123,10 +127,16 @@
 		}
 	}
 
-	&__button-change-description {
-    margin-top: 40px;
+	&__textarea {
+		font-size: 18px;
+		width: 400px;
+		max-width: 700px;
+		max-height: 400px;
+	}
 
-  }
+	&__button-change-description {
+		margin-top: 40px;
+	}
 
 	&__wrapper-load {
 		display: flex;
@@ -156,10 +166,10 @@
 
 .file-name {
 	margin-top: 10px;
-	max-width: 150px;
+	max-width: 170px;
 }
 
-.edit-title {
+.page__edit-title {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -184,16 +194,12 @@
 	z-index: 1;
 }
 
-.custom-input {
-	span {
-		bottom: 35%;
-	}
-}
-.custom-input input:placeholder-shown:focus ~ span,
-.custom-input input:not(:placeholder-shown) ~ span {
-	bottom: 70%;
-}
-.control-input {
-	max-width: 875px;
-	max-height: 400px;
+.edit-block-wrapper {
+	background: rgb(0, 0, 0, 0.5);
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	top: 0;
+	left: 0;
 }

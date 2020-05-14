@@ -1,3 +1,10 @@
+.edit-block {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) 
+}
+
 .custom-input {
 	span {
 		bottom: 35%;
@@ -6,11 +13,4 @@
 .custom-input input:placeholder-shown:focus ~ span,
 .custom-input input:not(:placeholder-shown) ~ span {
 	bottom: 60%;
-}
-
-.edit-block {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }

@@ -1,0 +1,67 @@
+<section>
+    <article class=page__title-wrapper>
+        <h1 class="page__title">Курсы</h1>
+        <button (click)="createCourse()" class="confirm-press-button">Создать новый курс</button>
+    </article>
+
+    <section *ngFor="let course of modelEditCourse.courseList; trackBy: trackByFn" class="content-window">
+
+        <article [ngStyle]="{'border-bottom': isOpen ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+            <div class="course-list-head__block">
+                <span class="course-list-head__title">{{course.courseName}}</span>
+                <span class="course-list-head__title"> — {{course.courseMaxScore}} баллов</span>
+                <div class="right-block">
+                    <button (click)="editCourse(course.id)" class="course-menu__button low-press-button">Редактировать</button>
+                    <button class="course-menu__button low-press-button">Удалить курс</button>
+                    <button class="course-list-head__show-button" (click)='openCourse()'></button>
+                </div>
+            </div>
+        </article>
+
+        <article *ngIf="isOpen" class="course-list-body__wrapper">
+            <div class="course-list-body__row-title">
+                <span class="course-list-body__element-title">Задача</span>
+            </div>
+            <div>
+                <label class="custom-input">
+                    <input type="text" placeholder="&nbsp;" class="control-input" />
+                    <span>Назавние новой задачи</span>
+                </label>
+                <label class="custom-input">
+                    <input type="text" placeholder="&nbsp;" class="control-input" />
+                    <span>Дедлайн новой задачи</span>
+                </label>
+            </div>
+            <button class="course-list-body__create-button low-press-button">Добавить</button>
+            <article class="task-list">
+                <div class="task-list__wrapper">
+                    <span class="task-list__task-name">Энтропия</span>
+                    <span class="task-list__task-deadline">22.04.2020</span>
+                    <div class="task-list__task-edit">
+                        <button class="low-press-button">Редактировать</button>
+                        <div (click)="deleteTask()" class="closeMark"></div>
+                    </div>
+                </div>
+                <div class="task-list__wrapper">
+                    <span class="task-list__task-name">Энтропия</span>
+                    <span class="task-list__task-deadline">22.04.2020</span>
+                    <div class="task-list__task-edit">
+                        <button class="low-press-button">Редактировать</button>
+                        <div (click)="deleteTask()" class="closeMark"></div>
+                    </div>
+                </div>
+            </article>
+        </article>
+
+    </section>
+</section>
+
+<div *ngIf="isCreateCourse" class="edit-block-wrapper">
+    <create-window (inputValue)="addNewCourse($event)" firstTitle="Название курса"
+        secondTitle="Количество баллов за курс" buttonName="Сохранить"></create-window>
+</div>
+<!-- (inputValue)="editCurrentCourse($event)" -->
+<div *ngIf="isEditCourse" class="edit-block-wrapper">
+    <create-window  (inputValue)="editCurrentCourse($event)" firstTitle="Название курса"
+        secondTitle="Количество баллов за курс" buttonName="Сохранить"></create-window>
+</div>

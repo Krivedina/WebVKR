@@ -1,0 +1,141 @@
+.page {
+	&__title-wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin: 30px 0;
+		h1 {
+			margin: 0;
+			margin-right: 20px;
+		}
+	}
+}
+
+.edit-block-wrapper {
+	background: rgb(0, 0, 0, 0.5);
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	top: 0;
+	left: 0;
+}
+
+.course-list-head {
+	&__wrapper {
+		width: 100%;
+		display: flex;
+		position: relative;
+	}
+
+	&__block {
+		padding: 25px 30px;
+		display: flex;
+	}
+
+	&__title {
+		font-style: normal;
+		font-weight: bold;
+		font-size: 24px;
+		line-height: 29px;
+	}
+
+	&__show-button {
+		cursor: pointer;
+		margin-left: 29px;
+		width: 25px;
+		height: 15px;
+		background: transparent;
+		border: 0;
+		background-image: url("static/image/ShowArrow.svg");
+		background-repeat: no-repeat;
+	}
+}
+
+.right-block {
+	position: absolute;
+	right: 30px;
+}
+
+.course-menu__button {
+	margin-left: 23px;
+}
+
+.course-list-body {
+	&__wrapper {
+		padding: 25px 30px;
+	}
+
+	&__row-title {
+		display: flex;
+		position: relative;
+		span {
+			margin-top: 15px;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 14px;
+			margin-bottom: 33px;
+		}
+	}
+	&__create-button {
+		margin-top: 38px;
+		margin-bottom: 50px;
+	}
+}
+
+.task-list {
+	&__wrapper {
+		display: flex;
+		padding: 20px 15px;
+		border-bottom: 1px solid #E5E5E5;
+		position: relative;
+	}
+	&__task-name {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 21px;
+	}
+	&__task-deadline {
+		left: 307px;
+		position: absolute;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 21px;
+	}
+	&__task-edit {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		right: 0;
+
+		button{
+			margin-right: 60px;
+		}
+	}
+}
+
+.closeMark {
+	background-image: url(static\image\Mark.svg);
+	background-repeat: no-repeat;
+	width: 18px;
+	height: 18px;
+	margin-left: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+//overload
+.custom-input {
+	margin-right: 22px;
+	span {
+		bottom: 12px;
+	}
+}
+.custom-input input:placeholder-shown:focus ~ span,
+.custom-input input:not(:placeholder-shown) ~ span {
+	bottom: 28px;
+}

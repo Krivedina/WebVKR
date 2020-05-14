@@ -11,6 +11,7 @@ import { HeaderModule } from './layout/header.module';
 import { HttpModule } from './http/http.module';
 import { TaskListModule } from './task-list/task-list.module';
 import { CourseListModule } from './course-list/course-list.module';
+import { EditCourseModule } from './edit-course/edit-course.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { CourseListModule } from './course-list/course-list.module';
     HttpModule,
     TaskListModule,
     CourseListModule,
+    EditCourseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

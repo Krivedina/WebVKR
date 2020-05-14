@@ -1,7 +1,7 @@
-<div #editWindow class="edit-block">
-    <label class="custom-input">               
-        <input type="text" placeholder="&nbsp;" class="control-input" />
-        <span>{{inputName}}</span>
-      </label>
-    <button class="confirm-press-button">{{buttonName}}</button>
-</div>
+<form [formGroup]="editGroup" class="edit-block">
+  <label class="custom-input">
+    <input formControlName="currentInput" type="text" placeholder="&nbsp;" class="control-input" />
+    <span>{{inputName}}</span>
+  </label>
+  <button (click)="getInputValue()" class="confirm-press-button">{{buttonName}}</button>
+</form>

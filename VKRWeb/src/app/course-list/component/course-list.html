@@ -1,50 +1,41 @@
 <section>
     <h1 class="page__title">Курсы</h1>
-    <section class="content-window">
-        <article class="course-list-head__wrapper">
-            <span class="course-list-head__title">Скрипты</span>
-            <div class="middle-block">
-                <div class="progress-bar">
-                    <span style="width: 50%"></span>
+    <section *ngFor="let course of modelCourseList.courseList" class="content-window">
+        <article [ngStyle]="{'border-bottom': isOpen ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+            <div class="course-list-head__block">
+                <span class="course-list-head__title">{{course.name}}</span>
+                <div class="middle-block">
+                    <div class="progress-bar">
+                        <span style="width: 50%"></span>
+                    </div>
+                    <span class="course-list-head__score">{{course.currentScore}}/{{course.maxScore}}</span>
                 </div>
-                <span class="course-list-head__score">10/30</span>
-            </div>
-            <div class="right-block">
-                <span class="course-list-head__status">Незачет</span>
-                <button class="course-list-head__show-button" (click)='openCourse()'></button>
+                <div class="right-block">
+                    <span class="course-list-head__status">{{course.courseStatus ? 'Зачет' : 'Незачет'}}</span>
+                    <button class="course-list-head__show-button" (click)='openCourse()'></button>
+                </div>
             </div>
         </article>
-        <article *ngIf="isOpen" class="course-list-body__wrapper">
+        <section *ngIf="isOpen" class="course-list-body__wrapper">
             <div class="course-list-body__row-title">
                 <span class="course-list-body__element-title">Задача</span>
                 <span class="course-list-body__middle-block">Требования</span>
                 <span class="course-list-body__rigth-block">Входные данные</span>
             </div>
-            <div class="course-list-body__row-element">
-                <a class="course-list-body__element-title" [routerLink]="['scripts', 'entropy']">
-                    <span>Энтропия</span>
+            <article *ngFor="let task of course.courseTasks" class="course-list-body__row-element">
+                <a class="course-list-body__element-title" [routerLink]="[course.name, task.name]">
+                    <span>{{task.name}}</span>
                 </a>
                 <div class=" course-list-body__middle-block">
-                    <div [ngStyle]="{'background-color': '#00B7DF'}" class="point">
+                    <div *ngFor="let requirement of task.requirementList"
+                        [ngStyle]="{'background-color': requirement.status ?'#00b7df' : '#cbf6ff'}" class="point">
                         <span></span>
-                    </div>
-                    <div class="point">
-                    </div>
-                    <div class="point">
-                    </div>
-                    <div class="point">
-                    </div>
-                    <div class="point">
-                    </div>
-                    <div class="point">
-                    </div>
-                    <div class="point">
                     </div>
                 </div>
                 <button class=" 
                     course-list-body__rigth-block 
                     low-press-button">Скачать</button>
-            </div>
-        </article>
+            </article>
+        </section>
     </section>
 </section>

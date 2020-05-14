@@ -14,6 +14,13 @@
 		overflow: auto;
 	}
 
+	&__status {
+		background-repeat: no-repeat;
+		width: 30px;
+		height: 30px;
+		border-radius: 15px;
+	}
+
 	&__score-point {
 		background-repeat: no-repeat;
 		width: 18px;

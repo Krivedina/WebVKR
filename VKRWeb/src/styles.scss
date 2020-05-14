@@ -1,220 +1,224 @@
 @font-face {
-  font-family: "SansPro";
-  src: url("../static/fonts/SourceSansPro-Regular.ttf");
+	font-family: "SansPro";
+	src: url("../static/fonts/SourceSansPro-Regular.ttf");
 }
 
 $button: #32a458;
-$button-active:  #32a458aa;
+$button-active: #32a458aa;
 $error: #f44336;
 $confirm: #007ac0;
-$confirm-active:#007ac0aa;
+$confirm-active: #007ac0aa;
 $content-line: #e5e5e5;
-
+$checked: #00b7df;
+$notChecked: #cbf6ff;
 body {
-  font-family: "SansPro";
-  border: 0;
-  margin: 0;
-  padding: 0;
+	font-family: "SansPro";
+	border: 0;
+	margin: 0;
+	padding: 0;
 }
 
 a:hover {
-  color: $confirm;
+	color: $confirm;
 }
 
 .page__title {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 43px;
-  margin-bottom: 50px;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 43px;
+	margin-bottom: 50px;
 }
 
 .content-window {
-  border: 1px solid #d0d0d0;
-  box-sizing: border-box;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  padding: 25px 30px;
+	border: 1px solid #d0d0d0;
+	box-sizing: border-box;
+	border-radius: 10px;
+	margin-bottom: 20px;
 }
 
 .point {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  position: relative;
-  background-color: #cbf6ff;
-  margin-right: 10px;
-  margin-bottom: 10px;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	position: relative;
+	background-color: $notChecked;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 .progress-bar {
-  border-radius: 15px;
-  width: 300px;
-  height: 30px;
-  position: relative;
-  background-color: #cbf6ff;
+	border-radius: 15px;
+	width: 300px;
+	height: 30px;
+	position: relative;
+	background-color: $notChecked;
 
-  span {
-    border-radius: 15px;
-    display: block;
-    height: 100%;
-    background-color: #00b7df;
-    position: relative;
-  }
+	span {
+		border-radius: 15px;
+		display: block;
+		height: 100%;
+		background-color: $checked;
+		position: relative;
+	}
 }
 
 .press-button {
-  min-width: 80px;
-  max-height: 40px;
-  font-family: "SansPro";
-  border: none;
-  text-decoration: none;
-  text-align: center;
-  color: #ffffff;
-  font-size: 16px;
-  padding: 10px 18px;
-  border-radius: 20px;
-  background-color: $button;
-  &:hover {
-    cursor: pointer;
-    background-color: $button-active;
-  }
+	min-width: 80px;
+	max-height: 40px;
+	font-family: "SansPro";
+	border: none;
+	text-decoration: none;
+	text-align: center;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 10px 18px 11px 18px;
+	border-radius: 20px;
+	background-color: $button;
+	line-height: 19px;
+	&:hover {
+		cursor: pointer;
+		background-color: $button-active;
+	}
 }
 
 .low-press-button {
-  @extend .press-button;
-  padding: 5px 18px;
+	@extend .press-button;
+	padding: 5px 18px 6px 18px;
 }
 
-.confirm-press-button{
-  @extend .press-button;
-  background-color: $confirm;
-  &:hover {
-    background-color: $confirm-active;
-  }
+.confirm-press-button {
+	@extend .press-button;
+	background-color: $confirm;
+	&:hover {
+		background-color: $confirm-active;
+	}
 }
 
 .control-input {
-  font-family: "SansPro";
-  background-color: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding: 14px 15px;
-  font-size: 16px;
-  width: 250px;
-  height: 60px;
+	font-family: "SansPro";
+	background-color: #ffffff;
+	border: 1px solid #d0d0d0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding: 30px 16px 9px 16px;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	width: 250px;
+	height: 60px;
 }
 
 .custom-input {
-  position: relative;
-  &:focus {
-    border-color: $confirm;
-  }
+	position: relative;
+	&:focus {
+		border-color: $confirm;
+	}
 }
 .custom-input span {
-  position: absolute;
-  bottom: 50%;
-  left: 5%;
-  opacity: 0.5;
-  visibility: hidden;
-  transition: 0.2s;
+	pointer-events: none;
+	position: absolute;
+	bottom: 50%;
+	left: 5%;
+	opacity: 0.5;
+	visibility: hidden;
+	transition: 0.2s;
 }
 .custom-input input:placeholder-shown ~ span {
-  visibility: visible;
+	visibility: visible;
 }
 .custom-input input:placeholder-shown:focus ~ span,
 .custom-input input:not(:placeholder-shown) ~ span {
-  bottom: 75%;
-  opacity: 1;
-  left: 5%;
-  display: inline;
-  font-size: 80%;
-  visibility: visible;
+	font-size: 12px;
+	bottom: 70%;
+	opacity: 1;
+	left: 6.5%;
+	display: inline;
+	font-size: 80%;
+	visibility: visible;
 }
 
 .control-checkbox {
-  position: absolute;
-  opacity: 0;
-  border-radius: 20px;
-  & + label {
-    position: relative;
-    cursor: pointer;
-    padding: 0;
-  }
+	position: absolute;
+	opacity: 0;
+	border-radius: 20px;
+	& + label {
+		position: relative;
+		cursor: pointer;
+		padding: 0;
+	}
 
-  // Box.
-  & + label:before {
-    content: "";
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
-    border: 1px solid #d0d0d0;
-  }
+	// Box.
+	& + label:before {
+		content: "";
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		margin-right: 10px;
+		display: inline-block;
+		vertical-align: middle;
+		width: 20px;
+		height: 20px;
+		background: #ffffff;
+		border: 1px solid #d0d0d0;
+	}
 
-  // // Box hover
-  // &:hover + label:before {
-  //   border: 2px solid #d0d0d0;
-  // }
+	// // Box hover
+	// &:hover + label:before {
+	//   border: 2px solid #d0d0d0;
+	// }
 
-  // Box checked
-  &:checked + label:before {
-    background: $confirm;
-  }
+	// Box checked
+	&:checked + label:before {
+		background: $confirm;
+	}
 
-  // Disabled state label.
-  &:disabled + label {
-    color: #b8b8b8;
-    cursor: auto;
-  }
+	// Disabled state label.
+	&:disabled + label {
+		color: #b8b8b8;
+		cursor: auto;
+	}
 
-  // Disabled box.
-  &:disabled + label:before {
-    box-shadow: none;
-    background: #ddd;
-  }
+	// Disabled box.
+	&:disabled + label:before {
+		box-shadow: none;
+		background: #ddd;
+	}
 
-  // Checkmark
-  &:checked + label:after {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 10px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
-      4px -6px 0 white, 4px -8px 0 white;
-    transform: rotate(45deg);
-  }
+	// Checkmark
+	&:checked + label:after {
+		content: "";
+		position: absolute;
+		left: 5px;
+		top: 10px;
+		background: white;
+		width: 2px;
+		height: 2px;
+		box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
+			4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+		transform: rotate(45deg);
+	}
 }
 
 .snatch {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 .edit-block {
-  border: 1px solid #d0d0d0;
-  width: 300px;
-  height: 150px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+	border: 1px solid #d0d0d0;
+	box-sizing: border-box;
+	border-radius: 10px;
+	padding: 16px 22px 23px 22px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
 
-  button {
-    margin-top: 20px;
-  }
+	button {
+		margin-top: 22px;
+	}
 }

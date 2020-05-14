@@ -1,19 +1,25 @@
 export class ProfileFormViewModel {
-    public email: string;
-    public name: string;
-    public surename: string;
-    public second_name: string;
-    public passsword: string;
-    public password_confirm: string;
-    public group: string;
+  public email: string;
+  public firstName: string;
+  public surname: string;
+  public secondName: string;
+  public passsword: string;
+  public group: string;
 
-    constructor(data: any) {
-        this.email = data.email;
-        this.name = data.name;
-        this.surename = data.surename;
-        this.second_name = data.second_name;
-        this.passsword = data.passsword;
-        this.password_confirm = data.password_confirm;
-        this.group = data.group;
-    } 
+  public fillModel(
+    data = {
+      email: "pochta@email.com",
+      firstName: "Имя",
+      surname: "Фамилия",
+      secondName: "Отчество",
+      passsword: "Пароль",
+      group: "Группа",
+    }
+  ) {
+    for (let element in data) {
+      if (element !== undefined) {
+        this[element] = data[element];
+      }
+    }
+  }
 }

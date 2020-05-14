@@ -1,21 +1,57 @@
 import { Component, OnInit } from "@angular/core";
 import { ProfileBaseService } from "../data/profile.base.service";
-import { HttpService } from "src/app/http/http.service";
+import { ProfileFormViewModel } from "../view-model/profile-form.view-model";
+import { Validators, FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "profile",
   templateUrl: "./profile.html",
-  styleUrls: ["./profile.scss"]
+  styleUrls: ["./profile.scss"],
 })
-export class ProfileComponent extends ProfileBaseService{
-  public isEditProfile: boolean;
+//  implements OnInit
+export class ProfileComponent {
+  public isEditProfile: boolean = false;
 
-  constructor(httpService: HttpService) {
-    super(httpService);
-    this.isEditProfile = false;
+  public modelProfileForm: ProfileFormViewModel = new ProfileFormViewModel();
+  public profileForm: FormGroup;
+  private textValidators = [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(15),
+  ];
+
+  // constructor(profileBaseService: ProfileBaseService) {}
+
+  public ngOnInit(): void {
+    this.modelProfileForm.fillModel();
+    this.profileForm = new FormGroup({
+      email: new FormControl(this.modelProfileForm.email, [
+        Validators.required,
+        Validators.email,
+      ]),
+      firstName: new FormControl(
+        this.modelProfileForm.firstName,
+        this.textValidators
+      ),
+      surname: new FormControl(
+        this.modelProfileForm.surname,
+        this.textValidators
+      ),
+      secondName: new FormControl(
+        this.modelProfileForm.secondName,
+        this.textValidators
+      ),
+      group: new FormControl(this.modelProfileForm.group, this.textValidators),
+    });
   }
-  
+
   public editProfile() {
     this.isEditProfile = !this.isEditProfile;
+  }
+
+  public saveChanges() {
+    this.isEditProfile = !this.isEditProfile;
+    this.modelProfileForm.fillModel(this.profileForm.value);
+    // this.httpService.postRequest(RequestPathList.signIn, this.profileForm.value, { withCredentials: true });
   }
 }

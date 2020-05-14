@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-} from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
@@ -21,12 +16,14 @@ import { trigger, transition, style, animate } from "@angular/animations";
   ],
 })
 export class RequirementTextComponent {
-  @Output() deleteElement = new EventEmitter<string>();
+  @Output()
+  deleteElement = new EventEmitter<string>();
 
   @Input()
   public requirement: string;
 
-  @Output() deleteRequirement = new EventEmitter<boolean>();
+  @Input()
+  public status: boolean;
 
   public deleteLog() {
     this.deleteElement.emit(this.requirement);
