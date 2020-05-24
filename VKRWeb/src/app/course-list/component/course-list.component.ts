@@ -18,9 +18,9 @@ export class CourseListComponent implements OnInit {
   public ngOnInit(): void {
     this.courseListService.getCourseList()
     .subscribe(data => {
-      // this.modelCourseList.fillModel(data);
+      this.modelCourseList.fillModel(data);
     });
-    this.modelCourseList.fillModel();
+    // this.modelCourseList.fillModel();
   }
 
   public openCourse() {

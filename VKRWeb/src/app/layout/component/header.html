@@ -3,24 +3,25 @@
     <a [routerLink]="['/']">
       <span class="logo-block">WTF</span>
     </a>
-    <ul class="navigation__main-menu">
+    <ul *ngIf="isAuth()" class="navigation__main-menu">
       <li>
         <a [routerLink]="['/profile']" routerLinkActive="router-link-active">Профиль</a>
       </li>
+      <!-- <li *ngIf="isStudent()"> -->
       <li>
         <a [routerLink]="['/course-list']" routerLinkActive="router-link-active">Список Курсов</a>
       </li>
-      <li>
+      <li *ngIf="isAdmin()">
+        <a [routerLink]="['/edit-course']" routerLinkActive="router-link-active">Редактировать курсы</a>
+      </li>
+      <li *ngIf="isAdmin()">
         <a [routerLink]="['/student-list']" routerLinkActive="router-link-active">Список Студентов</a>
       </li>
-      <li>
+      <li *ngIf="isAdmin()">
         <a [routerLink]="['/edit-task']" routerLinkActive="router-link-active">edit-task</a>
       </li>
-      <li>
-        <a [routerLink]="['/edit-course']" routerLinkActive="router-link-active">edit-course</a>
-      </li>
     </ul>
-    <ul *ngIf="!isAuth" class="navigation__auth-menu">
+    <ul *ngIf="!isAuth()"  class="navigation__auth-menu">
       <li >
         <a [routerLink]="['/registration']" routerLinkActive="router-link-active">Зарегистрироваться</a>
       </li>
@@ -28,7 +29,7 @@
         <a [routerLink]="['/login']" routerLinkActive="router-link-active">Войти</a>
       </li>
     </ul>
-    <div *ngIf="isAuth" class="navigation__auth-menu">
+    <div *ngIf="isAuth()"  class="navigation__auth-menu">
       <span class="navigation__profile-name">Константинопольский К.К.</span>
       <img class="navigation__profile-photo"
         src="https://memepedia.ru/wp-content/uploads/2018/07/576552d6e73f015563cb97a3.png" alt="profile-photo">

@@ -21,10 +21,11 @@ export class EditCourseViewModel {
       ],
     }
   ) {
-    for (let element in data) {
-      if (element !== undefined) {
-        this[element] = data[element];
-      }
-    }
+    // for (let element in data) {
+    //   if (element !== undefined) {
+    //     this[element] = data[element];
+    //   }
+  // }
+    this.courseList = data;
   }
 }

@@ -19,16 +19,20 @@
         <span>Email</span>
       </label>
       <label class="custom-input">
-        <input formControlName="password" type="password" placeholder="&nbsp;" class="control-input" />
+        <input formControlName="password" type="text" placeholder="&nbsp;" class="control-input" />
         <span>Пароль</span>
       </label>
       <label class="custom-input">
-        <input formControlName="passwordConfirm" type="password" placeholder="&nbsp;" class="control-input" />
+        <input formControlName="passwordConfirm" type="text" placeholder="&nbsp;" class="control-input" />
         <span>Повторите пароль</span>
       </label>
       <label class="custom-input">
         <input formControlName="group" type="text" placeholder="&nbsp;" class="control-input" />
         <span>Группа</span>
+      </label>
+      <label class="custom-input">
+        <input formControlName="capcha" type="text" placeholder="&nbsp;" class="control-input" />
+        <span>Решите {{capcha.a}} + {{capcha.b}} = </span>
       </label>
       <div class="registration__checkbox-group">
         <div>

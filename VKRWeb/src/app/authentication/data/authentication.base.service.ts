@@ -16,7 +16,7 @@ export class AuthenticationBaseService {
   public logIn() {
     this._isAuth = true;
     this._role = RoleEnum.admin;
-    this.httpService.goToUrl("/");
+    this.httpService.goToUrl("/profile");
   }
 
   public logOut() {

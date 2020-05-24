@@ -8,6 +8,7 @@ import {
 import { EditCourseViewModel } from "../view-model/edit-course.view-model";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FormGroup, FormControlName, FormControl } from "@angular/forms";
+import { EditCourseBaseService } from "../data/edit-course.base.service";
 
 @Component({
   selector: "edit-course",
@@ -30,6 +31,8 @@ export class EditCourseComponent implements OnInit {
   public isDeleteCourse: boolean = false;
   public isDeleteTask: boolean = false;
 
+  public currentCourse: any = null;
+
   public modelEditCourse: EditCourseViewModel = new EditCourseViewModel();
 
   public addTaskForm = new FormGroup({
@@ -43,11 +46,21 @@ export class EditCourseComponent implements OnInit {
       this.isEditCourse = false;
       this.isDeleteCourse = false;
       this.isDeleteTask = false;
+      this.currentCourse = null;
     }
   }
 
+  constructor(private editCourseBaseService: EditCourseBaseService) {}
+
   public ngOnInit() {
-    this.modelEditCourse.fillModel();
+    this.fillCourseListPage()
+  }
+
+  public fillCourseListPage(flag = true) {
+    this.editCourseBaseService.getCourseList(flag).subscribe((courseList) => {
+      console.log(courseList);
+      this.modelEditCourse.fillModel(courseList);
+    });
   }
 
   trackByFn(index, item) {
@@ -62,12 +75,14 @@ export class EditCourseComponent implements OnInit {
     this.isCreateCourse = !this.isCreateCourse;
   }
 
-  public editCourseModal() {
+  public editCourseModal(course: any) {
     this.isEditCourse = !this.isEditCourse;
+    this.currentCourse = course;
   }
 
-  public deleteCourseModal() {
+  public deleteCourseModal(course: any) {
     this.isDeleteCourse = !this.isDeleteCourse;
+    this.currentCourse = course;
   }
 
   public deleteTaskModal() {
@@ -78,26 +93,39 @@ export class EditCourseComponent implements OnInit {
     console.log(this.addTaskForm.value);
   }
 
-  public deleteCourse(value: string) {}
+  public deleteCourse(value: string) {
+    if (!value) {
+      this.isDeleteCourse = false;
+      this.currentCourse = null;
+    } else {
+      this.editCourseBaseService
+        .postDeleteCourse(this.currentCourse.id)
+        .subscribe((res) => {
+          console.log(res);
+          this.fillCourseListPage(false)
+        });
+      this.isDeleteCourse = false;
+      this.currentCourse = null;
+      console.log(this.currentCourse);
+    }
+  }
 
   public deleteTask(value: string) {}
 
   public editCurrentCourse(courseModel: any) {}
 
-  public addNewCourse(newCourseModel: any) {
-    newCourseModel = this.fillNewCourseModel(newCourseModel);
-    this.modelEditCourse.courseList.push(newCourseModel);
+  public addNewCourse(newCourseModal: any) {
+    const newCourseModel = this.fillNewCourseModel(newCourseModal);
+    this.editCourseBaseService.postCreateCourse(newCourseModel);
+    // this.modelEditCourse.courseList.push(newCourseModel);
     this.isCreateCourse = false;
   }
 
-  private fillNewCourseModel(courseModel: any) {
-    courseModel.courseName = courseModel.firstTitle;
-    courseModel.courseMaxScore = courseModel.secondTitle;
-    courseModel.taskList = [];
-
-    delete courseModel.firstTitle;
-    delete courseModel.secondTitle;
-
-    return courseModel;
+  private fillNewCourseModel(newCourseModal: any) {
+    return {
+      name: newCourseModal.firstTitle,
+      maxScore: newCourseModal.secondTitle,
+      courseTasks: [],
+    };
   }
 }

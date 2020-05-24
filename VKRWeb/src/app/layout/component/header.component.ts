@@ -1,39 +1,36 @@
 import { Component, OnInit } from "@angular/core";
 import { HeaderBaseService } from "../data/header.base.service";
-import { RoleEnum } from 'static/role.enum';
+import { RoleEnum } from "static/role.enum";
 
 @Component({
   selector: "site-header",
   templateUrl: "./header.html",
-  styleUrls: ["./header.scss"]
+  styleUrls: ["./header.scss"],
 })
 export class HeaderComponent implements OnInit {
-  
-  public isAuth: boolean;
-  public role: number;
-
-  constructor(private HeaderBaseService: HeaderBaseService){
-
-  }
+  constructor(private HeaderBaseService: HeaderBaseService) {}
 
   public ngOnInit(): void {
-    setInterval(() =>{
-      const authInfo = this.HeaderBaseService.isAuthenticated()
-      this.isAuth = authInfo.authentication;
-      this.role = authInfo.role
-    }, 1000)
-
+    // setInterval(() =>{
+    //   const authInfo = this.HeaderBaseService.isAuthenticated()
+    //   this.isAuth = authInfo.authentication;
+    //   this.role = authInfo.role
+    // }, 1000)
   }
 
-  public isStudent(){
-    return this.role === RoleEnum.student && this.isAuth;
+  public isAuth() {
+    return this.HeaderBaseService.isAuthenticated().authentication;
   }
 
-  public isAdmin(){
-    return this.role === RoleEnum.admin && this.isAuth;
+  public isStudent() {
+    return this.HeaderBaseService.isAuthenticated().role === RoleEnum.student;
   }
 
-  public logOut(){
-    this.HeaderBaseService.logOutRequest()
+  public isAdmin() {
+    return this.HeaderBaseService.isAuthenticated().role === RoleEnum.admin;
+  }
+
+  public logOut() {
+    this.HeaderBaseService.logOutRequest();
   }
 }

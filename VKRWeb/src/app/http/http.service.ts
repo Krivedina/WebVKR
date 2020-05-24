@@ -1,8 +1,8 @@
+import { of } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { of } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class HttpService {
@@ -10,12 +10,16 @@ export class HttpService {
   private _cache = {};
 
   public postRequest(url: string, data: any, options: any = {}) {
-    return this.http
-      .post(url, data, options)
+    return this.http.post(url, data, options);
   }
 
-  public getRequest(url: string, cacheName: string, options: any = {}) {
-    if (!this._cache[cacheName]) {
+  public getRequest(
+    url: string,
+    cacheName: string,
+    withCache: boolean = true,
+    options: any = {}
+  ) {
+    if (!withCache){
       return this.http.get(url, options).pipe(
         switchMap((response) => {
           this._cache[cacheName] = response;
@@ -23,8 +27,18 @@ export class HttpService {
         })
       );
     } else {
-      return of(this._cache[cacheName]);
+      if (!this._cache[cacheName]) {
+        return this.http.get(url, options).pipe(
+          switchMap((response) => {
+            this._cache[cacheName] = response;
+            return of(response);
+          })
+        );
+      } else {
+        return of(this._cache[cacheName]);
+      }
     }
+  
   }
 
   /**
@@ -38,7 +52,7 @@ export class HttpService {
     this._cache = {};
   }
 
-  public goToUrl(url){
-    this.router.navigate([`${url}`])
+  public goToUrl(url) {
+    this.router.navigate([`${url}`]);
   }
 }

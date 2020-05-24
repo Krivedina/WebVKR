@@ -12,6 +12,7 @@ import { HttpModule } from './http/http.module';
 import { TaskListModule } from './task-list/task-list.module';
 import { CourseListModule } from './course-list/course-list.module';
 import { EditCourseModule } from './edit-course/edit-course.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { EditCourseModule } from './edit-course/edit-course.module';
     HttpModule,
     TaskListModule,
     CourseListModule,
-    EditCourseModule
+    EditCourseModule,
+    AuthenticationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

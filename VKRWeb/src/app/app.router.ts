@@ -19,10 +19,12 @@ const routers: Routes = [
   {
     path: "student-list",
     component: StudentListComponent,
+    // canActivate: ["AdminGuard"],
   },
   {
     path: "profile",
     component: ProfileComponent,
+    // canActivate: ["AuthicationGuard"],
   },
   {
     path: "registration",
@@ -35,10 +37,23 @@ const routers: Routes = [
   {
     path: "course-list",
     component: CourseListComponent,
+    // canActivate: ["StudentGuard"],
   },
-  { path: "course-list/:courseName/:taskName", component: TaskComponent },
-  { path: "edit-task", component: EditTaskComponent },
-  { path: "edit-course", component: EditCourseComponent },
+  {
+    path: "course-list/:courseName/:taskName",
+    component: TaskComponent,
+    // canActivate: ["StudentGuard"],
+  },
+  {
+    path: "edit-task",
+    component: EditTaskComponent,
+    // canActivate: ["AdminGuard"],
+  },
+  {
+    path: "edit-course",
+    component: EditCourseComponent,
+    // canActivate: ["AdminGuard"],
+  },
   {
     path: "**",
     component: NotFoundPageComponent,
