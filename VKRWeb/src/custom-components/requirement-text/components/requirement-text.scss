@@ -32,6 +32,7 @@
 .closeMark {
 	background-image: url(static/image/Mark.svg);
 	margin-left: 10px;
+	border: 0;
 	&:hover {
 		cursor: pointer;
 	}

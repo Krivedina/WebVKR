@@ -1,0 +1,26 @@
+.confirm-window {
+	&__question {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 21px;
+		text-align: center;
+    }
+    
+    &__question-name{
+        @extend .confirm-window__question;
+        font-weight: bold;
+    }
+
+    &__button-wrapper{
+        margin-top: 19px;
+    }
+
+    &__yes-button{
+        margin-right: 19px;
+    }
+}
+
+.edit-block {
+    padding: 20px 25px 23px 25px;
+}

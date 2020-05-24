@@ -50,15 +50,14 @@
 		background-image: url("static/image/ShowArrow.svg");
 		background-repeat: no-repeat;
 	}
-}
 
-.right-block {
-	position: absolute;
-	right: 30px;
-}
-
-.course-menu__button {
-	margin-left: 23px;
+	&__right-block {
+		position: absolute;
+		right: 30px;
+	}
+	&__button {
+		margin-left: 23px;
+	}
 }
 
 .course-list-body {
@@ -88,7 +87,7 @@
 	&__wrapper {
 		display: flex;
 		padding: 20px 15px;
-		border-bottom: 1px solid #E5E5E5;
+		border-bottom: 1px solid #e5e5e5;
 		position: relative;
 	}
 	&__task-name {
@@ -110,10 +109,9 @@
 		align-items: center;
 		position: absolute;
 		right: 0;
-
-		button{
-			margin-right: 60px;
-		}
+	}
+	&__task-edit-button {
+		margin-right: 51px;
 	}
 }
 
@@ -122,7 +120,8 @@
 	background-repeat: no-repeat;
 	width: 18px;
 	height: 18px;
-	margin-left: 10px;
+	margin: 0 10px;
+	border: 0;
 	&:hover {
 		cursor: pointer;
 	}

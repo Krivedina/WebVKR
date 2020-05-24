@@ -5,6 +5,7 @@ export class ProfileFormViewModel {
   public secondName: string;
   public passsword: string;
   public group: string;
+  public role: string;
 
   public fillModel(
     data = {
@@ -14,6 +15,7 @@ export class ProfileFormViewModel {
       secondName: "Отчество",
       passsword: "Пароль",
       group: "Группа",
+      role: "Студент"
     }
   ) {
     for (let element in data) {

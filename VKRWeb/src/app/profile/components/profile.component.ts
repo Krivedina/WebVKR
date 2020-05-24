@@ -8,8 +8,7 @@ import { Validators, FormGroup, FormControl } from "@angular/forms";
   templateUrl: "./profile.html",
   styleUrls: ["./profile.scss"],
 })
-//  implements OnInit
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   public isEditProfile: boolean = false;
 
   public modelProfileForm: ProfileFormViewModel = new ProfileFormViewModel();
@@ -43,6 +42,11 @@ export class ProfileComponent {
       ),
       group: new FormControl(this.modelProfileForm.group, this.textValidators),
     });
+    if (this.modelProfileForm.role === "Студент") {
+      this.modelProfileForm.role = "Студента";
+    } else if (this.modelProfileForm.role === "Преподаватель") {
+      this.modelProfileForm.role = "Преподавателя";
+    }
   }
 
   public editProfile() {

@@ -1,14 +1,20 @@
 .edit-block {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) 
+	padding: 16px 22px 23px 22px;
+
+	button {
+		margin-top: 22px;
+	}
+}
+
+.first-title__wrapper{
+	margin-bottom: 18px;
 }
 
 .custom-input {
 	span {
 		bottom: 35%;
 	}
+
 }
 .custom-input input:placeholder-shown:focus ~ span,
 .custom-input input:not(:placeholder-shown) ~ span {

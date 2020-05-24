@@ -1,17 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { of } from "rxjs";
-import { map, delay, switchAll, switchMap, switchMapTo } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   private _cache = {};
 
   public postRequest(url: string, data: any, options: any = {}) {
-    this.http
+    return this.http
       .post(url, data, options)
-      .subscribe((response) => console.log(response));
   }
 
   public getRequest(url: string, cacheName: string, options: any = {}) {
@@ -36,5 +36,9 @@ export class HttpService {
 
   public clearCache() {
     this._cache = {};
+  }
+
+  public goToUrl(url){
+    this.router.navigate([`${url}`])
   }
 }

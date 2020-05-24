@@ -1,0 +1,9 @@
+<div class="edit-block">
+    <span class="confirm-window__question">Вы дейстивтельно хотите удалить</span>
+    <span class="confirm-window__question-name">{{inputName}}?</span>
+    <div class="confirm-window__button-wrapper">
+        <button (click)=sendConfirmMessage(confirmMessage) class="confirm-window__yes-button confirm-press-button">Да,
+            конечно</button>
+        <button (click)=sendConfirmMessage() class="confirm-press-button">Да, мать твою, сделай это!</button>
+    </div>
+</div>

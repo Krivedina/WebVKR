@@ -4,6 +4,7 @@ import { EditCourseBaseService } from "./data/edit-course.base.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { CustomComponentsModule } from "src/custom-components/custom-components.module";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [EditCourseComponent],
@@ -14,6 +15,7 @@ import { CustomComponentsModule } from "src/custom-components/custom-components.
     ReactiveFormsModule,
     CommonModule,
     CustomComponentsModule,
+    RouterModule,
   ],
 })
 export class EditCourseModule {}

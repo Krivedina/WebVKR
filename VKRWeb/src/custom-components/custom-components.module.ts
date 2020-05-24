@@ -4,11 +4,13 @@ import { EditWindowComponent } from "./edit-window/components/edit-window.compon
 import { CommonModule } from "@angular/common";
 import { RequirementTextComponent } from "./requirement-text/components/requirement-text.component";
 import { CreateWindowComponent } from "./create-window/component/create-window.component";
+import { ConfirmWindowComponent } from './confirm-window/components/confirm-window.component';
 
 const customComponent = [
   RequirementTextComponent,
   EditWindowComponent,
   CreateWindowComponent,
+  ConfirmWindowComponent
 ];
 
 @NgModule({

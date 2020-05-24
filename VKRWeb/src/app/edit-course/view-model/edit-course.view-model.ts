@@ -7,7 +7,16 @@ export class EditCourseViewModel {
         {
           courseName: "Скрипты",
           courseMaxScore: "30",
-          taskList: [],
+          taskList: [
+            {
+              name: "Энтропия",
+              deadline: "22.04.2020",
+            },
+            {
+              name: "Шифр Цезаря",
+              deadline: "29.04.2020",
+            },
+          ],
         },
       ],
     }

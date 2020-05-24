@@ -5,8 +5,9 @@ import {
   ElementRef,
   OnInit,
 } from "@angular/core";
-import { EditCourseViewModel } from '../view-model/edit-course.view-model';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { EditCourseViewModel } from "../view-model/edit-course.view-model";
+import { trigger, transition, style, animate } from "@angular/animations";
+import { FormGroup, FormControlName, FormControl } from "@angular/forms";
 
 @Component({
   selector: "edit-course",
@@ -26,44 +27,60 @@ export class EditCourseComponent implements OnInit {
   public isOpen: boolean = true;
   public isCreateCourse: boolean = false;
   public isEditCourse: boolean = false;
+  public isDeleteCourse: boolean = false;
+  public isDeleteTask: boolean = false;
 
   public modelEditCourse: EditCourseViewModel = new EditCourseViewModel();
 
-  public ngOnInit() {
-    this.modelEditCourse.fillModel();
-  }
-
-  trackByFn(index, item) {   
-    console.log(item) 
-    return item.id;
- }
+  public addTaskForm = new FormGroup({
+    name: new FormControl(),
+    deadline: new FormControl(),
+  });
 
   @HostListener("click", ["$event"]) onClick(e: any) {
     if (e.target.className.match("edit-block-wrapper")) {
       this.isCreateCourse = false;
       this.isEditCourse = false;
+      this.isDeleteCourse = false;
+      this.isDeleteTask = false;
     }
+  }
+
+  public ngOnInit() {
+    this.modelEditCourse.fillModel();
+  }
+
+  trackByFn(index, item) {
+    return item.id;
   }
 
   public openCourse() {
     this.isOpen = !this.isOpen;
   }
 
-  public createCourse() {
+  public createCourseModal() {
     this.isCreateCourse = !this.isCreateCourse;
   }
 
-  public editCourse(id) {
+  public editCourseModal() {
     this.isEditCourse = !this.isEditCourse;
   }
 
-  public deleteCourse() {
-    // this.courseList = this.courseList.filter(course => course)
+  public deleteCourseModal() {
+    this.isDeleteCourse = !this.isDeleteCourse;
   }
 
-  public addTask() {}
+  public deleteTaskModal() {
+    this.isDeleteTask = !this.isDeleteTask;
+  }
 
-  public deleteTask() {}
+  public addTask() {
+    console.log(this.addTaskForm.value);
+  }
+
+  public deleteCourse(value: string) {}
+
+  public deleteTask(value: string) {}
 
   public editCurrentCourse(courseModel: any) {}
 

@@ -1,26 +1,28 @@
-import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { Injectable } from "@angular/core";
 import { HttpService } from "src/app/http/http.service";
-import { RequestPathList } from 'src/app/http/routing-path-list';
+import { RequestPathList } from "src/app/http/routing-path-list";
+import { AuthenticationBaseService } from "src/app/authentication/data/authentication.base.service";
 
 @Injectable()
 export class LoginBaseService {
-  public LoginForm: FormGroup;
+  constructor(
+    private httpService: HttpService,
+    private authenticationBaseService: AuthenticationBaseService
+  ) {}
 
-  constructor(private httpService: HttpService) {
-    const textValidators = [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(25)
-    ];
-    this.LoginForm = new FormGroup({
-      email: new FormControl("krivedina@gmail.com", [Validators.required, Validators.email]),
-      password: new FormControl("123456", textValidators)
-    });
+  public loginRequest(loginForm) {
+    this.httpService
+      .postRequest(RequestPathList.signIn, loginForm.value, {
+        withCredentials: true,
+      })
+      .subscribe(
+        (loginData) => {
+          console.log(loginData);
+          this.authenticationBaseService.logIn();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
-
-  public submitData() {
-    this.httpService.postRequest(RequestPathList.signIn, this.LoginForm.value, { withCredentials: true });
-  }
-  
 }
