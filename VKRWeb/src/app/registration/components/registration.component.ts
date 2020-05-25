@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { RegistrationBaseService } from "../data/registration.base.service";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { MD5 } from "../data/md5";
@@ -59,10 +59,23 @@ export class RegistrationComponent implements OnInit {
         surname: "Иванович",
       };
       this.registrationBaseService.registrationRequest(sendRegistrationData);
+      // this.registrationBaseService.showSuccsess("Регистрация успешна!")
     } else {
-      alert('aaaaaaaaaa')
+      this.registrationBaseService.showSuccsess("Регистрация успешна!");
+
+      // alert('dasdas')
+      // showFail("Ошибка при заполнении данных")
     }
   }
+
+  // {
+  //   "email": "fio@gmail.com",
+  //   "password": "root",
+  //   "surname": "Фамилия",
+  //   "firstName": "Имя",
+  //   "secondName": "Отчество",
+  //   "group": "КН-402"
+  // }
 
   private createCapcha() {
     const a = this.randomNumber(1, 100);

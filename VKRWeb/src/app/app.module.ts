@@ -13,10 +13,12 @@ import { TaskListModule } from './task-list/task-list.module';
 import { CourseListModule } from './course-list/course-list.module';
 import { EditCourseModule } from './edit-course/edit-course.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { WrapperMainModule } from './wrapper-main/wrapper-main.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    WrapperMainModule,
     AppRouterModule,
     BrowserModule,
     RegistrationModule,
@@ -27,7 +29,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     TaskListModule,
     CourseListModule,
     EditCourseModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
