@@ -7,19 +7,16 @@ import { RoleEnum } from "static/role.enum";
 import { AuthenticationBaseService } from 'src/app/authentication/data/authentication.base.service';
 
 @Injectable()
-export class ProfileBaseService implements OnInit {
+export class ProfileBaseService {
   constructor(private httpService: HttpService, private authenticationBaseService: AuthenticationBaseService) {
-    // this.httpService.getRequest(RequestPathList.userData, RequestDataName.UserData)
   }
-  public ngOnInit() {
-    // const userData = this.httpService.getCacheData(RequestDataName.UserData);
-  }
+
   // public save() {
   //   // this.httpService.postRequest(RequestPathList.signIn, this.profileForm.value, { withCredentials: true });
   // }
 
   public getOpenUser() {
-    // this.authenticationBaseService.
-    return this.httpService.getRequest(RequestPathList.openUser, "currentUser");
+    const userId = this.authenticationBaseService.getIsAuthenticated().authentication
+    return this.httpService.getRequest(RequestPathList.openUser + `?userId=${userId}`, "currentUser");
   }
 }

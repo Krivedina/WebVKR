@@ -7,7 +7,7 @@
         alt="kumamon">
     </div>
 
-    <article *ngIf="!isEditProfile" class="profile__data">
+    <article *ngIf="isProfileData" class="profile__data">
       <div class="profile__value-data">
         <span class='field-name'>ФИО</span>
         <span>{{modelProfileForm.surname}} {{modelProfileForm.firstName}} {{modelProfileForm.secondName}}</span>
@@ -20,10 +20,40 @@
         <span class='field-name'>Email</span>
         <span>{{modelProfileForm.email}}</span>
       </div>
-      <button (click)="editProfile()" class="press-button profile__change-button">
-        Редактировать данные
-      </button>
+      <div class="profile__button-group">
+        <button (click)="editProfile()" class="press-button">
+          Редактировать данные
+        </button>
+        <button (click)="editPassword()" class="press-button right-button">
+          Изменить пароль
+        </button>
+      </div>
     </article>
+
+    <form *ngIf="isEditPassword" [formGroup]="passwordForm">
+      <article class="profile__edit-password">
+        <label class="custom-input password-input">
+          <input formControlName="currentPassword" type="text" placeholder="&nbsp;" class="control-input" />
+          <span>Старый пароль</span>
+        </label>
+        <label class="custom-input password-input">
+          <input formControlName="newPassword" type="text" placeholder="&nbsp;" class="control-input" />
+          <span>Новый пароль</span>
+        </label>
+        <label class="custom-input">
+          <input formControlName="newPasswordConfirm" type="text" placeholder="&nbsp;" class="control-input" />
+          <span>Подтвердить новый пароль</span>
+        </label>
+      </article>
+      <div class="profile__button-group">
+        <button (click)="savePasswordChanges()" class="press-button profile__change-button">
+          Сохранить
+        </button>
+        <button (click)="cancelChanges()" class="press-button profile__change-button right-button">
+          Отмена
+        </button>
+      </div>
+    </form>
 
     <form *ngIf="isEditProfile" [formGroup]="profileForm" class="profile__data">
       <article class="profile__edit-wrapper">
@@ -61,9 +91,13 @@
           </label>
         </div>
       </article>
-      <button (click)="saveChanges()" class="press-button profile__change-button">
-        Сохранить
-      </button>
+      <div class="profile__button-group">
+        <button (click)="saveUserDataChanges()" class="press-button profile__change-button">
+          Сохранить
+        </button>
+        <button (click)="cancelChanges()" class="press-button profile__change-button right-button">
+          Отмена
+        </button></div>
     </form>
 
   </div>

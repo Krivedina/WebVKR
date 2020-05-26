@@ -15,6 +15,7 @@ import { EditCourseModule } from "./edit-course/edit-course.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { WrapperMainModule } from "./wrapper-main/wrapper-main.module";
 import { AuthicationGuard, StudentGuard, AdminGuard } from './authentication/data/checkAuthication';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { AuthicationGuard, StudentGuard, AdminGuard } from './authentication/dat
     CourseListModule,
     EditCourseModule,
     AuthenticationModule,
+    ProfileModule,
   ],
   providers: [AuthicationGuard, StudentGuard, AdminGuard],
   bootstrap: [AppComponent],

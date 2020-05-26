@@ -10,13 +10,7 @@ import { RoleEnum } from "static/role.enum";
 export class HeaderComponent implements OnInit {
   constructor(private HeaderBaseService: HeaderBaseService) {}
 
-  public ngOnInit(): void {
-    // setInterval(() =>{
-    //   const authInfo = this.HeaderBaseService.isAuthenticated()
-    //   this.isAuth = authInfo.authentication;
-    //   this.role = authInfo.role
-    // }, 1000)
-  }
+  public ngOnInit(): void {}
 
   public isAuth() {
     return this.HeaderBaseService.isAuthenticated().authentication;
