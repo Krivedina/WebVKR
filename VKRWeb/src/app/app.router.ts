@@ -9,6 +9,11 @@ import { CourseListComponent } from "./course-list/component/course-list.compone
 import { TaskComponent } from "./task/component/task.component";
 import { EditTaskComponent } from "./edit-task/components/edit-task.component";
 import { EditCourseComponent } from "./edit-course/component/edit-course.component";
+import {
+  AuthicationGuard,
+  StudentGuard,
+  AdminGuard,
+} from "./authentication/data/checkAuthication";
 
 const routers: Routes = [
   {
@@ -19,40 +24,42 @@ const routers: Routes = [
   {
     path: "student-list",
     component: StudentListComponent,
-    // canActivate: ["AdminGuard"],
+    canActivate: [AdminGuard],
   },
   {
     path: "profile",
     component: ProfileComponent,
-    // canActivate: ["AuthicationGuard"],
+    canActivate: [AuthicationGuard],
   },
   {
     path: "registration",
     component: RegistrationComponent,
+    // canActivate: [AdminGuard],
   },
   {
     path: "login",
     component: LoginComponent,
+    // canActivate: [AdminGuard],
   },
   {
     path: "course-list",
     component: CourseListComponent,
-    // canActivate: ["StudentGuard"],
+    canActivate: [StudentGuard],
   },
   {
     path: "course-list/:courseName/:taskName",
     component: TaskComponent,
-    // canActivate: ["StudentGuard"],
+    canActivate: [StudentGuard],
   },
   {
     path: "edit-task",
     component: EditTaskComponent,
-    // canActivate: ["AdminGuard"],
+    canActivate: [AdminGuard],
   },
   {
     path: "edit-course",
     component: EditCourseComponent,
-    // canActivate: ["AdminGuard"],
+    canActivate: [AdminGuard],
   },
   {
     path: "**",

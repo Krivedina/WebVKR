@@ -6,18 +6,27 @@
 	border-radius: 30px;
 
 	&__wrapper {
+		word-wrap: break-word;
 		padding: 14px 15px 15px 15px;
 		display: flex;
 		align-items: center;
-		position: absolute;
-        right: 15vw;
-        bottom: 0%;
+		position: fixed;
+		right: 10%;
+		bottom: 15%;
 	}
 
 	&__image-status {
 		width: 30px;
 		height: 30px;
 		margin-right: 15px;
+	}
+
+	&__message {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 17px;
+		max-width: 200px;
 	}
 }
 

@@ -13,8 +13,8 @@ export const RequestPathList = {
 
   //profile
   //get
-  userData:
-    "http://localhost:8080/profile/f1831740-a461-4223-a53d-902753eca4a3",
+  openUser:
+    "http://localhost:8080/profile/get?userId=7ccec9e8-8f42-4526-8942-e9eb3d73edf7",
 
   //Task
   //get

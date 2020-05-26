@@ -7,8 +7,7 @@
       <li>
         <a [routerLink]="['/profile']" routerLinkActive="router-link-active">Профиль</a>
       </li>
-      <!-- <li *ngIf="isStudent()"> -->
-      <li>
+      <li *ngIf="isStudent()">
         <a [routerLink]="['/course-list']" routerLinkActive="router-link-active">Список Курсов</a>
       </li>
       <li *ngIf="isAdmin()">

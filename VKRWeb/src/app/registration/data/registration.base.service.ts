@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "src/app/http/http.service";
 import { RequestPathList } from "src/app/http/routing-path-list";
 import { AuthenticationBaseService } from "src/app/authentication/data/authentication.base.service";
-import { WrapperMainBaseService } from 'src/app/wrapper-main/wrapper-main.base.service';
+import { WrapperMainBaseService } from "src/app/wrapper-main/wrapper-main.base.service";
 
 @Injectable()
 export class RegistrationBaseService {
@@ -13,22 +13,24 @@ export class RegistrationBaseService {
   ) {}
 
   public registrationRequest(registrationForm) {
-    const data = registrationForm.value;
-    //f1831740-a461-4223-a53d-902753eca4a3
-    console.log(data);
-    this.httpService.postRequest(RequestPathList.signUp, data).subscribe(
-      (registrationData) => {
-        console.log(registrationData);
-        this.authenticationBaseService.logIn();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.httpService
+      .postRequest(RequestPathList.signUp, registrationForm)
+      .subscribe(
+        (registrationData) => {
+          console.log(registrationData);
+          this.authenticationBaseService.logIn(registrationData);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
+  public showSuccsess(string) {
+    this.wrapperMainBaseService.showMessage(string, true);
+  }
 
-  public showSuccsess(string){
-    this.wrapperMainBaseService.showSuccsess(string)
+  public showFail(string) {
+    this.wrapperMainBaseService.showMessage(string, false);
   }
 }

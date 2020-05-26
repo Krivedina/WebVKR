@@ -11,7 +11,7 @@ export class WrapperMainBaseService {
 
   public container;
 
-  public showSuccsess(string) {
+  public showMessage(string, succsess) {
     const factory = this.componentFactoryResolver.resolveComponentFactory(
       MessageWindowComponent
     );
@@ -20,9 +20,10 @@ export class WrapperMainBaseService {
       factory
     );
     componentRef.instance.message = string;
-    componentRef.instance.succsess = true;
+    componentRef.instance.succsess = succsess;
     setTimeout(() => {
       componentRef.destroy();
-    }, 5000);
+    }, 3000);
   }
+  
 }

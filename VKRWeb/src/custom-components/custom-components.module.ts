@@ -6,7 +6,6 @@ import { RequirementTextComponent } from "./requirement-text/components/requirem
 import { CreateWindowComponent } from "./create-window/component/create-window.component";
 import { ConfirmWindowComponent } from "./confirm-window/components/confirm-window.component";
 import { MessageWindowComponent } from "./message-window/components/message-window.component";
-import { MessageWindowBaseService } from './message-window/data/message-window.base.service';
 
 const customComponent = [
   RequirementTextComponent,
@@ -18,7 +17,7 @@ const customComponent = [
 
 @NgModule({
   declarations: customComponent,
-  providers: [MessageWindowBaseService],
+  providers: [],
   exports: customComponent,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   entryComponents: customComponent,

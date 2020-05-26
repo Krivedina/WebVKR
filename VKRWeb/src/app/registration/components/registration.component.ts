@@ -51,31 +51,19 @@ export class RegistrationComponent implements OnInit {
         : RoleEnum.student;
       const sendRegistrationData = {
         role: role,
-        email: "azakov31@gmail.com",
-        firstName: "Иван",
-        group: "КН-402",
-        password: "12345",
-        secondName: "Зарубин",
-        surname: "Иванович",
+        email: this.registrationForm.value.email,
+        firstName: this.registrationForm.value.firstName,
+        group: this.registrationForm.value.group,
+        password: this.registrationForm.value.password,
+        surname: this.registrationForm.value.surname,
+        secondName: this.registrationForm.value.secondName,
       };
       this.registrationBaseService.registrationRequest(sendRegistrationData);
-      // this.registrationBaseService.showSuccsess("Регистрация успешна!")
+      this.registrationBaseService.showSuccsess("Регистрация успешна!")
     } else {
-      this.registrationBaseService.showSuccsess("Регистрация успешна!");
-
-      // alert('dasdas')
-      // showFail("Ошибка при заполнении данных")
+      this.registrationBaseService.showFail("Ошибка в заполнении данных!");
     }
   }
-
-  // {
-  //   "email": "fio@gmail.com",
-  //   "password": "root",
-  //   "surname": "Фамилия",
-  //   "firstName": "Имя",
-  //   "secondName": "Отчество",
-  //   "group": "КН-402"
-  // }
 
   private createCapcha() {
     const a = this.randomNumber(1, 100);

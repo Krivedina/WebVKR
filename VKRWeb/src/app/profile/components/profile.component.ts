@@ -19,9 +19,13 @@ export class ProfileComponent implements OnInit {
     Validators.maxLength(15),
   ];
 
-  // constructor(profileBaseService: ProfileBaseService) {}
+  // constructor(private profileBaseService: ProfileBaseService) {}
 
   public ngOnInit(): void {
+    // this.profileBaseService.getOpenUser().subscribe(userData => {
+    //   console.log(userData)
+    //   // this.modelProfileForm.fillModel(userData);
+    // })
     this.modelProfileForm.fillModel();
     this.profileForm = new FormGroup({
       email: new FormControl(this.modelProfileForm.email, [
