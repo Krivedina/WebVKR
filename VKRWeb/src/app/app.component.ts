@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthenticationBaseService } from "./authentication/data/authentication.base.service";
+import { AuthenticationBaseService } from "./global-part/authentication/data/authentication.base.service";
 
 @Component({
   selector: "app-root",
@@ -11,6 +11,6 @@ export class AppComponent implements OnInit {
 
   constructor(private authenticationBaseService: AuthenticationBaseService) {}
   public ngOnInit(): void {
-    this.authenticationBaseService.checkAuthentication()
+    this.authenticationBaseService.checkAuthentication();
   }
 }

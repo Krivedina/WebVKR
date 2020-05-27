@@ -1,19 +1,19 @@
 import { Routes, RouterModule } from "@angular/router";
-import { RegistrationComponent } from "src/app/registration/components/registration.component";
-import { NgModule } from "@angular/core";
-import { LoginComponent } from "./login/components/login.component";
-import { ProfileComponent } from "./profile/components/profile.component";
-import { StudentListComponent } from "./student-list/components/student-list.components";
-import { NotFoundPageComponent } from "./http/not-found-page/not-found-page.component";
-import { CourseListComponent } from "./course-list/component/course-list.component";
-import { TaskComponent } from "./task/component/task.component";
-import { EditTaskComponent } from "./edit-task/components/edit-task.component";
-import { EditCourseComponent } from "./edit-course/component/edit-course.component";
+import { StudentListComponent } from "./admin-part/student-list/components/student-list.components";
 import {
+  AdminGuard,
   AuthicationGuard,
   StudentGuard,
-  AdminGuard,
-} from "./authentication/data/checkAuthication";
+} from "./global-part/authentication/data/guard-list";
+import { ProfileComponent } from "./global-part/profile/components/profile.component";
+import { RegistrationComponent } from "./global-part/registration/components/registration.component";
+import { LoginComponent } from "./global-part/login/components/login.component";
+import { CourseListComponent } from "./student-part/course-list/component/course-list.component";
+import { TaskComponent } from "./student-part/task/component/task.component";
+import { EditTaskComponent } from "./admin-part/edit-task/components/edit-task.component";
+import { EditCourseComponent } from "./admin-part/edit-course/component/edit-course.component";
+import { NotFoundPageComponent } from "./global-part/http/not-found-page/not-found-page.component";
+import { NgModule } from "@angular/core";
 
 const routers: Routes = [
   {
