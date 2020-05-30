@@ -25,6 +25,7 @@ import { WrapperMainComponent } from "./wrapper-main/components/wrapper-main.com
 import { WrapperMainBaseService } from "./wrapper-main/data/wrapper-main.base.service";
 import { LoginComponent } from "./login/components/login.component";
 import { LoginBaseService } from "./login/data/login.base.service";
+import { BrowserModule } from "@angular/platform-browser";
 
 const components = [
   NotFoundPageComponent,
@@ -53,6 +54,7 @@ const components = [
     WrapperMainBaseService,
   ],
   imports: [
+    BrowserModule,
     HttpClientModule,
     RouterModule,
     CommonModule,

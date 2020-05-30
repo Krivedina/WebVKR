@@ -20,16 +20,16 @@
         <a [routerLink]="['/edit-task']" routerLinkActive="router-link-active">edit-task</a>
       </li>
     </ul>
-    <ul *ngIf="!isAuth()"  class="navigation__auth-menu">
-      <li >
+    <ul *ngIf="!isAuth()" class="navigation__auth-menu">
+      <li>
         <a [routerLink]="['/registration']" routerLinkActive="router-link-active">Зарегистрироваться</a>
       </li>
       <li>
         <a [routerLink]="['/login']" routerLinkActive="router-link-active">Войти</a>
       </li>
     </ul>
-    <div *ngIf="isAuth()"  class="navigation__auth-menu">
-      <span class="navigation__profile-name">Константинопольский К.К.</span>
+    <div *ngIf="isAuth()" class="navigation__auth-menu">
+      <span class="navigation__profile-name">{{currentName}}</span>
       <img class="navigation__profile-photo"
         src="https://memepedia.ru/wp-content/uploads/2018/07/576552d6e73f015563cb97a3.png" alt="profile-photo">
       <button (click)="logOut()" [routerLink]="['/login']" class="navigation__exit-logo"></button>

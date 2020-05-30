@@ -13,8 +13,9 @@ export const RequestPathList = {
 
   //profile
   //get
-  openUser:
-    "http://localhost:8080/profile/get",
+  openUser: "http://localhost:8080/profile/get",
+  saveUser: "http://localhost:8080/profile/save",
+  changePassword: "http://localhost:8080/changePassword",
 
   //Task
   //get
@@ -25,7 +26,7 @@ export const RequestPathList = {
     "http://localhost:8080/course/addtask?courseId=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
   //get
   getTask:
-    "http://localhost:8080/course/addtask?courseId=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
+    "http://localhost:8080/task/get",
   //post
   editTask:
     "http://localhost:8080/task/save?id=b8a19b2a-1280-4898-967c-386adbd58f0e",
@@ -45,6 +46,5 @@ export const RequestPathList = {
   openCourse:
     "http://localhost:8080/course/get?id=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
   //post
-  deleteCourse:
-    "http://localhost:8080/course/delete",
+  deleteCourse: "http://localhost:8080/course/delete",
 };

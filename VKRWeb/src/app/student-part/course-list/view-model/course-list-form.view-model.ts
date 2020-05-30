@@ -12,6 +12,8 @@ export class CourseListFormViewModel {
         courseTasks: [
           {
             name: "Энтропия",
+            currentScore: 2,
+            maxScore: 12,
             requirementList: [
               {
                 status: true,
@@ -29,6 +31,8 @@ export class CourseListFormViewModel {
           },
           {
             name: "Энтропdsия",
+            currentScore: 2,
+            maxScore: 3,
             requirementList: [
               {
                 status: true,
@@ -48,7 +52,9 @@ export class CourseListFormViewModel {
       },
     ]
   ) {
-    this.courseList = data;
+    this.courseList = data.map((course) => {
+      return { isOpenView: false, ...course };
+    });
 
     // for (let element in data) {
     //   if (data[element] !== undefined) {

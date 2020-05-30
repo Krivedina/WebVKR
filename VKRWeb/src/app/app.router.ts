@@ -47,7 +47,7 @@ const routers: Routes = [
     canActivate: [StudentGuard],
   },
   {
-    path: "course-list/:courseName/:taskName",
+    path: "course-list/:courseName/:id",
     component: TaskComponent,
     canActivate: [StudentGuard],
   },

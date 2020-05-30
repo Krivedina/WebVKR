@@ -10,6 +10,7 @@ import { EditTaskComponent } from "./edit-task/components/edit-task.component";
 import { EditTaskBaseService } from "./edit-task/data/edit-task.base.service";
 import { EditCourseComponent } from "./edit-course/component/edit-course.component";
 import { EditCourseBaseService } from "./edit-course/data/edit-course.base.service";
+import { BrowserModule } from "@angular/platform-browser";
 
 const components = [
   EditTaskComponent,
@@ -22,6 +23,7 @@ const components = [
   providers: [EditCourseBaseService, EditTaskBaseService],
   exports: components,
   imports: [
+    BrowserModule,
     FormsModule,
     CommonModule,
     RouterModule,

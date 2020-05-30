@@ -9,17 +9,17 @@ export class HttpService {
   constructor(private http: HttpClient, private router: Router) {}
   private _cache = {};
 
-  public postRequest(url: string, data: any, options: any = {}) {
+  public postRequest(url: string, data: any, options: any = {withCredentials: true}) {
     return this.http.post(url, data, options);
   }
 
   public getRequest(
     url: string,
     cacheName: string,
-    withCache: boolean = true,
-    options: any = {}
+    useCache: boolean = true,
+    options: any = {withCredentials: true}
   ) {
-    if (!withCache){
+    if (!useCache){
       return this.http.get(url, options).pipe(
         switchMap((response) => {
           this._cache[cacheName] = response;

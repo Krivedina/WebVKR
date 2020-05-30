@@ -10,7 +10,11 @@ import { RoleEnum } from "static/role.enum";
 export class HeaderComponent implements OnInit {
   constructor(private HeaderBaseService: HeaderBaseService) {}
 
-  public ngOnInit(): void {}
+  public currentName: string;
+
+  ngOnInit(): void {
+    this.getName();
+  }
 
   public isAuth() {
     return this.HeaderBaseService.isAuthenticated().authentication;
@@ -22,6 +26,13 @@ export class HeaderComponent implements OnInit {
 
   public isAdmin() {
     return this.HeaderBaseService.isAuthenticated().role === RoleEnum.admin;
+  }
+
+  public getName() {
+    return this.HeaderBaseService.getShortName().subscribe((userData) => {
+      this.currentName = `${userData.surname} ${userData.firstName[0]}. ${userData.secondName[0]}.`;
+      console.log(userData);
+    });
   }
 
   public logOut() {

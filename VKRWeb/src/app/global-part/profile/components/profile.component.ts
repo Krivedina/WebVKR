@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ProfileBaseService } from "../data/profile.base.service";
 import { ProfileFormViewModel } from "../view-model/profile-form.view-model";
 import { Validators, FormGroup, FormControl } from "@angular/forms";
+import { WrapperMainBaseService } from "../../wrapper-main/data/wrapper-main.base.service";
+import { AuthenticationBaseService } from "../../authentication/data/authentication.base.service";
+import { RoleEnum } from "static/role.enum";
 
 @Component({
   selector: "profile",
@@ -22,20 +25,34 @@ export class ProfileComponent implements OnInit {
     Validators.maxLength(15),
   ];
 
-  constructor(private profileBaseService: ProfileBaseService) {}
+  constructor(
+    private profileBaseService: ProfileBaseService,
+    private wrapperMainBaseService: WrapperMainBaseService,
+    private authenticationBaseService: AuthenticationBaseService
+  ) {}
 
   public ngOnInit(): void {
-    this.profileBaseService.getOpenUser().subscribe((userData) => {
-      console.log(userData);
-      // this.modelProfileForm.fillModel(userData);
-    });
-    this.modelProfileForm.fillModel();
+    this.loadProfile();
+    // this.modelProfileForm.fillModel();
 
-    if (this.modelProfileForm.role === "Студент") {
+    if (
+      this.authenticationBaseService.getIsAuthenticated().role ===
+      RoleEnum.student
+    ) {
       this.modelProfileForm.role = "Студента";
-    } else if (this.modelProfileForm.role === "Преподаватель") {
+    } else if (
+      this.authenticationBaseService.getIsAuthenticated().role ===
+      RoleEnum.admin
+    ) {
       this.modelProfileForm.role = "Преподавателя";
     }
+  }
+
+  public loadProfile(useCache: boolean = true) {
+    this.profileBaseService.getOpenUser(useCache).subscribe((userData) => {
+      console.log(userData);
+      this.modelProfileForm.fillModel(userData);
+    });
   }
 
   public editProfile() {
@@ -83,12 +100,49 @@ export class ProfileComponent implements OnInit {
   public saveUserDataChanges() {
     this.isEditProfile = false;
     this.isProfileData = true;
-    this.modelProfileForm.fillModel(this.profileForm.value);
-    // this.httpService.postRequest(RequestPathList.signIn, this.profileForm.value, { withCredentials: true });
+    this.profileBaseService.postSaveUser(this.profileForm.value).subscribe(
+      () => {
+        this.loadProfile(false);
+        this.authenticationBaseService.checkAuthentication();
+        this.wrapperMainBaseService.showMessage(
+          "Данные успешно изменены",
+          true
+        );
+      },
+      (error) => {
+        this.wrapperMainBaseService.showMessage(
+          "Изменить данные не удалось!",
+          false
+        );
+      }
+    );
   }
 
   public savePasswordChanges() {
     this.isEditPassword = false;
     this.isProfileData = true;
+    if (
+      this.passwordForm.value.newPassword ===
+      this.passwordForm.value.newPasswordConfirm
+    ) {
+      const userPasswordData = {
+        current: this.passwordForm.value.currentPassword,
+        new: this.passwordForm.value.newPassword,
+      };
+      this.profileBaseService.postChangePassword(userPasswordData).subscribe(
+        () => {
+          this.wrapperMainBaseService.showMessage(
+            "Пароль успешно изменен",
+            true
+          );
+        },
+        (error) => {
+          this.wrapperMainBaseService.showMessage(
+            "Изменить пароль не удалось!",
+            false
+          );
+        }
+      );
+    }
   }
 }

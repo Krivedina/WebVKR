@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AuthenticationBaseService } from '../../authentication/data/authentication.base.service';
+import { AuthenticationBaseService } from "../../authentication/data/authentication.base.service";
 
 @Injectable()
 export class HeaderBaseService {
@@ -9,7 +9,13 @@ export class HeaderBaseService {
     return this.authenticationBaseService.getIsAuthenticated();
   }
 
-  public logOutRequest(){
-    this.authenticationBaseService.logOut(); 
+  public logOutRequest() {
+    this.authenticationBaseService.logOut();
+  }
+
+  public getShortName() {
+    return this.authenticationBaseService
+      .getNewLocalUserData()
+
   }
 }

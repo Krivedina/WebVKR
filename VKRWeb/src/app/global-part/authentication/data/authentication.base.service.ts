@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpService } from '../../http/http.service';
+import { HttpService } from "../../http/http.service";
+import { CacheListName } from "../../http/cashe-name";
+import { RequestPathList } from "../../http/routing-path-list";
 
 @Injectable()
 export class AuthenticationBaseService {
@@ -17,8 +19,15 @@ export class AuthenticationBaseService {
     };
   }
 
+  public getNewLocalUserData() {
+    return this.httpService.getRequest(
+      RequestPathList.openUser + `?userId=${this._userId}`,
+      CacheListName.userProfile
+    );
+  }
+
   public checkAuthentication() {
-    const localData = localStorage.getItem("userData");
+    const localData = localStorage.getItem(CacheListName.userProfile);
     if (localData) {
       this._userId = localData.split(",")[0];
       this._role = +localData.split(",")[1];
@@ -31,14 +40,14 @@ export class AuthenticationBaseService {
     this._role = loginData.role;
     this._userName = loginData.fio;
     localStorage.setItem(
-      "userData",
+      CacheListName.userProfile,
       `${loginData.userId},${loginData.role},${loginData.fio}`
     );
     this.httpService.goToUrl("/profile");
   }
 
   public logOut() {
-    localStorage.removeItem("userData");
+    localStorage.removeItem(CacheListName.userProfile);
     this.httpService.clearCache();
     this._userId = null;
     this._role = -1;

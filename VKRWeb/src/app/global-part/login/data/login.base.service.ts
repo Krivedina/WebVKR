@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpService } from '../../http/http.service';
-import { AuthenticationBaseService } from '../../authentication/data/authentication.base.service';
-import { WrapperMainBaseService } from '../../wrapper-main/data/wrapper-main.base.service';
-import { RequestPathList } from '../../http/routing-path-list';
+import { HttpService } from "../../http/http.service";
+import { AuthenticationBaseService } from "../../authentication/data/authentication.base.service";
+import { WrapperMainBaseService } from "../../wrapper-main/data/wrapper-main.base.service";
+import { RequestPathList } from "../../http/routing-path-list";
 
 @Injectable()
 export class LoginBaseService {
@@ -14,9 +14,7 @@ export class LoginBaseService {
 
   public loginRequest(loginForm) {
     this.httpService
-      .postRequest(RequestPathList.signIn, loginForm.value, {
-        withCredentials: true,
-      })
+      .postRequest(RequestPathList.signIn, loginForm.value)
       .subscribe(
         (loginData) => {
           console.log(loginData);

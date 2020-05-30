@@ -38,6 +38,7 @@ $confirm: #05a3ff;
 		line-height: 21px;
 		font-weight: 600;
 		color: $links;
+		cursor: pointer;
 		&:hover {
 			color: $confirm;
 		}
@@ -70,15 +71,15 @@ $confirm: #05a3ff;
 	}
 
 	&__profile-photo {
-    margin-left: 28px;
+		margin-left: 28px;
 		border-radius: 25px;
 		width: 50px;
 		height: 50px;
 	}
 
 	&__exit-logo {
-    cursor: pointer;
-    margin-left: 32px;
+		cursor: pointer;
+		margin-left: 32px;
 		background-color: white;
 		background-image: url(static\image\Exit.svg);
 		background-repeat: no-repeat;
