@@ -13,7 +13,7 @@ export class ProfileBaseService {
 
   public getOpenUser(useCache = true) {
     const userId = this.authenticationBaseService.getIsAuthenticated()
-      .authentication;
+      .userId;
     return this.httpService.getRequest(
       RequestPathList.openUser + `?userId=${userId}`,
       CacheListName.userProfile,
@@ -23,7 +23,7 @@ export class ProfileBaseService {
 
   public postSaveUser(userData) {
     const userId = this.authenticationBaseService.getIsAuthenticated()
-      .authentication;
+      .userId;
     return this.httpService.postRequest(
       RequestPathList.saveUser + `?userId=${userId}`,
       userData

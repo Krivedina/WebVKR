@@ -12,11 +12,11 @@
 }
 
 .edit-block-wrapper {
-	background: rgb(0, 0, 0, 0.1);
+	background: rgb(0, 0, 0, 0.5);
 	height: 100%;
 	position: fixed;
 	width: 100%;
-	z-index: 100;
+	z-index: 10;
 	top: 0;
 	left: 0;
 }
@@ -31,6 +31,7 @@
 	&__block {
 		padding: 25px 30px;
 		display: flex;
+		min-width: 50%;
 	}
 
 	&__title {
@@ -38,6 +39,16 @@
 		font-weight: bold;
 		font-size: 24px;
 		line-height: 29px;
+		max-width: 260px;
+		word-break: break-word;
+	}
+
+	&__score {
+		font-style: normal;
+		font-weight: bold;
+		font-size: 24px;
+		line-height: 29px;
+		margin-left: auto;
 	}
 
 	&__show-button {

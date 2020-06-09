@@ -6,6 +6,7 @@ import { RequirementTextComponent } from "./requirement-text/components/requirem
 import { CreateWindowComponent } from "./create-window/component/create-window.component";
 import { ConfirmWindowComponent } from "./confirm-window/components/confirm-window.component";
 import { MessageWindowComponent } from "./message-window/components/message-window.component";
+import { LoaderComponent } from './loader/loader.component';
 
 const customComponent = [
   RequirementTextComponent,
@@ -13,6 +14,7 @@ const customComponent = [
   CreateWindowComponent,
   ConfirmWindowComponent,
   MessageWindowComponent,
+  LoaderComponent
 ];
 
 @NgModule({

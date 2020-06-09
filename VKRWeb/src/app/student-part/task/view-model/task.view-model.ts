@@ -6,6 +6,8 @@ export class TaskViewModel {
   public status: boolean;
   public descriptionText: string;
   public requirementList: any;
+  public input: any;
+  public id: any;
 
   public fillModel(
     data = {
@@ -14,6 +16,7 @@ export class TaskViewModel {
       currentScore: 2,
       maxScore: 6,
       status: false,
+      input: { name: "123.zip" },
       descriptionText: "Кумамон - медведь",
       requirementList: [
         {

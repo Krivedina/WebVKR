@@ -7,7 +7,7 @@
                 <span class="course-list-head__title">{{course.name}}</span>
                 <div class="middle-block">
                     <div class="progress-bar">
-                        <span style="width: 50%"></span>
+                        <span  [ngStyle]="{'width': course.progress + '%'}"></span>
                     </div>
                     <span class="course-list-head__score">{{course.currentScore}}/{{course.maxScore}}</span>
                 </div>
@@ -20,12 +20,12 @@
         <section *ngIf="course.isOpenView" class="course-list-body__wrapper">
             <div class="course-list-body__row-title">
                 <span class="course-list-body__element-title">Задача</span>
-                <span class="course-list-body__middle-block">Требования</span>
+                <span class="course-list-body__middle-block middle-block-requirements">Требования</span>
                 <span class="course-list-body__rigth-block">Входные данные</span>
             </div>
             <article *ngFor="let task of course.courseTasks" class="course-list-body__row-element">
                 <a class="course-list-body__element-title" [routerLink]="[course.name, task.id]">
-                    <span>{{task.name}}(2/12)</span>
+                    <span>{{task.name}}({{task.currentScore}}/{{task.maxScore}})</span>
                 </a>
                 <div class=" course-list-body__middle-block">
                     <div *ngFor="let requirement of task.requirementStatusList"

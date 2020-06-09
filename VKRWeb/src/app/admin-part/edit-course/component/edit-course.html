@@ -1,35 +1,36 @@
-<section>
+<loader *ngIf="isLoadingCourseList"></loader>
+<section *ngIf="!isLoadingCourseList">
     <article class=page__title-wrapper>
         <h1 class="page__title">Курсы</h1>
         <button (click)="createCourseModal()" class="confirm-press-button">Создать новый курс</button>
     </article>
-
-    <div class="sk-three-bounce">
-        <div class="sk-bounce-1 sk-child"></div>
-        <div class="sk-bounce-2 sk-child"></div>
-        <div class="sk-bounce-3 sk-child"></div>
-    </div>
     <section *ngFor="let course of modelEditCourse.courseList; trackBy: trackByFn" class="content-window">
 
-        <article [ngStyle]="{'border-bottom': isOpen ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+        <article [ngStyle]="{'border-bottom': course.isOpenView ? '1px solid #E5E5E5' : '0'}"
+            class="course-list-head__wrapper">
             <div class="course-list-head__block">
                 <span class="course-list-head__title">{{course.name}}</span>
-                <span class="course-list-head__title"> — {{course.maxScore}} баллов</span>
+                <span class="course-list-head__score">{{course.maxScore}}</span>
                 <div class="course-list-head__right-block">
                     <button (click)="editCourseModal(course)"
                         class="course-menu__button low-press-button">Редактировать</button>
                     <button (click)="deleteCourseModal(course)"
                         class="course-list-head__button low-press-button">Удалить
                         курс</button>
-                    <div *ngIf="isDeleteCourse" class="edit-block-wrapper">
-                        <confirm-window (confirmValue)="deleteCourse($event)" inputName={{course.name}}></confirm-window>
+                    <div *ngIf="course.isDeleteCourse" class="edit-block-wrapper">
+                        <confirm-window (confirmValue)="deleteCourse($event)" inputName={{course.name}}>
+                        </confirm-window>
                     </div>
-                    <button (click)="openCourse()" class="course-list-head__show-button"></button>
+                    <div *ngIf="course.isEditCourse" class="edit-block-wrapper">
+                        <create-window (inputValue)="editCurrentCourse($event)" firstTitle="Название курса"
+                            secondTitle="Количество баллов за курс" buttonName="Сохранить"></create-window>
+                    </div>
+                    <button (click)="openCourse(course)" class="course-list-head__show-button"></button>
                 </div>
             </div>
         </article>
 
-        <article *ngIf="isOpen" class="course-list-body__wrapper">
+        <article *ngIf="course.isOpenView" class="course-list-body__wrapper">
             <form [formGroup]="addTaskForm">
                 <div class="course-list-body__row-title">
                     <span class="course-list-body__element-title">Задача</span>
@@ -44,17 +45,22 @@
                         <span>Дедлайн новой задачи</span>
                     </label>
                 </div>
-                <button (click)="addTask()" class="course-list-body__create-button low-press-button">Добавить</button>
+                <button (click)="addTask(course.id)"
+                    class="course-list-body__create-button low-press-button">Добавить</button>
             </form>
 
             <article class="task-list">
                 <div *ngFor="let task of course.courseTasks" class="task-list__wrapper">
-                    <span class="task-list__task-name">{{task.name}}</span>
+                    <span class="task-list__task-name">{{task.name}}({{task.maxScore}})</span>
                     <span class="task-list__task-deadline">{{task.deadline}}</span>
                     <div class="task-list__task-edit">
-                        <button [routerLink]="[]"
+                        <div *ngIf="task.isDeleteTask" class="edit-block-wrapper">
+                            <confirm-window (confirmValue)="deleteTask($event)" inputName={{task.name}}>
+                            </confirm-window>
+                        </div>
+                        <button [routerLink]="[task.name, task.id]"
                             class="low-press-button task-list__task-edit-button">Редактировать</button>
-                        <button (click)="deleteTaskModal()" class="closeMark"></button>
+                        <button (click)="deleteTaskModal(course, task)" class="closeMark"></button>
                     </div>
                 </div>
             </article>
@@ -67,12 +73,4 @@
 <div *ngIf="isCreateCourse" class="edit-block-wrapper">
     <create-window (inputValue)="addNewCourse($event)" firstTitle="Название курса"
         secondTitle="Количество баллов за курс" buttonName="Создать"></create-window>
-</div>
-<div *ngIf="isEditCourse" class="edit-block-wrapper">
-    <create-window (inputValue)="editCurrentCourse($event)" firstTitle="Название курса"
-        secondTitle="Количество баллов за курс" buttonName="Сохранить"></create-window>
-</div>
-
-<div *ngIf="isDeleteTask" class="edit-block-wrapper">
-    <confirm-window (confirmValue)="deleteTask($event)" inputName="Энтропия"></confirm-window>
 </div>

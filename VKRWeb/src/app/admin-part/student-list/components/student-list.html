@@ -31,7 +31,7 @@
               <span>Почта студента</span>
             </label>
           </div>
-          <button (click)="addNewGroup()" class="course-list-body__create-button low-press-button">Добавить</button>
+          <button (click)="addNewStudent(group)" class="course-list-body__create-button low-press-button">Добавить</button>
         </form>
 
         <article class="task-list">
@@ -83,7 +83,7 @@
 </section>
 
 <div *ngIf="isCreateGroup" class="edit-block-wrapper">
-  <edit-window (inputValue)=" ($event)" inputName="Название группы" buttonName="Создать"></edit-window>
+  <edit-window (inputValue)="addNewGroup($event)" inputName="Название группы" buttonName="Создать"></edit-window>
 </div>
 <div *ngIf="isDeleteGroup" class="edit-block-wrapper">
   <confirm-window (confirmValue)="deleteGroup($event)" inputName="КН-402"></confirm-window>

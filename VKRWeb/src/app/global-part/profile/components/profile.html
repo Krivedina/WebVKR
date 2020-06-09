@@ -1,6 +1,7 @@
 <section class="profile">
   <h1 class="page__title">Профиль {{modelProfileForm.role}}</h1>
-  <div class="profile__info">
+  <loader *ngIf="isLoadingProfileData"></loader>
+  <div *ngIf="!isLoadingProfileData" class="profile__info">
 
     <div>
       <!-- <img class="profile__image" src="http://localhost:8080/media/download?id=94f0ccacb21d3e1857e8d46eda516bf6" -->
@@ -11,15 +12,15 @@
     <article *ngIf="isProfileData" class="profile__data">
       <div class="profile__value-data">
         <span class='field-name'>ФИО</span>
-        <span>{{modelProfileForm.surname}} {{modelProfileForm.firstName}} {{modelProfileForm.secondName}}</span>
+        <span>{{modelProfileForm.surname || '-'}} {{modelProfileForm.firstName}} {{modelProfileForm.secondName}}</span>
       </div>
       <div class="profile__value-data">
         <span class='field-name'>Группа</span>
-        <span>{{modelProfileForm.group}}</span>
+        <span>{{modelProfileForm.group || '-'}}</span>
       </div>
       <div class="profile__value-data">
         <span class='field-name'>Email</span>
-        <span>{{modelProfileForm.email}}</span>
+        <span>{{modelProfileForm.email || '-'}}</span>
       </div>
       <div class="profile__button-group">
         <button (click)="editProfile()" class="press-button">

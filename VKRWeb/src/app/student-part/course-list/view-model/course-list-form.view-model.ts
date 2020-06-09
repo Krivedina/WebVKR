@@ -53,7 +53,13 @@ export class CourseListFormViewModel {
     ]
   ) {
     this.courseList = data.map((course) => {
-      return { isOpenView: false, ...course };
+      let progress = Math.floor(
+        (+course.currentScore / +course.maxScore) * 100
+      );
+      if (progress > 100) {
+        progress = 100;
+      }
+      return { progress: progress, isOpenView: false, ...course };
     });
 
     // for (let element in data) {

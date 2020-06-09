@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ["./course-list.scss"],
 })
 export class CourseListComponent implements OnInit {
-  // public isOpen: boolean = false;
 
+  public progress: any;
   public modelCourseList: CourseListFormViewModel = new CourseListFormViewModel();
 
   constructor(private courseListService: CourseListService, private s:Router) {}
@@ -18,8 +18,8 @@ export class CourseListComponent implements OnInit {
   public ngOnInit(): void {
     this.courseListService.getCourseList().subscribe((data) => {
       this.modelCourseList.fillModel(data);
+     
     });
-    // this.modelCourseList.fillModel();
   }
 
   trackByFn(index, item) {
@@ -29,6 +29,5 @@ export class CourseListComponent implements OnInit {
   public openCourse(course) {
     console.log(course);
     course.isOpenView = !course.isOpenView;
-    // this.isOpen = !this.isOpen;
   }
 }

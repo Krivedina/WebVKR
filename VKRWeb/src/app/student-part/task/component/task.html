@@ -1,4 +1,5 @@
-<section>
+<loader *ngIf="!modelTask.name"></loader>
+<section *ngIf="modelTask.name">
     <h1 class="page__title">{{modelTask.name}}</h1>
     <section class="content-window task-content-window">
         <article class="deadline-block">
@@ -6,9 +7,9 @@
             <span class="deadline-block__title">{{modelTask.deadline}}</span>
             <div class="deadline-block__progress-bar-wrapper">
                 <div class="progress-bar deadline-block__progress-bar">
-                    <span style="width: 50%"></span>
+                    <span [ngStyle]="{'width': progress + '%'}"></span>
                 </div>
-                <span class="deadline-block__score">{{modelTask.currentScore}}/{{modelTask.maxScore}}</span>
+                <span class="deadline-block__score">{{modelTask.currentScore || 0}}/{{modelTask.maxScore}}</span>
             </div>
             <span class="deadline-block__status">{{modelTask.status ? "Закрыт": "В работе"}}</span>
         </article>
@@ -33,17 +34,20 @@
             </div>
             <div class="description-block__wrapper-load ">
                 <span class="description-block__title">Входные данные</span>
-                <button class="low-press-button">Скачать</button>
+                <span class="input-file-name">{{modelTask.input.name || "Отсутствуют"}}</span>
+                <a download class="low-press-button description-block__download" href={{downloadEntryURL}}>Скачать</a>
             </div>
         </article>
         <article class="solution-block">
             <span class="solution-block__title">Решение</span>
-            <div>
+            <form [formGroup]="uploadSolutionFrom">
                 <label class="low-press-button" for="uploaded-file">Загрузить</label>
-                <input class="snatch" id="uploaded-file" name="file" type="file" title="Загрузить"
-                    (change)="getFileName()">
-                <span class="file-name" id="file-name"></span>
-            </div>
+                <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
+                    title="Загрузить" (change)="getFileName($event)">
+                <span class="file-name" id="file-name">{{uploadFileName}}</span>
+                <button *ngIf="uploadFileName" (click)='uploadSolution()'
+                    class="low-press-button solution-block__send-solution">Отправить</button>
+            </form>
         </article>
     </section>
 </section>

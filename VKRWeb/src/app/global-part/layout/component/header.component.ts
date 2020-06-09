@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public isAuth() {
-    return this.HeaderBaseService.isAuthenticated().authentication;
+    return this.HeaderBaseService.isAuthenticated().userId;
   }
 
   public isStudent() {

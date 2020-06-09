@@ -1,82 +1,81 @@
 .task-block-title {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 14px;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 14px;
 }
 
 .task-content-window {
-  padding: 0;
+	padding: 0;
 }
 
 .deadline-block {
-  position: relative;
-  display: flex;
-  padding: 25px 30px 20px 30px;
-  border-bottom: 1px solid #d0d0d0;
-  align-items: center;
-  &__title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 29px;
-    margin-right: 10px;
-  }
+	position: relative;
+	display: flex;
+	padding: 25px 30px 20px 30px;
+	border-bottom: 1px solid #d0d0d0;
+	align-items: center;
+	&__title {
+		font-style: normal;
+		font-weight: bold;
+		font-size: 24px;
+		line-height: 29px;
+		margin-right: 10px;
+	}
 
-  &__score {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    margin-left: 25px;
-  }
+	&__score {
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 19px;
+		margin-left: 25px;
+	}
 
-  &__status {
-    @extend .deadline-block__score;
-    font-weight: bold;
-    opacity: 50%;
-    position: absolute;
-    right: 50px;
-  }
+	&__status {
+		@extend .deadline-block__score;
+		font-weight: bold;
+		opacity: 50%;
+		position: absolute;
+		right: 50px;
+	}
 
-  &__progress-bar {
-    width: 120px;
-
-  }
-  &__progress-bar-wrapper{
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 300px;
-  }
+	&__progress-bar {
+		width: 120px;
+	}
+	&__progress-bar-wrapper {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		right: 300px;
+	}
 }
 
 .requirements-block {
-  @extend .deadline-block;
-  flex-direction: column;
-  align-items: flex-start;
-  &__title {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    margin-bottom: 30px;
-  }
+	@extend .deadline-block;
+	flex-direction: column;
+	align-items: flex-start;
+	&__title {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 14px;
+		margin-bottom: 30px;
+	}
 
-  &__score {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+	&__score {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+	}
 
-  &__score-text {
-    margin-left: 20px;
-    max-width: 900px;
-    max-height: 200px;
-    word-wrap: break-word;
-    overflow: auto;
-    font-size: 18px;
-  }
+	&__score-text {
+		margin-left: 20px;
+		max-width: 900px;
+		max-height: 200px;
+		word-wrap: break-word;
+		overflow: auto;
+		font-size: 18px;
+	}
 
 	&__status {
 		background-repeat: no-repeat;
@@ -87,59 +86,71 @@
 }
 
 .description-block {
-  @extend .deadline-block;
-  align-items: flex-start;
-  &__title {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    margin-bottom: 30px;
-  }
+	@extend .deadline-block;
+	align-items: flex-start;
+	justify-content: space-between;
+	&__title {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 14px;
+		margin-bottom: 10px;
+	}
 
-  &__wrapper-text {
-    display: flex;
-    flex-direction: column;
-  }
+	&__wrapper-text {
+		display: flex;
+		flex-direction: column;
+	}
 
-  &__text {
-    // width: 670px;
-    // height: 235px;
-    // border: 1px red solid;
+	&__text {
+		max-width: 670px;
+		word-wrap: break-word;
+		overflow: auto;
 
-    max-width: 670px;
-    word-wrap: break-word;
-    overflow: auto;
+		span {
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 24px;
+		}
+	}
 
-    span {
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      line-height: 24px;
-    }
-  }
+	&__wrapper-load {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-  &__wrapper-load {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 50px;
-  }
+	&__download {
+		&:hover {
+			color: white;
+		}
+	}
 }
 
 .solution-block {
-  @extend .deadline-block;
-  flex-direction: column;
-  align-items: flex-start;
-  &__title {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    margin-bottom: 30px;
-  }
+	@extend .deadline-block;
+	flex-direction: column;
+	align-items: flex-start;
+	&__title {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 14px;
+		margin-bottom: 30px;
+	}
+
+	&__send-solution {
+		margin-left: 20px;
+	}
 }
 
-.file-name{
-  margin-left: 20px;
+.file-name {
+	margin-left: 20px;
+}
+
+.input-file-name {
+	margin-bottom: 10px;
+	max-width: 120px;
+	word-break: break-word;
 }

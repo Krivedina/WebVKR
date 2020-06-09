@@ -3,6 +3,8 @@ import { TaskBaseService } from "../data/task.base.service";
 import { TaskViewModel } from "../view-model/task.view-model";
 import { ParamMap, ActivatedRoute } from "@angular/router";
 import { mergeMap } from "rxjs/operators";
+import { RequestPathList } from "src/app/global-part/http/routing-path-list";
+import { FormGroup, FormControlName, FormControl } from "@angular/forms";
 
 @Component({
   selector: "task",
@@ -11,6 +13,14 @@ import { mergeMap } from "rxjs/operators";
 })
 export class TaskComponent implements OnInit {
   public modelTask: TaskViewModel = new TaskViewModel();
+  public downloadEntryURL: any;
+  public uploadFileName: string;
+  public progress: any;
+  public uploadSolutionFormData = new FormData();
+
+  public uploadSolutionFrom = new FormGroup({
+    file: new FormControl(),
+  });
 
   constructor(
     private taskBaseService: TaskBaseService,
@@ -21,28 +31,43 @@ export class TaskComponent implements OnInit {
     this.route.paramMap
       .pipe(
         mergeMap((params: ParamMap) => {
-          const id = params.get("id");
-          return this.taskBaseService.getTask(id);
+          const taskId = params.get("taskId");
+          return this.taskBaseService.getTask(taskId);
         })
       )
       .subscribe((taskData) => {
         console.log(taskData);
+        this.modelTask.fillModel(taskData);
+        this.progress = Math.floor(
+          (+this.modelTask.currentScore / +this.modelTask.maxScore) * 100
+        );
+        if (this.progress > 100) {
+          this.progress = 100;
+        }
+        this.downloadEntryURL =
+          RequestPathList.downloadEntryTaskData +
+          `?attachmentId=${this.modelTask.input.id}`;
       });
-
-    // .subscribe((taskData) => {
-    //   console.log(taskData);
-    // });
-    this.modelTask.fillModel();
   }
 
-  // public getUrl() {
-  //   return "url('checkMark.svg')";
-  // }
+  public uploadSolution() {
+    this.taskBaseService
+      .postUploadSolution(this.uploadSolutionFormData, this.modelTask.id)
+      .subscribe((res) => {
+        console.log(res);
+      });
+    console.log(this.uploadSolutionFrom);
+    this.uploadSolutionFormData.delete("file");
+  }
 
-  public getFileName() {
-    let file = (<HTMLInputElement>document.getElementById("uploaded-file"))
-      .value;
-    file = file.replace(/\\/g, "/").split("/").pop();
-    document.getElementById("file-name").innerHTML = "Имя файла: " + file;
+  public getFileName(event) {
+    this.uploadFileName =
+      "Имя файла: " +
+      this.uploadSolutionFrom.value.file.replace(/\\/g, "/").split("/").pop();
+    this.uploadSolutionFormData.append(
+      "file",
+      event.target.files[0],
+      this.uploadFileName
+    );
   }
 }

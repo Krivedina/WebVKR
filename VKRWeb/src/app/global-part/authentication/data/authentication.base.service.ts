@@ -13,7 +13,7 @@ export class AuthenticationBaseService {
 
   public getIsAuthenticated() {
     return {
-      authentication: this._userId,
+      userId: this._userId,
       role: this._role,
       name: this._userName,
     };

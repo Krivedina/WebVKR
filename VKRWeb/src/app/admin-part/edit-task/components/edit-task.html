@@ -1,10 +1,11 @@
-<section>
+<loader *ngIf="isLoadingTaskPage"></loader>
+<section *ngIf="!isLoadingTaskPage">
     <article class="page__edit-title">
-        <h1 class="page__title">{{modelEditTask.title}}</h1>
-        <button (click)="editTitle()" class="confirm-press-button">Изменить название</button>
+        <h1 class="page__title">{{modelEditTask.name}}(Оценка: {{modelEditTask.maxScore}})</h1>
+        <button (click)="modalEditTitle()" class="confirm-press-button">Изменить название</button>
         <div *ngIf="isEditTitle" class="edit-block-wrapper">
-            <edit-window class="edit-title-window" (inputValue)="changeTitle($event)"
-                buttonName="Сохранить" inputName="Название">
+            <edit-window class="edit-title-window" (inputValue)="changeTitle($event)" buttonName="Сохранить"
+                inputName="Название">
             </edit-window>
         </div>
     </article>
@@ -12,14 +13,21 @@
     <section class="content-window task-content-window">
 
         <article class="deadline-block">
-            <span class="deadline-block__title">Дедлайн </span>
-            <span class="deadline-block__title">{{modelEditTask.deadline}}</span>
-            <button (click)="editDeadline()" class="deadline-block__button low-press-button">Изменить дедлайн</button>
+            <span class="deadline-block__title">Дедлайн: {{modelEditTask.deadline}}</span>
             <div *ngIf="isEditDeadline" class="edit-block-wrapper">
-                <edit-window (inputValue)="changeDeadline($event)" class="edit-deadline-window"
-                    buttonName="Сохранить" inputName="Дедлайн задачи">
+                <edit-window (inputValue)="changeDeadline($event)" class="edit-deadline-window" buttonName="Изменить"
+                    inputName="Дедлайн задачи">
                 </edit-window>
             </div>
+            <div *ngIf="isEditMaxScore" class="edit-block-wrapper">
+                <edit-window (inputValue)="changeMaxScore($event)" class="edit-deadline-window" buttonName="Изменить"
+                    inputName="Оценка за задачу">
+                </edit-window>
+            </div>
+            <button (click)="modalEditMaxScore()" class="deadline-block__change-max-score low-press-button">
+                Изменить оценку за задачу</button>
+            <button (click)="modalEditDeadline()" class="deadline-block__change-deadline low-press-button">Изменить
+                дедлайн</button>
         </article>
 
         <article class="requirements-block">
@@ -28,11 +36,21 @@
             <button (click)="addRequirements()"
                 class="requirements-block__add-button low-press-button">Добавить</button>
             <span class="requirements-block__title">Требования</span>
-            <requirement-text *ngFor="let requirementData of modelEditTask.requirementsList"
-                [status]=requirementData.status [requirement]=requirementData.text
-                (deleteElement)="deleteRequirement($event)">
-            </requirement-text>
+            <article *ngFor="let requirementData of modelEditTask.requirementList" class="requirements-block__score">
+                <div [ngStyle]="{'background-color': '#cbf6ff'}" class="requirements-block__status">
+                </div>
+                <span class="requirements-block__score-text">{{requirementData.text}}
+                </span>
+                <div *ngIf="requirementData.isDeleteRequirement" class="edit-block-wrapper">
+                    <confirm-window (confirmValue)="deleteRequirement()"
+                        inputName={{requirementData.text}}>
+                    </confirm-window>
+                </div>
+                <button (click)="modalDeleteRequirement(requirementData)"
+                    class="closeMark requirements-block__score-point"></button>
+            </article>
         </article>
+
 
         <article class="description-block">
             <div class="description-block__wrapper-text">
@@ -48,16 +66,18 @@
                 <button (click)="saveDescription()" *ngIf="isEditDescription"
                     class="description-block__button-change-description low-press-button">Сохранить</button>
             </div>
-            <div class="description-block__wrapper-load">
+            <form [formGroup]="uploadEntryFrom" class="description-block__wrapper-load">
                 <span class="description-block__title">Входные данные</span>
                 <div class="description-block__upload">
                     <label class="low-press-button" for="uploaded-file">Загрузить</label>
-                    <input class="snatch" id="uploaded-file" name="file" type="file" title="Загрузить"
-                        (change)="getFileName()">
-                    <span class="file-name" id="file-name"></span>
+                    <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
+                        title="Загрузить" (change)="getFileName($event)">
+                    <span class="input-file-name" id="file-name">{{uploadFileName}}</span>
+                    <button *ngIf="uploadFileName" (click)='uploadSolution()'
+                        class="low-press-button solution-block__send-solution">Отправить</button>
                 </div>
-            </div>
+            </form>
         </article>
-        
+
     </section>
 </section>

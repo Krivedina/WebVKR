@@ -22,17 +22,17 @@ export const RequestPathList = {
   courseTask:
     "http://localhost:8080/course/selecttasks?courseId=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
   //post
-  addTask:
-    "http://localhost:8080/course/addtask?courseId=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
+  addTask: "http://localhost:8080/course/addtask",
   //get
-  getTask:
-    "http://localhost:8080/task/get",
+  getTask: "http://localhost:8080/task/get",
   //post
-  editTask:
-    "http://localhost:8080/task/save?id=b8a19b2a-1280-4898-967c-386adbd58f0e",
+  editTask: "http://localhost:8080/task/save",
   //post
-  deleteTask:
-    "http://localhost:8080/course/deleteTask?courseId=c1031b0a-0967-41d4-9966-f762a264fed4&taskId=d2d13dd7-4d0d-4842-87f6-4afe276ecadb",
+  deleteTask: "http://localhost:8080/course/deleteTask",
+  //get
+  downloadEntryTaskData: "http://localhost:8080/task/downloadAttachment",
+  //post
+  sendSolution: "http://localhost:8080/task/uploadSolution",
 
   //Course
   //get
@@ -40,11 +40,27 @@ export const RequestPathList = {
   //post
   courseCreate: "http://localhost:8080/course/save",
   //post
-  courseEdit:
-    "http://localhost:8080/course/save?id=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
+  courseEdit: "http://localhost:8080/course/save",
   //get
   openCourse:
     "http://localhost:8080/course/get?id=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
   //post
   deleteCourse: "http://localhost:8080/course/delete",
+
+  //Group
+  //get
+  groupList: "http://localhost:8080/group/list",
+  //post
+  createGroup: "http://localhost:8080/group/save",
+  //post
+  editGroup: "http://localhost:8080/group/save",
+  //get
+  openSmth:
+    "http://localhost:8080/group/get?id=1a6ca73993814a9a84bc6d86fdd20865",
+  //post
+  deleteGroup:
+    "http://localhost:8080/group/delete?id=e67c0ea36171425e8f86a19a902f678b",
+  //get
+  studentList:
+    "http://localhost:8080/group/getStudentList?groupId=e67c0ea36171425e8f86a19a902f678b",
 };

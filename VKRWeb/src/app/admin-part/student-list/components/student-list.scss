@@ -15,7 +15,7 @@
 	height: 100%;
 	position: fixed;
 	width: 100%;
-	z-index: 100;
+	z-index: 10;
 	top: 0;
 	left: 0;
 }
@@ -130,7 +130,7 @@
 	width: 18px;
 	height: 18px;
 	margin: 0 10px;
-    border: 0;
+	border: 0;
 	&:hover {
 		cursor: pointer;
 	}
@@ -148,21 +148,19 @@
 	bottom: 28px;
 }
 
-
-.custom-select{
-  font-family: "SansPro";
-    background-color: #ffffff;
-    border: 1px solid #d0d0d0;
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 15px 10px 16px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-
+.custom-select {
+	font-family: "SansPro";
+	background-color: #ffffff;
+	border: 1px solid #d0d0d0;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding: 15px 10px 16px;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
 }
 
-.disabled-button{
-  background-color: #CECFCF
+.disabled-button {
+	background-color: #cecfcf;
 }

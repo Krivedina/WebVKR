@@ -11,6 +11,7 @@ import { EditTaskBaseService } from "./edit-task/data/edit-task.base.service";
 import { EditCourseComponent } from "./edit-course/component/edit-course.component";
 import { EditCourseBaseService } from "./edit-course/data/edit-course.base.service";
 import { BrowserModule } from "@angular/platform-browser";
+import { StudentListBaseService } from "./student-list/data/student-list.base.service";
 
 const components = [
   EditTaskComponent,
@@ -20,7 +21,11 @@ const components = [
 
 @NgModule({
   declarations: components,
-  providers: [EditCourseBaseService, EditTaskBaseService],
+  providers: [
+    EditCourseBaseService,
+    EditTaskBaseService,
+    StudentListBaseService,
+  ],
   exports: components,
   imports: [
     BrowserModule,

@@ -47,12 +47,12 @@ const routers: Routes = [
     canActivate: [StudentGuard],
   },
   {
-    path: "course-list/:courseName/:id",
+    path: "course-list/:courseName/:taskId",
     component: TaskComponent,
     canActivate: [StudentGuard],
   },
   {
-    path: "edit-task",
+    path: "edit-course/:taskName/:id",
     component: EditTaskComponent,
     canActivate: [AdminGuard],
   },

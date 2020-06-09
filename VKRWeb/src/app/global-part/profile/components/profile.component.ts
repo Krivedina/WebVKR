@@ -12,6 +12,7 @@ import { RoleEnum } from "static/role.enum";
   styleUrls: ["./profile.scss"],
 })
 export class ProfileComponent implements OnInit {
+  public isLoadingProfileData: boolean = false;
   public isEditProfile: boolean = false;
   public isEditPassword: boolean = false;
   public isProfileData: boolean = true;
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.isLoadingProfileData = true;
     this.loadProfile();
     // this.modelProfileForm.fillModel();
 
@@ -52,6 +54,7 @@ export class ProfileComponent implements OnInit {
     this.profileBaseService.getOpenUser(useCache).subscribe((userData) => {
       console.log(userData);
       this.modelProfileForm.fillModel(userData);
+      this.isLoadingProfileData = false;
     });
   }
 

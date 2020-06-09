@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { StudentListViewModel } from "../view-model/student-list.view-model";
 import { FormGroup, FormControl } from "@angular/forms";
-import { StudentListBaseService } from '../data/student-list.base.service';
+import { StudentListBaseService } from "../data/student-list.base.service";
 
 @Component({
   selector: "student-list",
@@ -36,9 +36,12 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  constructor(studentListBaseService: StudentListBaseService) {}
+  constructor(private studentListBaseService: StudentListBaseService) {}
 
   public ngOnInit(): void {
+    this.studentListBaseService.getGroupList().subscribe((data) => {
+      console.log(data);
+    });
     this.modelStudentList.fillModel();
   }
 
@@ -78,8 +81,17 @@ export class StudentListComponent implements OnInit {
 
   public deleteCourse(value: string) {}
 
-  public addNewGroup() {
-    console.log(this.addStudentGroupForm.value);
+  public addNewStudent(group) {
+    console.log(this.addStudentGroupForm.value, group);
+  }
+
+  public addNewGroup(newGroupName) {
+    this.studentListBaseService
+      .postAddNewGroup({ name: newGroupName })
+      .subscribe((res) => {
+        console.log(res);
+      });
+    this.isCreateGroup = false;
   }
 
   public addNewCourse() {
