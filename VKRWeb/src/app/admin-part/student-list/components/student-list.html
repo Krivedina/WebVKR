@@ -8,17 +8,27 @@
 
     <article [ngStyle]="{'border-bottom': isOpen ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
       <div class="course-list-head__block">
-        <span class="course-list-head__title">{{group.groupName}}</span>
+        <span class="course-list-head__title">{{group.name}}</span>
         <div class="course-list-head__right-block">
-          <button (click)="editGroupTitleModal()" class="course-list-head__button low-press-button">Изменить
+
+          <div *ngIf="group.isEditGroupTitle" class="edit-block-wrapper">
+            <edit-window (inputValue)="editGroup($event)" inputName="Название группы" buttonName="Сохранить">
+            </edit-window>
+          </div>
+          <div *ngIf="group.isDeleteGroup" class="edit-block-wrapper">
+            <confirm-window (confirmValue)="deleteGroup($event)" inputName={{group.name}}></confirm-window>
+          </div>
+
+          <button (click)="editGroupTitleModal(group)" class="course-list-head__button low-press-button">Изменить
             название</button>
-          <button (click)="deleteGroupModal()" class="course-list-head__button low-press-button">Удалить группу</button>
-          <button class="course-list-head__show-button" (click)='openGroup()'></button>
+          <button (click)="deleteGroupModal(group)" class="course-list-head__button low-press-button">Удалить
+            группу</button>
+          <button class="course-list-head__show-button" (click)='openGroup(group)'></button>
         </div>
       </div>
     </article>
 
-    <article *ngIf="isOpen" class="course-list-body__wrapper">
+    <article *ngIf="group.isOpenView" class="course-list-body__wrapper">
 
       <article>
         <form [formGroup]="addStudentGroupForm">
@@ -31,13 +41,19 @@
               <span>Почта студента</span>
             </label>
           </div>
-          <button (click)="addNewStudent(group)" class="course-list-body__create-button low-press-button">Добавить</button>
+          <button (click)="addNewStudent(group)"
+            class="course-list-body__create-button low-press-button">Добавить</button>
         </form>
 
         <article class="task-list">
           <div *ngFor="let student of group.studentList" class="task-list__wrapper">
             <span class="task-list__task-name">{{student.studentName}}</span>
             <div class="task-list__task-edit">
+              <div *ngIf="isDeleteStudent" class="edit-block-wrapper">
+                <confirm-window (confirmValue)="deleteStudent($event)"
+                  inputName={{student.name}>
+                </confirm-window>
+              </div>
               <button [routerLink]="[]" class="low-press-button">Список курсов</button>
               <button [routerLink]="[]" class="low-press-button">Профиль</button>
               <button (click)="deleteUserModal()" class="closeMark"></button>
@@ -85,16 +101,9 @@
 <div *ngIf="isCreateGroup" class="edit-block-wrapper">
   <edit-window (inputValue)="addNewGroup($event)" inputName="Название группы" buttonName="Создать"></edit-window>
 </div>
-<div *ngIf="isDeleteGroup" class="edit-block-wrapper">
-  <confirm-window (confirmValue)="deleteGroup($event)" inputName="КН-402"></confirm-window>
-</div>
-<div *ngIf="isEditGroupTitle" class="edit-block-wrapper">
-  <edit-window (inputValue)=" ($event)" inputName="Название группы" buttonName="Сохранить"></edit-window>
-</div>
-<div *ngIf="isDeleteStudent" class="edit-block-wrapper">
-  <confirm-window (confirmValue)="deleteStudent($event)" inputName="Константин Константинович Константинопольский">
-  </confirm-window>
-</div>
+
+
+
 <div *ngIf="isDeleteCourse" class="edit-block-wrapper">
   <confirm-window (confirmValue)="deleteCourse($event)" inputName="Скрипты"></confirm-window>
 </div>

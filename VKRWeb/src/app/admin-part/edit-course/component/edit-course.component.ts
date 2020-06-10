@@ -1,4 +1,10 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
 import { EditCourseViewModel } from "../view-model/edit-course.view-model";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FormGroup, FormControl } from "@angular/forms";
@@ -25,9 +31,12 @@ export class EditCourseComponent implements OnInit {
   public isCreateCourse: boolean = false;
   public isEditCourse: boolean = false;
   public isDeleteTask: boolean = false;
+  public isEditDescription: boolean = false;
 
   public currentCourse: any = null;
   public currentTask: any = null;
+
+  public courseID: any;
 
   public modelEditCourse: EditCourseViewModel = new EditCourseViewModel();
 
@@ -35,6 +44,8 @@ export class EditCourseComponent implements OnInit {
     name: new FormControl(),
     deadline: new FormControl(),
   });
+
+  @ViewChild("descriptionTextarea") descriptionTextarea: ElementRef;
 
   @HostListener("click", ["$event"]) onClick(e: any) {
     if (e.target.className.match("edit-block-wrapper")) {
@@ -52,7 +63,41 @@ export class EditCourseComponent implements OnInit {
     this.fillCourseListPage();
   }
 
-  public fillCourseListPage(flag = true, courseId = null) {
+  public editDescription(course) {
+    course.isOpenView = true;
+    this.isEditDescription = true;
+    if (this.descriptionTextarea) {
+      this.descriptionTextarea.nativeElement.value = course.descriptionText;
+    }
+  }
+
+  public saveDescription(course) {
+    console.log(course);
+    this.isEditDescription = false;
+    const newCourseModel = {
+      name: course.name,
+      maxScore: +course.maxScore,
+      descriptionText: this.descriptionTextarea.nativeElement.value,
+    };
+    this.editCourseBaseService
+      .postEditCourse(newCourseModel, course.id)
+      .subscribe(
+        () => {
+          this.fillCourseListPage(false);
+          this.wrapperMainBaseService.showMessage("Курс изменен", true);
+        },
+        (error) => {
+          this.closeAll();
+          this.wrapperMainBaseService.showMessage(
+            "Изменить курс не удалось",
+            false
+          );
+        }
+      );
+    course.isOpenView = true;
+  }
+
+  public fillCourseListPage(flag = false, courseId = null) {
     this.editCourseBaseService.getCourseList(flag).subscribe((courseList) => {
       console.log(courseList);
       this.modelEditCourse.fillModel(courseList);
@@ -96,7 +141,7 @@ export class EditCourseComponent implements OnInit {
 
   public addTask(courseId) {
     console.log(this.addTaskForm.value);
-    this.currentCourse = courseId;
+    this.courseID = courseId;
     const newTaskModel = {
       name: this.addTaskForm.value.name,
       description: null,
@@ -107,8 +152,8 @@ export class EditCourseComponent implements OnInit {
     this.addTaskForm.reset();
     this.editCourseBaseService.postAddTask(newTaskModel, courseId).subscribe(
       () => {
-        this.fillCourseListPage(false, this.currentCourse);
-        this.currentCourse = null;
+        this.fillCourseListPage(false, this.courseID);
+        // this.courseID = null;
         this.wrapperMainBaseService.showMessage("Задача добавлена", true);
       },
       (error) => {

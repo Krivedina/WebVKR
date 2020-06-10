@@ -10,7 +10,7 @@
             class="course-list-head__wrapper">
             <div class="course-list-head__block">
                 <span class="course-list-head__title">{{course.name}}</span>
-                <span class="course-list-head__score">{{course.maxScore}}</span>
+                <span class="course-list-head__score">Баллов: {{course.maxScore}}</span>
                 <div class="course-list-head__right-block">
                     <button (click)="editCourseModal(course)"
                         class="course-menu__button low-press-button">Редактировать</button>
@@ -30,7 +30,20 @@
             </div>
         </article>
 
+
         <article *ngIf="course.isOpenView" class="course-list-body__wrapper">
+            <article class="description-block__wrapper-text">
+                <div class="course-list-body__row-title">
+                    <span class="course-list-body__element-title">Описание курса</span>
+                </div>
+                <textarea #descriptionText *ngIf="isEditDescription" spellcheck="true"
+                    class="description-block__textarea"
+                    name="requirements-textarea">{{course.descriptionText}}</textarea>
+                <button (click)="editDescription(course)" *ngIf="!isEditDescription"
+                    class="description-block__button-change-description low-press-button">Изменить описание</button>
+                <button (click)="saveDescription(course)" *ngIf="isEditDescription"
+                    class="description-block__button-change-description low-press-button">Сохранить</button>
+            </article>
             <form [formGroup]="addTaskForm">
                 <div class="course-list-body__row-title">
                     <span class="course-list-body__element-title">Задача</span>

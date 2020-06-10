@@ -3,24 +3,24 @@ export class StudentListViewModel {
   public allCourse: any;
 
   public fillModel(
-    data = {
-      groupList: [
-        {
-          groupName: "КН-402",
-          studentList: [
-            { studentName: "Константин Константинович Константинопольский" },
-            { studentName: "sobaka-deputata@gmail.com" },
-          ],
-          courseList: [{ courseName: "Скрипты" }, { courseName: "Питон" }],
-        },
-      ],
-      allCourse: ["Скрипты", "Питон", "ЯТП"],
-    }
+    data = [
+      {
+        name: "КН-402",
+        studentList: [
+          { studentName: "Константин Константинович Константинопольский" },
+          { studentName: "sobaka-deputata@gmail.com" },
+        ],
+        courseList: [{ courseName: "Скрипты" }, { courseName: "Питон" }],
+      },
+    ]
   ) {
-    for (let element in data) {
-      if (element !== undefined) {
-        this[element] = data[element];
-      }
-    }
+    this.groupList = data.map((group) => {
+      return {
+        ...group,
+        isOpenView: false,
+        isEditGroupTitle: false,
+        isDeleteGroup: false,
+      };
+    });
   }
 }

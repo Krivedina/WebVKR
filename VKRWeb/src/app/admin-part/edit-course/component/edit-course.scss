@@ -126,6 +126,24 @@
 	}
 }
 
+.description-block {
+	&__wrapper-text {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	&__textarea {
+		font-size: 18px;
+		width: 400px;
+		max-width: 700px;
+		max-height: 400px;
+	}
+	&__button-change-description {
+		margin-top: 40px;
+		margin-bottom: 15px;
+	}
+}
+
 .closeMark {
 	background-image: url(static\image\Mark.svg);
 	background-repeat: no-repeat;

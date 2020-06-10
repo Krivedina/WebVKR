@@ -20,7 +20,7 @@ export class WrapperMainBaseService {
       factory
     );
     componentRef.instance.message = string;
-    componentRef.instance.succsess = succsess;
+    componentRef.instance.success = succsess;
     setTimeout(() => {
       componentRef.destroy();
     }, 3000);

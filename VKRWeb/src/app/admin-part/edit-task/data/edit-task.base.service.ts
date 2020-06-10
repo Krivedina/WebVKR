@@ -22,7 +22,7 @@ export class EditTaskBaseService {
 
   public postSaveTask(taskData) {
     return this.httpService.postRequest(
-      RequestPathList.editTask + `?Id=${taskData.id}`,
+      RequestPathList.editTask ,
       taskData
     );
   }

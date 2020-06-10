@@ -97,6 +97,13 @@ a:hover {
 	}
 }
 
+.no-solution-button {
+	background-color: #d0d0d0;
+	&:hover {
+		background-color: #d0d0d0;
+	}
+}
+
 .control-input {
 	font-family: "SansPro";
 	background-color: #ffffff;
@@ -223,4 +230,11 @@ a:hover {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.req-success {
+	background: url(static\image\Success.svg);
+}
+.req-fail {
+	background: url(static\image\Fail.svg);
 }

@@ -66,8 +66,8 @@ export class TaskComponent implements OnInit {
       this.uploadSolutionFrom.value.file.replace(/\\/g, "/").split("/").pop();
     this.uploadSolutionFormData.append(
       "file",
-      event.target.files[0],
-      this.uploadFileName
+      event.target.files[0]
+      // this.uploadFileName
     );
   }
 }

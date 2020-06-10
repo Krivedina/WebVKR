@@ -1,4 +1,5 @@
-<section>
+<loader *ngIf="isLoadingCoursePage"></loader>
+<section *ngIf="!isLoadingCoursePage">
     <h1 class="page__title">Курсы</h1>
     <section *ngFor="let course of modelCourseList.courseList; trackBy: trackByFn" class="content-window">
         <article [ngStyle]="{'border-bottom': course.isOpenView ? '1px solid #E5E5E5' : '0'}"
@@ -7,7 +8,7 @@
                 <span class="course-list-head__title">{{course.name}}</span>
                 <div class="middle-block">
                     <div class="progress-bar">
-                        <span  [ngStyle]="{'width': course.progress + '%'}"></span>
+                        <span [ngStyle]="{'width': course.progress + '%'}"></span>
                     </div>
                     <span class="course-list-head__score">{{course.currentScore}}/{{course.maxScore}}</span>
                 </div>
@@ -21,7 +22,7 @@
             <div class="course-list-body__row-title">
                 <span class="course-list-body__element-title">Задача</span>
                 <span class="course-list-body__middle-block middle-block-requirements">Требования</span>
-                <span class="course-list-body__rigth-block">Входные данные</span>
+                <span class="course-list-body__rigth-block">Решение задачи</span>
             </div>
             <article *ngFor="let task of course.courseTasks" class="course-list-body__row-element">
                 <a class="course-list-body__element-title" [routerLink]="[course.name, task.id]">
@@ -29,13 +30,15 @@
                 </a>
                 <div class=" course-list-body__middle-block">
                     <div *ngFor="let requirement of task.requirementStatusList"
-                        [ngStyle]="{'background-color': requirement.status ?'#00b7df' : '#cbf6ff'}" class="point">
+                        [ngClass]="{'req-success':requirement.status, 'req-fail':!requirement.status}" class="point">
                         <span></span>
                     </div>
                 </div>
-                <button class=" 
+                <button (click)="uploadSolution(task)" class=" 
                     course-list-body__rigth-block 
-                    low-press-button">Скачать</button>
+                    low-press-button" [disabled]="!task.solutionId"
+                    [ngClass]="{'no-solution-button':!task.solutionId}">
+                    Скачать</button>
             </article>
         </section>
     </section>

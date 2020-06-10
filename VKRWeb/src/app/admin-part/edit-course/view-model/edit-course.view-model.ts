@@ -4,8 +4,9 @@ export class EditCourseViewModel {
   public fillModel(
     data = [
       {
-        courseName: "Скрипты",
-        courseMaxScore: "30",
+        descriptionText: '2131',
+        name: "Скрипты",
+        maxScore: "30",
         taskList: [
           {
             name: "Энтропия",

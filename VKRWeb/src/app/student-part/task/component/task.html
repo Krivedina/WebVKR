@@ -17,7 +17,7 @@
             <span class="requirements-block__title">Требования</span>
             <div>
                 <div *ngFor="let requirement of modelTask.requirementList" class="requirements-block__score">
-                    <div [ngStyle]="{'background-color': requirement.status ? '#00B7DF': '#cbf6ff'}"
+                    <div [ngClass]="{'req-success':requirement.status, 'req-fail':!requirement.status}"
                         class="requirements-block__status">
                     </div>
                     <span class="requirements-block__score-text">{{requirement.text}}
@@ -34,8 +34,9 @@
             </div>
             <div class="description-block__wrapper-load ">
                 <span class="description-block__title">Входные данные</span>
-                <span class="input-file-name">{{modelTask.input.name || "Отсутствуют"}}</span>
-                <a download class="low-press-button description-block__download" href={{downloadEntryURL}}>Скачать</a>
+                <span class="input-file-name">{{modelTask.input ? modelTask.input.name : "Отсутствуют"}}</span>
+                <a *ngIf="downloadEntryURL" download class="low-press-button description-block__download"
+                    href={{downloadEntryURL}}>Скачать</a>
             </div>
         </article>
         <article class="solution-block">
