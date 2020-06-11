@@ -259,7 +259,26 @@ export class EditTaskComponent implements OnInit {
     );
   }
 
-  public uploadSolution() {}
+  public uploadSolution() {
+    this.editTaskBaseService
+      .postUploadSolution(this.uploadEntryFormData, this.modelEditTask.id)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.wrapperMainBaseService.showMessage(
+            "Входные данные загружены",
+            true
+          );
+        },
+        (error) => {
+          this.wrapperMainBaseService.showMessage(
+            "Входные данные загрузить не удалось",
+            false
+          );
+        }
+      );
+    this.uploadEntryFormData.delete("file");
+  }
 
   private saveTask(taskData) {
     return this.editTaskBaseService.postSaveTask(taskData);

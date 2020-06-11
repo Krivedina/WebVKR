@@ -1,7 +1,7 @@
-<section class="profile">
+<loader *ngIf="isLoadingProfileData"></loader>
+<section *ngIf="!isLoadingProfileData" class="profile">
   <h1 class="page__title">Профиль {{modelProfileForm.role}}</h1>
-  <loader *ngIf="isLoadingProfileData"></loader>
-  <div *ngIf="!isLoadingProfileData" class="profile__info">
+  <div class="profile__info">
 
     <div>
       <!-- <img class="profile__image" src="http://localhost:8080/media/download?id=94f0ccacb21d3e1857e8d46eda516bf6" -->

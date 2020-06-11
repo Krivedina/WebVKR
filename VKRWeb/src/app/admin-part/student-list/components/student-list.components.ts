@@ -107,27 +107,32 @@ export class StudentListComponent implements OnInit {
       });
   }
 
-  public deleteStudent(value: string) {
-    
-  }
+  public deleteStudent(value: string) {}
 
   public deleteCourse(value: string) {}
 
   public addNewStudent(group) {
     console.log(this.addStudentGroupForm.value, group);
-    let studentList = [];
-    if (group.studentList) {
-      studentList = group.studentList;
-      studentList.push(this.addStudentGroupForm.value.email);
-    } else {
-      studentList.push(this.addStudentGroupForm.value.email);
-    }
+    // let studentList = [];
+    // if (group.studentList) {
+    //   studentList = group.studentList;
+    //   studentList.push(this.addStudentGroupForm.value.email);
+    // } else {
+    //   studentList.push(this.addStudentGroupForm.value.email);
+    // }
+    // this.studentListBaseService
+    //   .postSaveGroup({
+    //     ...group,
+    //     studentList: studentList,
+    //   })
     this.studentListBaseService
-      .postSaveGroup({
-        ...group,
-        studentList: studentList,
-      })
-      .pipe(mergeMap((res) => this.studentListBaseService.getGroupList(false)))
+      .postInvite(group.id, this.addStudentGroupForm.value.email)
+      .pipe(
+        mergeMap((res) => {
+          console.log(res);
+          return this.studentListBaseService.getGroupList(false);
+        })
+      )
       .subscribe((groupData) => {
         this.modelStudentList.fillModel(groupData);
       });

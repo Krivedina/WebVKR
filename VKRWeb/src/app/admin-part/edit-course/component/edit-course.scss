@@ -65,7 +65,10 @@
 	&__right-block {
 		position: absolute;
 		right: 30px;
+		display: flex;
+		align-items: center;
 	}
+
 	&__button {
 		margin-left: 23px;
 	}
@@ -129,8 +132,8 @@
 .description-block {
 	&__wrapper-text {
 		display: flex;
-		flex-direction: column;
 		align-items: flex-start;
+		flex-direction: column;
 	}
 	&__textarea {
 		font-size: 18px;

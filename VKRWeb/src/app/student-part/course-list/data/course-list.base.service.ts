@@ -12,11 +12,11 @@ export class CourseListService {
   ) {}
 
   public getCourseList() {
-    const userId = this.authenticationBaseService.getIsAuthenticated()
-      .userId;
+    const userId = this.authenticationBaseService.getIsAuthenticated().userId;
     return this.httpService.getRequest(
       RequestPathList.courseList + `?userId=${userId}`,
-      CacheListName.courseList
+      CacheListName.courseList,
+      false
     );
   }
 }

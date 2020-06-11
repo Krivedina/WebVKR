@@ -26,6 +26,8 @@ import { WrapperMainBaseService } from "./wrapper-main/data/wrapper-main.base.se
 import { LoginComponent } from "./login/components/login.component";
 import { LoginBaseService } from "./login/data/login.base.service";
 import { BrowserModule } from "@angular/platform-browser";
+import { UserListBaseService } from "./user-list/data/user-list.base.service";
+import { UserListComponent } from "./user-list/components/user-list.component";
 
 const components = [
   NotFoundPageComponent,
@@ -34,6 +36,7 @@ const components = [
   RegistrationComponent,
   WrapperMainComponent,
   LoginComponent,
+  UserListComponent,
 ];
 
 @NgModule({
@@ -52,6 +55,7 @@ const components = [
     RegistrationBaseService,
     StudentGuard,
     WrapperMainBaseService,
+    UserListBaseService,
   ],
   imports: [
     BrowserModule,

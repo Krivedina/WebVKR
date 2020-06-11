@@ -42,8 +42,7 @@
                 <span class="requirements-block__score-text">{{requirementData.text}}
                 </span>
                 <div *ngIf="requirementData.isDeleteRequirement" class="edit-block-wrapper">
-                    <confirm-window (confirmValue)="deleteRequirement()"
-                        inputName={{requirementData.text}}>
+                    <confirm-window (confirmValue)="deleteRequirement()" inputName={{requirementData.text}}>
                     </confirm-window>
                 </div>
                 <button (click)="modalDeleteRequirement(requirementData)"

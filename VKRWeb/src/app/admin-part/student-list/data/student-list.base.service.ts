@@ -29,4 +29,11 @@ export class StudentListBaseService {
       null
     );
   }
+
+  public postInvite(groupId, email) {
+    return this.httpService.postRequest(
+      RequestPathList.sendInviteEmail + `?groupId=${groupId}&email=${email}`,
+      null
+    );
+  }
 }

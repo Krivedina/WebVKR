@@ -13,12 +13,20 @@
                     <span class="course-list-head__score">{{course.currentScore}}/{{course.maxScore}}</span>
                 </div>
                 <div class="right-block">
-                    <span class="course-list-head__status">{{course.courseStatus ? 'Зачет' : 'Незачет'}}</span>
+                    <span class="course-list-head__status" [ngClass]="{'course-list-head__success':course.currentScore === course.maxScore,
+                         'course-list-head__fail':course.currentScore !== course.maxScore}">
+                        {{course.currentScore === course.maxScore  ? 'Зачет' : 'Незачет'}}</span>
                     <button class="course-list-head__show-button" (click)='openCourse(course)'></button>
                 </div>
             </div>
         </article>
         <section *ngIf="course.isOpenView" class="course-list-body__wrapper">
+            <div class="description-course description-course__wrapper">
+                <div class="description-course__row-title">
+                    <span>Описание</span>
+                </div>
+                <span class="description-course__text">{{course.descriptionText || "Описание отсутствует"}}</span>
+            </div>
             <div class="course-list-body__row-title">
                 <span class="course-list-body__element-title">Задача</span>
                 <span class="course-list-body__middle-block middle-block-requirements">Требования</span>
@@ -34,11 +42,12 @@
                         <span></span>
                     </div>
                 </div>
-                <button (click)="uploadSolution(task)" class=" 
+                <button class=" 
                     course-list-body__rigth-block 
                     low-press-button" [disabled]="!task.solutionId"
                     [ngClass]="{'no-solution-button':!task.solutionId}">
-                    Скачать</button>
+                    <a href={{task.downloadUrl}}>Скачать</a>
+                </button>
             </article>
         </section>
     </section>

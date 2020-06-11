@@ -4,4 +4,5 @@ export const CacheListName = {
   task: "task-",
   entryTask: "entryTask-",
   groupList: "groupList",
+  userList: "userList"
 };

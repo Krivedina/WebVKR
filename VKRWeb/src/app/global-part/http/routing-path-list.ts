@@ -32,6 +32,8 @@ export const RequestPathList = {
   //get
   downloadEntryTaskData: "http://localhost:8080/task/downloadAttachment",
   //post
+  sendEntryTaskData: "http://localhost:8080/task/uploadInput",
+  //post
   sendSolution: "http://localhost:8080/task/uploadSolution",
   //post
   downloadSolution:
@@ -61,9 +63,15 @@ export const RequestPathList = {
   openSmth:
     "http://localhost:8080/group/get?id=1a6ca73993814a9a84bc6d86fdd20865",
   //post
-  deleteGroup:
-    "http://localhost:8080/group/delete",
+  deleteGroup: "http://localhost:8080/group/delete",
   //get
   studentList:
     "http://localhost:8080/group/getStudentList?groupId=e67c0ea36171425e8f86a19a902f678b",
+  //get
+  userList: "http://localhost:8080/group/getStudentList",
+
+  //Invite
+  //post
+  sendInviteEmail:
+    "http://localhost:8080/group/inviteStudent",
 };

@@ -5,6 +5,7 @@ import { ParamMap, ActivatedRoute } from "@angular/router";
 import { mergeMap } from "rxjs/operators";
 import { RequestPathList } from "src/app/global-part/http/routing-path-list";
 import { FormGroup, FormControlName, FormControl } from "@angular/forms";
+import { WrapperMainBaseService } from 'src/app/global-part/wrapper-main/data/wrapper-main.base.service';
 
 @Component({
   selector: "task",
@@ -24,7 +25,8 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private taskBaseService: TaskBaseService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private wrapperMainBaseService: WrapperMainBaseService
   ) {}
 
   public ngOnInit(): void {
@@ -55,6 +57,9 @@ export class TaskComponent implements OnInit {
       .postUploadSolution(this.uploadSolutionFormData, this.modelTask.id)
       .subscribe((res) => {
         console.log(res);
+        this.wrapperMainBaseService.showMessage('Решение отправлено', true);
+      },error => {
+        this.wrapperMainBaseService.showMessage('Отправить решение не удалось', false);
       });
     console.log(this.uploadSolutionFrom);
     this.uploadSolutionFormData.delete("file");
@@ -66,7 +71,7 @@ export class TaskComponent implements OnInit {
       this.uploadSolutionFrom.value.file.replace(/\\/g, "/").split("/").pop();
     this.uploadSolutionFormData.append(
       "file",
-      event.target.files[0]
+      event.target.files[0],
       // this.uploadFileName
     );
   }

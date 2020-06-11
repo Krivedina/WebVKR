@@ -7,6 +7,9 @@
       <li>
         <a [routerLink]="['/profile']" routerLinkActive="router-link-active">Профиль</a>
       </li>
+      <li>
+        <a [routerLink]="['/user-list']" routerLinkActive="router-link-active">Список всех пользователей</a>
+      </li>
       <li *ngIf="isStudent()">
         <a [routerLink]="['/course-list']" routerLinkActive="router-link-active">Список Курсов</a>
       </li>
@@ -15,9 +18,6 @@
       </li>
       <li *ngIf="isAdmin()">
         <a [routerLink]="['/student-list']" routerLinkActive="router-link-active">Список Студентов</a>
-      </li>
-      <li *ngIf="isAdmin()">
-        <a [routerLink]="['/edit-task']" routerLinkActive="router-link-active">edit-task</a>
       </li>
     </ul>
     <ul *ngIf="!isAuth()" class="navigation__auth-menu">

@@ -14,6 +14,7 @@ import { EditTaskComponent } from "./admin-part/edit-task/components/edit-task.c
 import { EditCourseComponent } from "./admin-part/edit-course/component/edit-course.component";
 import { NotFoundPageComponent } from "./global-part/http/not-found-page/not-found-page.component";
 import { NgModule } from "@angular/core";
+import { UserListComponent } from "./global-part/user-list/components/user-list.component";
 
 const routers: Routes = [
   {
@@ -60,6 +61,11 @@ const routers: Routes = [
     path: "edit-course",
     component: EditCourseComponent,
     canActivate: [AdminGuard],
+  },
+  {
+    path: "user-list",
+    component: UserListComponent,
+    canActivate: [AuthicationGuard],
   },
   {
     path: "**",

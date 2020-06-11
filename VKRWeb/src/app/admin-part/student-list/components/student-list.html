@@ -6,7 +6,7 @@
 
   <section *ngFor="let group of modelStudentList.groupList" class="content-window">
 
-    <article [ngStyle]="{'border-bottom': isOpen ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+    <article [ngStyle]="{'border-bottom': group.isOpenView ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
       <div class="course-list-head__block">
         <span class="course-list-head__title">{{group.name}}</span>
         <div class="course-list-head__right-block">
@@ -51,7 +51,7 @@
             <div class="task-list__task-edit">
               <div *ngIf="isDeleteStudent" class="edit-block-wrapper">
                 <confirm-window (confirmValue)="deleteStudent($event)"
-                  inputName={{student.name}>
+                  inputName={{student.name}}>
                 </confirm-window>
               </div>
               <button [routerLink]="[]" class="low-press-button">Список курсов</button>

@@ -41,7 +41,7 @@
         </article>
         <article class="solution-block">
             <span class="solution-block__title">Решение</span>
-            <form [formGroup]="uploadSolutionFrom">
+            <form class="solution-block__form" [formGroup]="uploadSolutionFrom">
                 <label class="low-press-button" for="uploaded-file">Загрузить</label>
                 <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
                     title="Загрузить" (change)="getFileName($event)">

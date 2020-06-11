@@ -34,7 +34,4 @@ export class CourseListComponent implements OnInit {
     course.isOpenView = !course.isOpenView;
   }
 
-  public uploadSolution(task) {
-    console.log(task);
-  }
 }

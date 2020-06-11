@@ -21,9 +21,13 @@ export class EditTaskBaseService {
   }
 
   public postSaveTask(taskData) {
+    return this.httpService.postRequest(RequestPathList.editTask, taskData);
+  }
+
+  public postUploadSolution(uploadEntryFormData, modelEditTaskId) {
     return this.httpService.postRequest(
-      RequestPathList.editTask ,
-      taskData
+      RequestPathList.sendEntryTaskData + `?taskId=${modelEditTaskId}`,
+      uploadEntryFormData
     );
   }
 }

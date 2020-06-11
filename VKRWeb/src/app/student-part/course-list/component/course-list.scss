@@ -1,4 +1,3 @@
-
 .course-list-head {
 	&__wrapper {
 		width: 100%;
@@ -33,7 +32,14 @@
 		font-weight: bold;
 		font-size: 16px;
 		line-height: 19px;
+	}
+
+	&__fail {
 		color: #9e0000;
+	}
+
+	&__success {
+		color: #007426;
 	}
 
 	&__show-button {
@@ -73,12 +79,16 @@
 		max-width: 300px;
 	}
 
-
 	&__rigth-block {
 		right: 40px;
 		display: flex;
 		position: absolute;
 		align-items: center;
+
+		a {
+			color: white;
+			text-decoration: none;
+		}
 	}
 
 	&__row-element {
@@ -87,7 +97,6 @@
 		position: relative;
 		display: flex;
 		padding: 29px 0 20px 0;
-
 	}
 
 	&__element-title {
@@ -101,7 +110,25 @@
 	}
 }
 
-
+.description-course {
+	&__wrapper {
+		margin-bottom: 18px;
+	}
+	&__row-title {
+		display: flex;
+		margin-bottom: 29px;
+		span {
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 14px;
+		}
+	}
+	&__text {
+		max-width: 75%;
+		word-break: break-all;
+	}
+}
 
 .middle-block {
 	left: 35%;
@@ -116,6 +143,6 @@
 	right: 30px;
 }
 
-.middle-block-requirements{
-	left:34%
+.middle-block-requirements {
+	left: 34%;
 }

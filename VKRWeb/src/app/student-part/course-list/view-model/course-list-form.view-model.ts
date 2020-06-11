@@ -1,3 +1,5 @@
+import { RequestPathList } from "src/app/global-part/http/routing-path-list";
+
 export class CourseListFormViewModel {
   public courseList;
 
@@ -11,6 +13,7 @@ export class CourseListFormViewModel {
 
         courseTasks: [
           {
+            solutionId: "",
             name: "Энтропия",
             currentScore: 2,
             maxScore: 12,
@@ -30,6 +33,7 @@ export class CourseListFormViewModel {
             ],
           },
           {
+            solutionId: "",
             name: "Энтропdsия",
             currentScore: 2,
             maxScore: 3,
@@ -59,6 +63,14 @@ export class CourseListFormViewModel {
       if (progress > 100) {
         progress = 100;
       }
+      course.courseTasks = course.courseTasks.map((task) => {
+        let downloadUrl = null;
+        if (task.solutionId) {
+          downloadUrl = this.createDownloadUrl(task.solutionId);
+        }
+        return { ...task, downloadUrl: downloadUrl };
+      });
+
       return { progress: progress, isOpenView: false, ...course };
     });
 
@@ -67,5 +79,9 @@ export class CourseListFormViewModel {
     //     this[element] = data[element];
     //   }
     // }
+  }
+
+  private createDownloadUrl(taskId) {
+    return RequestPathList.downloadEntryTaskData + `?attachmentId=${taskId}`;
   }
 }
