@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserListViewModel } from "../view-model/user-list.view-model";
 import { UserListBaseService } from "../data/user-list.base.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "user-list",
@@ -10,18 +11,23 @@ import { UserListBaseService } from "../data/user-list.base.service";
 export class UserListComponent implements OnInit {
   public modelUserList = new UserListViewModel();
 
-  constructor(private userListBaseService: UserListBaseService) {}
-  
+  constructor(
+    private userListBaseService: UserListBaseService,
+    private router: Router
+  ) {}
+
   public ngOnInit(): void {
+    this.modelUserList.fillModel();
     // this.userListBaseService.getStudentList().subscribe((studentData) => {
     //   this.modelUserList.fillModel(studentData);
     // })
   }
 
   public openGroup(group) {
-    group.isViewOpen = !group.isViewOpen;
+    group.isOpenView = !group.isOpenView;
   }
 
-  public toResultStudents() {}
-
+  public toResultStudents() {
+    this.router.navigate(["student-result"]);
+  }
 }

@@ -15,6 +15,7 @@ import { EditCourseComponent } from "./admin-part/edit-course/component/edit-cou
 import { NotFoundPageComponent } from "./global-part/http/not-found-page/not-found-page.component";
 import { NgModule } from "@angular/core";
 import { UserListComponent } from "./global-part/user-list/components/user-list.component";
+import { StudentResultComponent } from "./global-part/student-result/component/student-result.component";
 
 const routers: Routes = [
   {
@@ -65,6 +66,11 @@ const routers: Routes = [
   {
     path: "user-list",
     component: UserListComponent,
+    canActivate: [AuthicationGuard],
+  },
+  {
+    path: "student-result",
+    component: StudentResultComponent,
     canActivate: [AuthicationGuard],
   },
   {

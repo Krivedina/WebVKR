@@ -1,0 +1,48 @@
+<loader *ngIf="!checkTaskModel.name"></loader>
+<section *ngIf="checkTaskModel.name">
+    <h1 class="page__title">{{checkTaskModel.name}}</h1>
+    <section class="content-window task-content-window">
+        <article class="deadline-block">
+            <span class="deadline-block__title">Дедлайн</span>
+            <span class="deadline-block__title">{{checkTaskModel.deadline}}</span>
+            <div class="deadline-block__progress-bar-wrapper">
+                <span
+                    class="deadline-block__score">{{checkTaskModel.currentScore || 0}}/{{checkTaskModel.maxScore}}</span>
+            </div>
+            <span class="deadline-block__status">{{checkTaskModel.status ? "Закрыт": "В работе"}}</span>
+        </article>
+        <article class="requirements-block">
+            <span class="requirements-block__title">Требования</span>
+            <div>
+                <div *ngFor="let requirement of checkTaskModel.requirementList" class="requirements-block__score">
+                    <div [ngClass]="{'req-success':requirement.status, 'req-fail':!requirement.status}"
+                        class="requirements-block__status">
+                    </div>
+                    <span class="requirements-block__score-text">{{requirement.text}}
+                    </span>
+                </div>
+            </div>
+        </article>
+        <article class="description-block">
+            <div class="description-block__wrapper-text">
+                <span class="description-block__title">Описание</span>
+                <div class="description-block__text">
+                    <span>{{checkTaskModel.descriptionText}}</span>
+                </div>
+            </div>
+            <div class="description-block__wrapper-load ">
+                <span class="description-block__title">Входные данные</span>
+                <span
+                    class="input-file-name">{{checkTaskModel.input ? checkTaskModel.input.name : "Отсутствуют"}}</span>
+                <a *ngIf="downloadEntryURL" download class="low-press-button description-block__download"
+                    href={{downloadEntryURL}}>Скачать</a>
+            </div>
+        </article>
+        <article class="solution-block">
+            <span class="solution-block__title">Решение</span>
+            <button class="low-press-button solution-block__send-solution">
+                <a class="solution-block__download" href={{downloadSolutionURL}}>Скачать</a>
+            </button>
+        </article>
+    </section>
+</section>

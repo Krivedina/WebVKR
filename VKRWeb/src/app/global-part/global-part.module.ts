@@ -28,6 +28,8 @@ import { LoginBaseService } from "./login/data/login.base.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { UserListBaseService } from "./user-list/data/user-list.base.service";
 import { UserListComponent } from "./user-list/components/user-list.component";
+import { StudentResultComponent } from "./student-result/component/student-result.component";
+import { StudentResultBaseService } from "./student-result/data/student-result.base.service";
 
 const components = [
   NotFoundPageComponent,
@@ -37,6 +39,7 @@ const components = [
   WrapperMainComponent,
   LoginComponent,
   UserListComponent,
+  StudentResultComponent,
 ];
 
 @NgModule({
@@ -56,6 +59,7 @@ const components = [
     StudentGuard,
     WrapperMainBaseService,
     UserListBaseService,
+    StudentResultBaseService,
   ],
   imports: [
     BrowserModule,

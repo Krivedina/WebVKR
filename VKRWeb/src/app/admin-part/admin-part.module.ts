@@ -12,11 +12,14 @@ import { EditCourseComponent } from "./edit-course/component/edit-course.compone
 import { EditCourseBaseService } from "./edit-course/data/edit-course.base.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { StudentListBaseService } from "./student-list/data/student-list.base.service";
+import { CheckTaskComponent } from "./check-task/component/check-task.component";
+import { CheckTaskBaseService } from "./check-task/data/check-task.base.service";
 
 const components = [
   EditTaskComponent,
   EditCourseComponent,
   StudentListComponent,
+  CheckTaskComponent,
 ];
 
 @NgModule({
@@ -25,6 +28,7 @@ const components = [
     EditCourseBaseService,
     EditTaskBaseService,
     StudentListBaseService,
+    CheckTaskBaseService,
   ],
   exports: components,
   imports: [
