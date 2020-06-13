@@ -14,9 +14,9 @@ export class StudentListViewModel {
       },
     ]
   ) {
-    this.groupList = data.map((group) => {
+    this.groupList = data.map((groupData) => {
       return {
-        ...group,
+        ...groupData,
         isOpenView: false,
         isEditGroupTitle: false,
         isDeleteGroup: false,

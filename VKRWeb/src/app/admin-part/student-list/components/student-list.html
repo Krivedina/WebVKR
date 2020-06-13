@@ -6,9 +6,10 @@
 
   <section *ngFor="let group of modelStudentList.groupList" class="content-window">
 
-    <article [ngStyle]="{'border-bottom': group.isOpenView ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+    <article [ngStyle]="{'border-bottom': group.isOpenView ? '1px solid #E5E5E5' : '0'}"
+      class="course-list-head__wrapper">
       <div class="course-list-head__block">
-        <span class="course-list-head__title">{{group.name}}</span>
+        <span class="course-list-head__title">{{group.name || "Группа без имени"}}</span>
         <div class="course-list-head__right-block">
 
           <div *ngIf="group.isEditGroupTitle" class="edit-block-wrapper">
@@ -46,16 +47,17 @@
         </form>
 
         <article class="task-list">
-          <div *ngFor="let student of group.studentList" class="task-list__wrapper">
-            <span class="task-list__task-name">{{student.studentName}}</span>
+          <div *ngFor="let student of group.inviteList" class="task-list__wrapper">
+            <span class="task-list__task-name">{{student.name || student.email}}</span>
             <div class="task-list__task-edit">
               <div *ngIf="isDeleteStudent" class="edit-block-wrapper">
-                <confirm-window (confirmValue)="deleteStudent($event)"
-                  inputName={{student.name}}>
+                <confirm-window (confirmValue)="deleteStudent($event)" inputName={{student.name || student.email}}>
                 </confirm-window>
               </div>
-              <button [routerLink]="[]" class="low-press-button">Список курсов</button>
-              <button [routerLink]="[]" class="low-press-button">Профиль</button>
+              <button [disabled]="!student.isAccepted" [ngClass]="{'no-solution-button':!student.isAccepted}"
+                (click)="toCourseList(student)" class="low-press-button">Список курсов</button>
+              <button [disabled]="!student.isAccepted" [ngClass]="{'no-solution-button':!student.isAccepted}"
+                (click)="toProfile(student)" class="low-press-button">Профиль</button>
               <button (click)="deleteUserModal()" class="closeMark"></button>
             </div>
           </div>
@@ -71,18 +73,18 @@
           </div>
           <div>
             <label class="custom-input">
-              <select formControlName="course" placeholder="&nbsp;" class="custom-select">
-                <option value="" hidden disabled selected>Добавить курс этой группе</option>
-                <option *ngFor="let course of  modelStudentList.allCourse">{{course}}</option>
+              <select id="selectCourse" formControlName="course" class="custom-select">
+                <option *ngFor="let course of allCourseList" value={{course.id}}>{{course.name}}</option>
+                <option hidden disabled selected>Добавить курс этой группе</option>
               </select>
             </label>
           </div>
-          <button (click)="addNewCourse()" class="course-list-body__create-button low-press-button">Добавить</button>
+          <button (click)="addNewCourse(group)" class="course-list-body__create-button low-press-button">Добавить</button>
         </form>
 
         <article>
           <div *ngFor="let courseList of group.courseList" class="task-list__wrapper">
-            <span class="task-list__task-name">{{courseList.courseName}}</span>
+            <span class="task-list__task-name">{{courseList.name}}</span>
             <div class="task-list__task-edit">
               <button [routerLink]="[]" class="low-press-button">Задачи курса</button>
               <button (click)="deleteCourseModal()" class="closeMark"></button>

@@ -3,6 +3,8 @@ import { StudentListViewModel } from "../view-model/student-list.view-model";
 import { FormGroup, FormControl } from "@angular/forms";
 import { StudentListBaseService } from "../data/student-list.base.service";
 import { mergeMap } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { from, of, forkJoin } from "rxjs";
 
 @Component({
   selector: "student-list",
@@ -18,6 +20,7 @@ export class StudentListComponent implements OnInit {
   public isDeleteCourse: boolean = false;
 
   public currentGroup: any;
+  public allCourseList: any;
 
   public modelStudentList: StudentListViewModel = new StudentListViewModel();
 
@@ -44,14 +47,22 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  constructor(private studentListBaseService: StudentListBaseService) {}
+  constructor(
+    private studentListBaseService: StudentListBaseService,
+    private router: Router
+  ) {}
 
   public ngOnInit(): void {
     this.createStudentListPage();
   }
 
   public createStudentListPage(flag = true) {
-    this.studentListBaseService.getGroupList(flag).subscribe((groupData) => {
+    forkJoin(
+      this.studentListBaseService.getGroupList(flag),
+      this.studentListBaseService.getCourseList()
+    ).subscribe((groupDataList) => {
+      const groupData = groupDataList[0];
+      this.allCourseList = groupDataList[1];
       this.modelStudentList.fillModel(groupData);
     });
   }
@@ -93,6 +104,7 @@ export class StudentListComponent implements OnInit {
           this.modelStudentList.fillModel(groupData);
         });
     }
+    this.currentGroup.isDeleteGroup = false;
   }
 
   public editGroup(newGroupName) {
@@ -105,6 +117,7 @@ export class StudentListComponent implements OnInit {
       .subscribe((groupData) => {
         this.modelStudentList.fillModel(groupData);
       });
+    this.currentGroup.isEditGroupTitle = false;
   }
 
   public deleteStudent(value: string) {}
@@ -113,18 +126,7 @@ export class StudentListComponent implements OnInit {
 
   public addNewStudent(group) {
     console.log(this.addStudentGroupForm.value, group);
-    // let studentList = [];
-    // if (group.studentList) {
-    //   studentList = group.studentList;
-    //   studentList.push(this.addStudentGroupForm.value.email);
-    // } else {
-    //   studentList.push(this.addStudentGroupForm.value.email);
-    // }
-    // this.studentListBaseService
-    //   .postSaveGroup({
-    //     ...group,
-    //     studentList: studentList,
-    //   })
+    this.currentGroup = group;
     this.studentListBaseService
       .postInvite(group.id, this.addStudentGroupForm.value.email)
       .pipe(
@@ -135,7 +137,15 @@ export class StudentListComponent implements OnInit {
       )
       .subscribe((groupData) => {
         this.modelStudentList.fillModel(groupData);
+        this.modelStudentList.groupList.forEach((group) => {
+          if (group.id === this.currentGroup.id) {
+            group.isOpenView = true;
+          }
+        });
+        this.currentGroup = null;
       });
+
+    this.addStudentGroupForm.reset();
   }
 
   public addNewGroup(newGroupName) {
@@ -147,7 +157,31 @@ export class StudentListComponent implements OnInit {
     this.isCreateGroup = false;
   }
 
-  public addNewCourse() {
-    console.log(this.addCourseGroupForm.value);
+  public addNewCourse(group) {
+    this.currentGroup = group;
+    this.studentListBaseService
+      .postAddCourse(group.id, [this.addCourseGroupForm.value.course])
+      .pipe(mergeMap(() => this.studentListBaseService.getGroupList(false)))
+      .subscribe((groupData) => {
+        this.modelStudentList.fillModel(groupData);
+        this.modelStudentList.groupList.forEach((group) => {
+          if (group.id === this.currentGroup.id) {
+            group.isOpenView = true;
+          }
+        });
+        this.currentGroup = null;
+      });
+  }
+
+  public toCourseList(student) {
+    const studentName = student.name.replace(/\s+/g, "_");
+    this.router.navigate([
+      `/course-list/user/${studentName}/${student.studentId}`,
+    ]);
+  }
+
+  public toProfile(student) {
+    const studentName = student.name.replace(/\s+/g, "_");
+    this.router.navigate([`/profile/user/${studentName}/${student.studentId}`]);
   }
 }

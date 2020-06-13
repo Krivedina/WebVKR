@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { CourseListFormViewModel } from "../view-model/course-list-form.view-model";
 import { CourseListService } from "../data/course-list.base.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { mergeMap } from "rxjs/operators";
 
 @Component({
   selector: "course-list",
@@ -12,17 +13,29 @@ export class CourseListComponent implements OnInit {
   public progress: any;
   public modelCourseList: CourseListFormViewModel = new CourseListFormViewModel();
   public isLoadingCoursePage: boolean;
+  public isAnoutherUser: boolean = false;
 
   constructor(
     private courseListService: CourseListService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
     this.isLoadingCoursePage = true;
-    this.courseListService.getCourseList().subscribe((data) => {
-      this.modelCourseList.fillModel(data);
-      this.isLoadingCoursePage = false;
-    });
+    this.activatedRoute.paramMap
+      .pipe(
+        mergeMap((params: ParamMap) => {
+          const userId = params.get("userId") || null;
+          if (userId) {
+            this.isAnoutherUser = true;
+          }
+          return this.courseListService.getCourseList(userId);
+        })
+      )
+      .subscribe((courseData) => {
+        this.modelCourseList.fillModel(courseData);
+        this.isLoadingCoursePage = false;
+      });
   }
 
   trackByFn(index, item) {
@@ -33,5 +46,4 @@ export class CourseListComponent implements OnInit {
     console.log(course);
     course.isOpenView = !course.isOpenView;
   }
-
 }

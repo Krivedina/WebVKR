@@ -32,18 +32,21 @@
 
 
         <article *ngIf="course.isOpenView" class="course-list-body__wrapper">
-            <article class="description-block__wrapper-text">
+            <form [formGroup]="descriptionForm" class="description-block__wrapper-text">
                 <div class="course-list-body__row-title">
                     <span class="course-list-body__element-title">Описание курса</span>
                 </div>
-                <textarea placeholder="Добавить требование" #descriptionText *ngIf="isEditDescription" spellcheck="true"
-                    class="description-block__textarea"
+                <textarea placeholder="Добавить описание" formControlName="description" #descriptionTextarea
+                    *ngIf="course.isEditDescription" spellcheck="true" class="description-block__textarea"
                     name="requirements-textarea">{{course.descriptionText}}</textarea>
-                <button (click)="editDescription(course)" *ngIf="!isEditDescription"
+                <span *ngIf="!course.isEditDescription" class="description-block__text">{{course.descriptionText}}</span>
+                <button (click)="editDescription(course)" *ngIf="!course.isEditDescription"
                     class="low-press-button description-block__button-change-description ">Изменить описание</button>
-                <button (click)="saveDescription(course)" *ngIf="isEditDescription"
+                <button (click)="saveDescription(course)" *ngIf="course.isEditDescription"
                     class="low-press-button description-block__button-change-description">Сохранить</button>
-            </article>
+                <button (click)="cancelDescription(course)" *ngIf="course.isEditDescription"
+                    class="low-press-button">Отмена</button>
+            </form>
             <form [formGroup]="addTaskForm">
                 <div class="course-list-body__row-title">
                     <span class="course-list-body__element-title">Задача</span>

@@ -11,9 +11,18 @@ export class ProfileBaseService {
     private authenticationBaseService: AuthenticationBaseService
   ) {}
 
-  public getOpenUser(useCache = true) {
-    const userId = this.authenticationBaseService.getIsAuthenticated()
-      .userId;
+  public postToInvite() {
+    return this.httpService.postRequest(
+      "http://localhost:8080/group/acceptInvite?secret=4368adc5-9b65-4352-b057-ee8831a8ea4a",
+      null
+    );
+  }
+
+  public getOpenUser(useCache = true, anotherUserId = null) {
+    let userId = anotherUserId
+      ? anotherUserId
+      : this.authenticationBaseService.getIsAuthenticated().userId;
+
     return this.httpService.getRequest(
       RequestPathList.openUser + `?userId=${userId}`,
       CacheListName.userProfile,
@@ -22,8 +31,7 @@ export class ProfileBaseService {
   }
 
   public postSaveUser(userData) {
-    const userId = this.authenticationBaseService.getIsAuthenticated()
-      .userId;
+    const userId = this.authenticationBaseService.getIsAuthenticated().userId;
     return this.httpService.postRequest(
       RequestPathList.saveUser + `?userId=${userId}`,
       userData

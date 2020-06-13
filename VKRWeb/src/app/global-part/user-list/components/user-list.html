@@ -6,12 +6,13 @@
 
     <section *ngFor="let group of modelUserList.groupList" class="content-window">
 
-        <article [ngStyle]="{'border-bottom': group.isOpenView ? '1px solid #E5E5E5' : '0'}" class="course-list-head__wrapper">
+        <article [ngStyle]="{'border-bottom': group.isOpenView ? '1px solid #E5E5E5' : '0'}"
+            class="course-list-head__wrapper">
             <div class="course-list-head__block">
                 <span class="course-list-head__title">{{group.name}}</span>
-                <div class="course-list-head__right-block">
-                    <button class="course-list-head__show-button" (click)='openGroup(group)'></button>
-                </div>
+                <button class="course-list-head__show-button" (click)='openGroup(group)'></button>
+                <!-- <div class="course-list-head__right-block">
+                </div> -->
             </div>
         </article>
 
@@ -21,8 +22,8 @@
                 <div *ngFor="let student of group.studentList" class="task-list__wrapper">
                     <span class="task-list__task-name">{{student.studentName}}</span>
                     <div class="task-list__task-edit">
-                        <button [routerLink]="[]" class="low-press-button">Список курсов</button>
-                        <button [routerLink]="[]" class="low-press-button">Профиль</button>
+                        <button (click)="toCourseList(student)" class="low-press-button">Список курсов</button>
+                        <button (click)="toProfile(student)" class="low-press-button">Профиль</button>
                     </div>
                 </div>
             </article>

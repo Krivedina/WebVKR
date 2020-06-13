@@ -17,10 +17,9 @@ export class UserListComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.modelUserList.fillModel();
-    // this.userListBaseService.getStudentList().subscribe((studentData) => {
-    //   this.modelUserList.fillModel(studentData);
-    // })
+    this.userListBaseService.getUserList().subscribe((userData) => {
+      this.modelUserList.fillModel(userData);
+    });
   }
 
   public openGroup(group) {
@@ -29,5 +28,17 @@ export class UserListComponent implements OnInit {
 
   public toResultStudents() {
     this.router.navigate(["student-result"]);
+  }
+
+  public toCourseList(student) {
+    const studentName = student.studentName.replace(/\s+/g, "_");
+    this.router.navigate([
+      `/course-list/user/${studentName}/${student.userId}`,
+    ]);
+  }
+
+  public toProfile(student) {
+    const studentName = student.studentName.replace(/\s+/g, "_");
+    this.router.navigate([`/profile/user/${studentName}/${student.userId}`]);
   }
 }

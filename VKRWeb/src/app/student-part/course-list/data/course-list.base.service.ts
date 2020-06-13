@@ -11,8 +11,10 @@ export class CourseListService {
     private authenticationBaseService: AuthenticationBaseService
   ) {}
 
-  public getCourseList() {
-    const userId = this.authenticationBaseService.getIsAuthenticated().userId;
+  public getCourseList(anotherUserId = null) {
+    const userId = anotherUserId
+      ? anotherUserId
+      : this.authenticationBaseService.getIsAuthenticated().userId;
     return this.httpService.getRequest(
       RequestPathList.courseList + `?userId=${userId}`,
       CacheListName.courseList,

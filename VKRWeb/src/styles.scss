@@ -11,6 +11,7 @@ $confirm-active: #007ac0aa;
 $content-line: #e5e5e5;
 $checked: #00b7df;
 $notChecked: #cbf6ff;
+$disabled: #cecfcf;
 
 body {
 	font-family: "SansPro";
@@ -98,9 +99,10 @@ a:hover {
 }
 
 .no-solution-button {
-	background-color: #d0d0d0;
+	background-color: $disabled;
 	&:hover {
-		background-color: #d0d0d0;
+		background-color: $disabled;
+		cursor: default;
 	}
 }
 
@@ -183,7 +185,7 @@ a:hover {
 
 	// Disabled state label.
 	&:disabled + label {
-		color: #b8b8b8;
+		color: $disabled;
 		cursor: auto;
 	}
 
@@ -237,4 +239,14 @@ a:hover {
 }
 .req-fail {
 	background: url(static\image\Fail.svg);
+}
+
+.not-found {
+	&__wrapper {
+		display: flex;
+		justify-content: center;
+	}
+	&__text {
+		font-size: 32px;
+	}
 }

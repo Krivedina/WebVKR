@@ -137,13 +137,20 @@
 	}
 	&__textarea {
 		font-size: 18px;
-		width: 400px;
+		width: 500px;
+		height: 300px;
 		max-width: 700px;
 		max-height: 400px;
 	}
 	&__button-change-description {
-		margin-top: 40px;
+		margin-top: 30px;
 		margin-bottom: 15px;
+	}
+	&__text {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		line-height: 21px;
 	}
 }
 

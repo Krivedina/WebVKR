@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { EditCourseViewModel } from "../view-model/edit-course.view-model";
 import { trigger, transition, style, animate } from "@angular/animations";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, FormControlName } from "@angular/forms";
 import { EditCourseBaseService } from "../data/edit-course.base.service";
 import { WrapperMainBaseService } from "src/app/global-part/wrapper-main/data/wrapper-main.base.service";
 
@@ -31,7 +31,6 @@ export class EditCourseComponent implements OnInit {
   public isCreateCourse: boolean = false;
   public isEditCourse: boolean = false;
   public isDeleteTask: boolean = false;
-  public isEditDescription: boolean = false;
 
   public currentCourse: any = null;
   public currentTask: any = null;
@@ -43,6 +42,10 @@ export class EditCourseComponent implements OnInit {
   public addTaskForm = new FormGroup({
     name: new FormControl(),
     deadline: new FormControl(),
+  });
+
+  public descriptionForm: FormGroup = new FormGroup({
+    description: new FormControl(),
   });
 
   @ViewChild("descriptionTextarea") descriptionTextarea: ElementRef;
@@ -63,27 +66,29 @@ export class EditCourseComponent implements OnInit {
     this.fillCourseListPage();
   }
 
+  public cancelDescription(course) {
+    course.isEditDescription = false;
+  }
+
   public editDescription(course) {
     course.isOpenView = true;
-    this.isEditDescription = true;
-    if (this.descriptionTextarea) {
-      this.descriptionTextarea.nativeElement.value = course.descriptionText;
-    }
+    course.isEditDescription = true;
+    this.descriptionForm.setValue({ description: course.descriptionText });
   }
 
   public saveDescription(course) {
-    console.log(course);
-    this.isEditDescription = false;
+    this.currentCourse = course;
+    course.isEditDescription = false;
     const newCourseModel = {
-      name: course.name,
-      maxScore: +course.maxScore,
-      descriptionText: this.descriptionTextarea.nativeElement.value,
+      ...course,
+      descriptionText: this.descriptionForm.value.description,
     };
     this.editCourseBaseService
       .postEditCourse(newCourseModel, course.id)
       .subscribe(
         () => {
-          this.fillCourseListPage(false);
+          this.fillCourseListPage(false, this.currentCourse.id);
+          this.currentCourse = null;
           this.wrapperMainBaseService.showMessage("Курс изменен", true);
         },
         (error) => {
@@ -94,7 +99,6 @@ export class EditCourseComponent implements OnInit {
           );
         }
       );
-    course.isOpenView = true;
   }
 
   public fillCourseListPage(flag = false, courseId = null) {
@@ -174,7 +178,8 @@ export class EditCourseComponent implements OnInit {
       this.editCourseBaseService
         .postDeleteCourse(this.currentCourse.id)
         .subscribe(
-          () => {
+          (res) => {
+            console.log(res);
             this.fillCourseListPage(false);
             this.wrapperMainBaseService.showMessage("Курс удален", true);
           },

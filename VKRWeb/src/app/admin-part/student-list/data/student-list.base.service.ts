@@ -9,9 +9,17 @@ export class StudentListBaseService {
 
   public getGroupList(flag) {
     return this.httpService.getRequest(
-      RequestPathList.groupList,
-      CacheListName.groupList,
+      RequestPathList.inviteList,
+      CacheListName.inviteList,
       flag
+    );
+  }
+
+  public getCourseList() {
+    return this.httpService.getRequest(
+      RequestPathList.courseLink,
+      CacheListName.courseListLink,
+      false
     );
   }
 
@@ -21,6 +29,13 @@ export class StudentListBaseService {
 
   public postSaveGroup(groupData) {
     return this.httpService.postRequest(RequestPathList.editGroup, groupData);
+  }
+
+  public postAddCourse(groupId, courseData) {
+    return this.httpService.postRequest(
+      RequestPathList.addCourse + `?groupId=${groupId}`,
+      courseData
+    );
   }
 
   public postDeleteGroup(groupId) {

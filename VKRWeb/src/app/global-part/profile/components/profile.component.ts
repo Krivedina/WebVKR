@@ -5,6 +5,8 @@ import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { WrapperMainBaseService } from "../../wrapper-main/data/wrapper-main.base.service";
 import { AuthenticationBaseService } from "../../authentication/data/authentication.base.service";
 import { RoleEnum } from "static/role.enum";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { mergeMap } from "rxjs/operators";
 
 @Component({
   selector: "profile",
@@ -16,6 +18,7 @@ export class ProfileComponent implements OnInit {
   public isEditProfile: boolean = false;
   public isEditPassword: boolean = false;
   public isProfileData: boolean = true;
+  public isAnoutherUser: boolean = false;
 
   public modelProfileForm: ProfileFormViewModel = new ProfileFormViewModel();
   public profileForm: FormGroup;
@@ -29,33 +32,43 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileBaseService: ProfileBaseService,
     private wrapperMainBaseService: WrapperMainBaseService,
-    private authenticationBaseService: AuthenticationBaseService
+    private authenticationBaseService: AuthenticationBaseService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
     this.isLoadingProfileData = true;
     this.loadProfile();
     // this.modelProfileForm.fillModel();
-
-    if (
-      this.authenticationBaseService.getIsAuthenticated().role ===
-      RoleEnum.student
-    ) {
-      this.modelProfileForm.role = "Студента";
-    } else if (
-      this.authenticationBaseService.getIsAuthenticated().role ===
-      RoleEnum.admin
-    ) {
-      this.modelProfileForm.role = "Преподавателя";
-    }
   }
 
-  public loadProfile(useCache: boolean = true) {
-    this.profileBaseService.getOpenUser(useCache).subscribe((userData) => {
-      console.log(userData);
-      this.modelProfileForm.fillModel(userData);
-      this.isLoadingProfileData = false;
-    });
+  public loadProfile() {
+    this.activatedRoute.paramMap
+      .pipe(
+        mergeMap((params: ParamMap) => {
+          const userId = params.get("userId") || null;
+          if (userId) {
+            this.isAnoutherUser = true;
+          }
+          return this.profileBaseService.getOpenUser(false, userId);
+        })
+      )
+      .subscribe((userData) => {
+        console.log(userData);
+        this.modelProfileForm.fillModel(userData);
+        if (
+          this.authenticationBaseService.getIsAuthenticated().role ===
+          RoleEnum.student
+        ) {
+          this.modelProfileForm.role = "Студента";
+        } else if (
+          this.authenticationBaseService.getIsAuthenticated().role ===
+          RoleEnum.admin
+        ) {
+          this.modelProfileForm.role = "Преподавателя";
+        }
+        this.isLoadingProfileData = false;
+      });
   }
 
   public editProfile() {
@@ -96,8 +109,12 @@ export class ProfileComponent implements OnInit {
     this.isEditProfile = false;
     this.isEditPassword = false;
     this.isProfileData = true;
-    this.profileForm.reset();
-    this.passwordForm.reset();
+    if (this.profileForm) {
+      this.profileForm.reset();
+    }
+    if (this.passwordForm) {
+      this.passwordForm.reset();
+    }
   }
 
   public saveUserDataChanges() {
@@ -105,7 +122,7 @@ export class ProfileComponent implements OnInit {
     this.isProfileData = true;
     this.profileBaseService.postSaveUser(this.profileForm.value).subscribe(
       () => {
-        this.loadProfile(false);
+        this.loadProfile();
         this.authenticationBaseService.checkAuthentication();
         this.wrapperMainBaseService.showMessage(
           "Данные успешно изменены",

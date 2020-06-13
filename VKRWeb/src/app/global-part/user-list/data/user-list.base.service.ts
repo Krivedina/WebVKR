@@ -6,7 +6,7 @@ import { CacheListName } from '../../http/cashe-name';
 @Injectable()
 export class UserListBaseService {
   constructor(private httpService: HttpService) {}
-  public getStudentList() {
-    //   return this.httpService.getRequest(RequestPathList.userList, CacheListName.userList)
+  public getUserList() {
+      return this.httpService.getRequest(RequestPathList.userList, CacheListName.userList)
   }
 }

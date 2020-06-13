@@ -32,7 +32,7 @@
 
         <article class="requirements-block">
             <textarea #requirementsTextArea spellcheck="true" class="requirements-block__textarea"
-                name="requirements-textarea"></textarea>
+                name="requirements-textarea" placeholder="Добавить требование..."></textarea>
             <button (click)="addRequirements()"
                 class="requirements-block__add-button low-press-button">Добавить</button>
             <span class="requirements-block__title">Требования</span>
@@ -58,8 +58,8 @@
                     <span>{{modelEditTask.descriptionText}}</span>
                 </div>
                 <textarea #descriptionTextarea *ngIf="isEditDescription" spellcheck="true"
-                    class="description-block__textarea"
-                    name="requirements-textarea">{{modelEditTask.descriptionText}}</textarea>
+                    class="description-block__textarea" name="requirements-textarea"
+                    placeholder="Добавить описание задачи...">{{modelEditTask.descriptionText}}</textarea>
                 <button (click)="editDescription()" *ngIf="!isEditDescription"
                     class="description-block__button-change-description low-press-button">Изменить описание</button>
                 <button (click)="saveDescription()" *ngIf="isEditDescription"
@@ -69,12 +69,22 @@
                 <span class="description-block__title">Входные данные</span>
                 <div class="description-block__upload">
                     <label class="low-press-button" for="uploaded-file">Загрузить</label>
-                    <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
-                        title="Загрузить" (change)="getFileName($event)">
-                    <span class="input-file-name" id="file-name">{{uploadFileName}}</span>
-                    <button *ngIf="uploadFileName" (click)='uploadSolution()'
-                        class="low-press-button solution-block__send-solution">Отправить</button>
+                    <div  class="description-block__upload">
+                        <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
+                            title="Загрузить" (change)="getFileName($event)">
+                        <span class="input-file-name" id="file-name">{{uploadFileName}}</span>
+                        <button *ngIf="uploadFileName" (click)='uploadSolution()'
+                            class="low-press-button solution-block__send-solution">Отправить</button>
+                    </div>
+                    <div *ngIf="!uploadFileName" class="description-block__upload">
+                        <span *ngIf="modelEditTask.input.name" class="input-file-name"
+                            id="file-name">{{modelEditTask.input.name}}</span>
+                        <button class="low-press-button solution-block__send-solution">
+                            <a href={{downloadEntryURL}}>Скачать</a>
+                        </button>
+                    </div>
                 </div>
+
             </form>
         </article>
 

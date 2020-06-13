@@ -1,6 +1,9 @@
 <loader *ngIf="isLoadingCoursePage"></loader>
 <section *ngIf="!isLoadingCoursePage">
     <h1 class="page__title">Курсы</h1>
+    <div *ngIf="!modelCourseList.courseList.length" class="not-found__wrapper">
+        <span class="not-found__text">Нет доступных курсов этому пользователю</span>
+    </div>
     <section *ngFor="let course of modelCourseList.courseList; trackBy: trackByFn" class="content-window">
         <article [ngStyle]="{'border-bottom': course.isOpenView ? '1px solid #E5E5E5' : '0'}"
             class="course-list-head__wrapper">
@@ -33,7 +36,7 @@
                 <span class="course-list-body__rigth-block">Решение задачи</span>
             </div>
             <article *ngFor="let task of course.courseTasks" class="course-list-body__row-element">
-                <a class="course-list-body__element-title" [routerLink]="[course.name, task.id]">
+                <a class="course-list-body__element-title" [routerLink]="[task.name, task.id]">
                     <span>{{task.name}}({{task.currentScore}}/{{task.maxScore}})</span>
                 </a>
                 <div class=" course-list-body__middle-block">

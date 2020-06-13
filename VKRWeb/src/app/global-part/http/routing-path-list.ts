@@ -51,6 +51,10 @@ export const RequestPathList = {
     "http://localhost:8080/course/get?id=edbe8757-86b8-4e30-bc97-e72b2b5fce4b",
   //post
   deleteCourse: "http://localhost:8080/course/delete",
+  //get
+  courseLink: "http://localhost:8080/course/selectLinks",
+  //post
+  addCourse: "http://localhost:8080/group/grantAccess",
 
   //Group
   //get
@@ -68,10 +72,11 @@ export const RequestPathList = {
   studentList:
     "http://localhost:8080/group/getStudentList?groupId=e67c0ea36171425e8f86a19a902f678b",
   //get
-  userList: "http://localhost:8080/group/getStudentList",
+  userList: "http://localhost:8080/group/getUserList",
 
   //Invite
   //post
-  sendInviteEmail:
-    "http://localhost:8080/group/inviteStudent",
+  sendInviteEmail: "http://localhost:8080/group/inviteStudent",
+  //get
+  inviteList: "http://localhost:8080/group/getInviteList",
 };

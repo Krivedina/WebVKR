@@ -23,10 +23,10 @@
         <span>{{modelProfileForm.email || '-'}}</span>
       </div>
       <div class="profile__button-group">
-        <button (click)="editProfile()" class="press-button">
+        <button *ngIf="!isAnoutherUser" (click)="editProfile()" class="press-button">
           Редактировать данные
         </button>
-        <button (click)="editPassword()" class="press-button right-button">
+        <button *ngIf="!isAnoutherUser" (click)="editPassword()" class="press-button right-button">
           Изменить пароль
         </button>
       </div>

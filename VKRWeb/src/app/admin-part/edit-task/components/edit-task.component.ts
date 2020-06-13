@@ -12,6 +12,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { mergeMap } from "rxjs/operators";
 import { FormGroup, FormControl } from "@angular/forms";
 import { WrapperMainBaseService } from "src/app/global-part/wrapper-main/data/wrapper-main.base.service";
+import { RequestPathList } from "src/app/global-part/http/routing-path-list";
 
 @Component({
   selector: "edit-task",
@@ -29,6 +30,7 @@ export class EditTaskComponent implements OnInit {
   public uploadFileName: string;
   public uploadEntryFormData = new FormData();
   public currentRequirement: any;
+  public downloadEntryURL: any;
 
   public uploadEntryFrom: FormGroup = new FormGroup({
     file: new FormControl(),
@@ -69,6 +71,11 @@ export class EditTaskComponent implements OnInit {
       .subscribe((taskData) => {
         this.modelEditTask.fillModel(taskData);
         this.isLoadingTaskPage = false;
+        if (this.modelEditTask.input.id) {
+          this.downloadEntryURL =
+            RequestPathList.downloadEntryTaskData +
+            `?attachmentId=${this.modelEditTask.input.id}`;
+        }
       });
   }
 
@@ -92,7 +99,9 @@ export class EditTaskComponent implements OnInit {
 
   public editDescription() {
     this.isEditDescription = true;
-    this.descriptionTextarea.nativeElement.value = this.modelEditTask.descriptionText;
+    if (this.descriptionTextarea.nativeElement) {
+      this.descriptionTextarea.nativeElement.value = this.modelEditTask.descriptionText;
+    }
   }
 
   public saveDescription() {
@@ -255,16 +264,28 @@ export class EditTaskComponent implements OnInit {
     this.uploadEntryFormData.append(
       "file",
       event.target.files[0],
-      this.uploadFileName
+      this.uploadEntryFrom.value.file.replace(/\\/g, "/").split("/").pop()
     );
   }
 
   public uploadSolution() {
     this.editTaskBaseService
       .postUploadSolution(this.uploadEntryFormData, this.modelEditTask.id)
+      .pipe(
+        mergeMap(() => {
+          return this.fillTaskPage(false);
+        })
+      )
       .subscribe(
-        (res) => {
-          console.log(res);
+        (taskData) => {
+          console.log(taskData);
+          this.modelEditTask.fillModel(taskData);
+          if (this.modelEditTask.input.id) {
+            this.downloadEntryURL =
+              RequestPathList.downloadEntryTaskData +
+              `?attachmentId=${this.modelEditTask.input.id}`;
+          }
+          this.uploadFileName = null;
           this.wrapperMainBaseService.showMessage(
             "Входные данные загружены",
             true
@@ -286,5 +307,6 @@ export class EditTaskComponent implements OnInit {
 
   private fillTaskPage(flag = true) {
     return this.editTaskBaseService.getTask(this.modelEditTask.id, flag);
+    
   }
 }

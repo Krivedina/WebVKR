@@ -30,6 +30,7 @@ export class EditCourseViewModel {
         isOpenView: false,
         isEditCourse: false,
         isDeleteCourse: false,
+        isEditDescription: false,
         ...course,
       };
     });

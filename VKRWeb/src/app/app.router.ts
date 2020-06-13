@@ -4,6 +4,7 @@ import {
   AdminGuard,
   AuthicationGuard,
   StudentGuard,
+  NonAuthicationGuard,
 } from "./global-part/authentication/data/guard-list";
 import { ProfileComponent } from "./global-part/profile/components/profile.component";
 import { RegistrationComponent } from "./global-part/registration/components/registration.component";
@@ -49,7 +50,7 @@ const routers: Routes = [
     canActivate: [StudentGuard],
   },
   {
-    path: "course-list/:courseName/:taskId",
+    path: "course-list/:taskName/:taskId",
     component: TaskComponent,
     canActivate: [StudentGuard],
   },
@@ -71,6 +72,21 @@ const routers: Routes = [
   {
     path: "student-result",
     component: StudentResultComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: "course-list/user/:name/:userId",
+    component: CourseListComponent,
+    canActivate: [AuthicationGuard],
+  },
+  {
+    path: "course-list/user/:name/:userId/:courseName/:taskId",
+    component: TaskComponent,
+    canActivate: [AuthicationGuard],
+  },
+  {
+    path: "profile/user/:name/:userId",
+    component: ProfileComponent,
     canActivate: [AuthicationGuard],
   },
   {
