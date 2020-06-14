@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   public currentName: string;
 
   ngOnInit(): void {
-    this.getName();
   }
 
   public isAuth() {
@@ -26,13 +25,6 @@ export class HeaderComponent implements OnInit {
 
   public isAdmin() {
     return this.HeaderBaseService.isAuthenticated().role === RoleEnum.admin;
-  }
-
-  public getName() {
-    return this.HeaderBaseService.getShortName().subscribe((userData) => {
-      this.currentName = `${userData.surname} ${userData.firstName[0]}. ${userData.secondName[0]}.`;
-      console.log(userData);
-    });
   }
 
   public logOut() {

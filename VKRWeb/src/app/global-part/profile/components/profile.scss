@@ -101,3 +101,17 @@ $line-distance: 40px;
 .custom-input input:not(:placeholder-shown) ~ span {
 	bottom: 60%;
 }
+
+@media screen and (max-width: 320px) {
+	.profile {
+		max-width: 50%;
+		&__data {
+			max-width: 100%;
+		}
+		&__image {
+			width: 150px;
+			height: 150px;
+			border-radius: 100px;
+		}
+	}
+}

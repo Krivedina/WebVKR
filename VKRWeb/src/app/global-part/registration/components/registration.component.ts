@@ -33,8 +33,8 @@ export class RegistrationComponent implements OnInit {
       passwordConfirm: new FormControl("12345", this.textValidators),
       group: new FormControl("КН-402", this.textValidators),
       capcha: new FormControl(""),
-      student: new FormControl(""),
-      admin: new FormControl(""),
+      student: new FormControl(null),
+      admin: new FormControl(null),
     });
   }
 
@@ -44,8 +44,10 @@ export class RegistrationComponent implements OnInit {
     const passwordConfirm =
       this.registrationForm.value.password ===
       this.registrationForm.value.passwordConfirm;
+    const isRole =
+      this.registrationForm.value.admin && this.registrationForm.value.student;
 
-    if (capchaCheck && passwordConfirm) {
+    if (capchaCheck && passwordConfirm && !isRole) {
       const role = this.registrationForm.value.admin
         ? RoleEnum.admin
         : RoleEnum.student;
@@ -59,7 +61,6 @@ export class RegistrationComponent implements OnInit {
         secondName: this.registrationForm.value.secondName,
       };
       this.registrationBaseService.registrationRequest(sendRegistrationData);
-      this.registrationBaseService.showSuccsess("Регистрация успешна!")
     } else {
       this.registrationBaseService.showFail("Ошибка в заполнении данных!");
     }

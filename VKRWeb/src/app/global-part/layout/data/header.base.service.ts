@@ -12,10 +12,4 @@ export class HeaderBaseService {
   public logOutRequest() {
     this.authenticationBaseService.logOut();
   }
-
-  public getShortName() {
-    return this.authenticationBaseService
-      .getNewLocalUserData()
-
-  }
 }

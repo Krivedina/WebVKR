@@ -19,9 +19,10 @@ export class RegistrationBaseService {
         (registrationData) => {
           console.log(registrationData);
           this.authenticationBaseService.logIn(registrationData);
+          this.showSuccsess("Регистрация успешна!");
         },
         (error) => {
-          console.log(error);
+          this.showFail("Ошибка при регистрации пользователя")
         }
       );
   }
