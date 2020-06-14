@@ -11,7 +11,9 @@
                 </div>
                 <span class="deadline-block__score">{{modelTask.currentScore || 0}}/{{modelTask.maxScore}}</span>
             </div>
-            <span class="deadline-block__status">{{modelTask.status ? "Закрыт": "В работе"}}</span>
+            <span
+                class="deadline-block__status">{{modelTask.currentScore === modelTask.maxScore ? "Закрыт": "В работе"}}
+            </span>
         </article>
         <article class="requirements-block">
             <span class="requirements-block__title">Требования</span>

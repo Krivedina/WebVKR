@@ -1,25 +1,40 @@
-<loader *ngIf="!checkTaskModel.name"></loader>
-<section *ngIf="checkTaskModel.name">
-    <h1 class="page__title">{{checkTaskModel.name}}</h1>
+<loader *ngIf="isCheckTaskPageLoad"></loader>
+
+<section *ngIf="!isCheckTaskPageLoad">
+    <h1 class="page__title">{{checkTaskModel.name}}({{checkTaskModel.currentScore || 0}}/{{checkTaskModel.maxScore}})
+    </h1>
     <section class="content-window task-content-window">
         <article class="deadline-block">
             <span class="deadline-block__title">Дедлайн</span>
             <span class="deadline-block__title">{{checkTaskModel.deadline}}</span>
-            <div class="deadline-block__progress-bar-wrapper">
-                <span
-                    class="deadline-block__score">{{checkTaskModel.currentScore || 0}}/{{checkTaskModel.maxScore}}</span>
-            </div>
-            <span class="deadline-block__status">{{checkTaskModel.status ? "Закрыт": "В работе"}}</span>
+            <button (click)="completeTask()" class="deadline-block__complete-task-button low-press-button">Зачесть задачу и требования</button>
+            <span
+                class="deadline-block__status">{{checkTaskModel.currentScore === checkTaskModel.maxScore ? "Закрыт": "В работе"}}</span>
         </article>
+        <form class="set-score" [formGroup]="taskScoreForm">
+            <label class="custom-input">
+                <input formControlName="currentScore" type="text" placeholder="&nbsp;" class="control-input" />
+                <span>Кол-во баллов за задачу</span>
+            </label>
+            <button (click)="changeScore()" class="set-score__save-score low-press-button">Сохранить оценку</button>
+        </form>
         <article class="requirements-block">
             <span class="requirements-block__title">Требования</span>
             <div>
                 <div *ngFor="let requirement of checkTaskModel.requirementList" class="requirements-block__score">
-                    <div [ngClass]="{'req-success':requirement.status, 'req-fail':!requirement.status}"
-                        class="requirements-block__status">
+                    <div class="requirements-block__score-block">
+                        <div [ngClass]="{'req-success':requirement.status, 'req-fail':!requirement.status}"
+                            class="requirements-block__status">
+                        </div>
+                        <span class="requirements-block__score-text">{{requirement.text}}
+                        </span>
                     </div>
-                    <span class="requirements-block__score-text">{{requirement.text}}
-                    </span>
+                    <div class="requirements-block__button-block">
+                        <button (click)="setRequirementValue(true, requirement)" *ngIf="!requirement.status"
+                            class="low-press-button">Засчитать</button>
+                        <button (click)="setRequirementValue(false, requirement)" *ngIf="requirement.status"
+                            class="low-press-button">Не сделано</button>
+                    </div>
                 </div>
             </div>
         </article>

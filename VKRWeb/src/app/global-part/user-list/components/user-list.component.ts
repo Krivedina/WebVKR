@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class UserListComponent implements OnInit {
   public modelUserList = new UserListViewModel();
+  public isUserPageLoad: boolean = false;
 
   constructor(
     private userListBaseService: UserListBaseService,
@@ -17,8 +18,10 @@ export class UserListComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.isUserPageLoad = true;
     this.userListBaseService.getUserList().subscribe((userData) => {
       this.modelUserList.fillModel(userData);
+      this.isUserPageLoad = false;
     });
   }
 

@@ -38,6 +38,13 @@ export class StudentListBaseService {
     );
   }
 
+  public postDeleteCourse(groupId, courseData) {
+    return this.httpService.postRequest(
+      RequestPathList.delteCourse + `?groupId=${groupId}`,
+      courseData
+    );
+  }
+
   public postDeleteGroup(groupId) {
     return this.httpService.postRequest(
       RequestPathList.deleteGroup + `?id=${groupId}`,
@@ -48,6 +55,13 @@ export class StudentListBaseService {
   public postInvite(groupId, email) {
     return this.httpService.postRequest(
       RequestPathList.sendInviteEmail + `?groupId=${groupId}&email=${email}`,
+      null
+    );
+  }
+
+  public postDeleteStudent(groupId, email) {
+    return this.httpService.postRequest(
+      RequestPathList.delteInviteEmail + `?groupId=${groupId}&email=${email}`,
       null
     );
   }

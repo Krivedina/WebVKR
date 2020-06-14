@@ -1,4 +1,5 @@
-<section>
+<loader *ngIf="isUserPageLoad"></loader>
+<section *ngIf="!isUserPageLoad">
     <article class=page__title-wrapper>
         <h1 class="page__title">Список пользователей</h1>
         <button (click)="toResultStudents()" class="confirm-press-button">Результаты студентов</button>

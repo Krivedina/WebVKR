@@ -25,5 +25,4 @@ export class WrapperMainBaseService {
       componentRef.destroy();
     }, 3000);
   }
-  
 }

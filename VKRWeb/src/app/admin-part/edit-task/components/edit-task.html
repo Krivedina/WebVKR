@@ -65,24 +65,29 @@
                 <button (click)="saveDescription()" *ngIf="isEditDescription"
                     class="description-block__button-change-description low-press-button">Сохранить</button>
             </div>
+
             <form [formGroup]="uploadEntryFrom" class="description-block__wrapper-load">
                 <span class="description-block__title">Входные данные</span>
+
                 <div class="description-block__upload">
                     <label class="low-press-button" for="uploaded-file">Загрузить</label>
-                    <div  class="description-block__upload">
+
+                    <div class="description-block__upload">
                         <input formControlName="file" class="snatch" id="uploaded-file" name="file" type="file"
                             title="Загрузить" (change)="getFileName($event)">
                         <span class="input-file-name" id="file-name">{{uploadFileName}}</span>
                         <button *ngIf="uploadFileName" (click)='uploadSolution()'
                             class="low-press-button solution-block__send-solution">Отправить</button>
                     </div>
-                    <div *ngIf="!uploadFileName" class="description-block__upload">
-                        <span *ngIf="modelEditTask.input.name" class="input-file-name"
+
+                    <div *ngIf="!uploadFileName && modelEditTask.input" class="description-block__upload">
+                        <span *ngIf="modelEditTask.input" class="input-file-name"
                             id="file-name">{{modelEditTask.input.name}}</span>
                         <button class="low-press-button solution-block__send-solution">
                             <a href={{downloadEntryURL}}>Скачать</a>
                         </button>
                     </div>
+
                 </div>
 
             </form>

@@ -23,7 +23,8 @@
                     </div>
                     <div *ngIf="course.isEditCourse" class="edit-block-wrapper">
                         <create-window (inputValue)="editCurrentCourse($event)" firstTitle="Название курса"
-                            secondTitle="Количество баллов за курс" buttonName="Сохранить"></create-window>
+                            buttonName="Сохранить" needSecond='false'>
+                        </create-window>
                     </div>
                     <button (click)="openCourse(course)" class="course-list-head__show-button"></button>
                 </div>
@@ -39,7 +40,8 @@
                 <textarea placeholder="Добавить описание" formControlName="description" #descriptionTextarea
                     *ngIf="course.isEditDescription" spellcheck="true" class="description-block__textarea"
                     name="requirements-textarea">{{course.descriptionText}}</textarea>
-                <span *ngIf="!course.isEditDescription" class="description-block__text">{{course.descriptionText}}</span>
+                <span *ngIf="!course.isEditDescription"
+                    class="description-block__text">{{course.descriptionText}}</span>
                 <button (click)="editDescription(course)" *ngIf="!course.isEditDescription"
                     class="low-press-button description-block__button-change-description ">Изменить описание</button>
                 <button (click)="saveDescription(course)" *ngIf="course.isEditDescription"
@@ -87,6 +89,6 @@
 </section>
 
 <div *ngIf="isCreateCourse" class="edit-block-wrapper">
-    <create-window (inputValue)="addNewCourse($event)" firstTitle="Название курса"
-        secondTitle="Количество баллов за курс" buttonName="Создать"></create-window>
+    <create-window (inputValue)="addNewCourse($event)" firstTitle="Название курса" needSecond='false'
+        buttonName="Создать"></create-window>
 </div>

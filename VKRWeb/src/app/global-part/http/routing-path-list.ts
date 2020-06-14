@@ -36,8 +36,7 @@ export const RequestPathList = {
   //post
   sendSolution: "http://localhost:8080/task/uploadSolution",
   //post
-  downloadSolution:
-    "http://localhost:8080/task/getSolutionLink?taskId=2dc6abddee5641e3b8017298adbfcc56&userId=0444b3586a1748c9a19f0ab64c2fc61d",
+  downloadSolution: "http://localhost:8080/task/downloadAttachment",
 
   //Course
   //get
@@ -55,6 +54,8 @@ export const RequestPathList = {
   courseLink: "http://localhost:8080/course/selectLinks",
   //post
   addCourse: "http://localhost:8080/group/grantAccess",
+  //post
+  delteCourse: "http://localhost:8080/group/revokeAccess",
 
   //Group
   //get
@@ -77,6 +78,8 @@ export const RequestPathList = {
   //Invite
   //post
   sendInviteEmail: "http://localhost:8080/group/inviteStudent",
+  //post
+  delteInviteEmail: "",
   //get
   inviteList: "http://localhost:8080/group/getInviteList",
 };

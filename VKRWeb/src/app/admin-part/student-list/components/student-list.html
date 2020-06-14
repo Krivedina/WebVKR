@@ -1,4 +1,5 @@
-<section>
+<loader *ngIf="isStudentPageLoad"></loader>
+<section *ngIf="!isStudentPageLoad">
   <article class=page__title-wrapper>
     <h1 class="page__title">Список студентов</h1>
     <button (click)="createGroupModal()" class="confirm-press-button">Создать новую группу</button>
@@ -39,7 +40,7 @@
           <div>
             <label class="custom-input">
               <input formControlName="email" type="text" placeholder="&nbsp;" class="control-input" />
-              <span>Почта студента</span>
+              <span>Добавить почту студента</span>
             </label>
           </div>
           <button (click)="addNewStudent(group)"
@@ -48,17 +49,17 @@
 
         <article class="task-list">
           <div *ngFor="let student of group.inviteList" class="task-list__wrapper">
-            <span class="task-list__task-name">{{student.name || student.email}}</span>
+            <span class="task-list__task-name">{{student.outputName}}</span>
             <div class="task-list__task-edit">
-              <div *ngIf="isDeleteStudent" class="edit-block-wrapper">
-                <confirm-window (confirmValue)="deleteStudent($event)" inputName={{student.name || student.email}}>
+              <div *ngIf="student.isDeleteStudent" class="edit-block-wrapper">
+                <confirm-window (confirmValue)="deleteStudent($event, group)" inputName={{student.outputName}}>
                 </confirm-window>
               </div>
               <button [disabled]="!student.isAccepted" [ngClass]="{'no-solution-button':!student.isAccepted}"
                 (click)="toCourseList(student)" class="low-press-button">Список курсов</button>
               <button [disabled]="!student.isAccepted" [ngClass]="{'no-solution-button':!student.isAccepted}"
                 (click)="toProfile(student)" class="low-press-button">Профиль</button>
-              <button (click)="deleteUserModal()" class="closeMark"></button>
+              <button (click)="deleteUserModal(student)" class="closeMark"></button>
             </div>
           </div>
         </article>
@@ -79,15 +80,19 @@
               </select>
             </label>
           </div>
-          <button (click)="addNewCourse(group)" class="course-list-body__create-button low-press-button">Добавить</button>
+          <button (click)="addNewCourse(group)"
+            class="course-list-body__create-button low-press-button">Добавить</button>
         </form>
 
         <article>
-          <div *ngFor="let courseList of group.courseList" class="task-list__wrapper">
-            <span class="task-list__task-name">{{courseList.name}}</span>
+          <div *ngFor="let course of group.courseList" class="task-list__wrapper">
+            <span class="task-list__task-name">{{course.name}}</span>
             <div class="task-list__task-edit">
-              <button [routerLink]="[]" class="low-press-button">Задачи курса</button>
-              <button (click)="deleteCourseModal()" class="closeMark"></button>
+              <div *ngIf="course.isDeleteCourse" class="edit-block-wrapper">
+                <confirm-window (confirmValue)="deleteCourse($event, group)" inputName={{course.name}}></confirm-window>
+              </div>
+              <button (click)="toCourseTasks(course)" class="low-press-button">Задачи курса</button>
+              <button (click)="deleteCourseModal(course)" class="closeMark"></button>
             </div>
           </div>
         </article>
@@ -102,10 +107,4 @@
 
 <div *ngIf="isCreateGroup" class="edit-block-wrapper">
   <edit-window (inputValue)="addNewGroup($event)" inputName="Название группы" buttonName="Создать"></edit-window>
-</div>
-
-
-
-<div *ngIf="isDeleteCourse" class="edit-block-wrapper">
-  <confirm-window (confirmValue)="deleteCourse($event)" inputName="Скрипты"></confirm-window>
 </div>

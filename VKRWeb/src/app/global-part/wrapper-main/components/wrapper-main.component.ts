@@ -19,7 +19,7 @@ export class WrapperMainComponent implements AfterViewInit {
   constructor(private WrapperMainBaseService: WrapperMainBaseService) {
     let checkContainer = setInterval(() => {
       return this.container;
-    }, 1);
+    }, 100);
     checkContainer = null;
   }
   public ngAfterViewInit(): void {

@@ -38,6 +38,20 @@
 		position: absolute;
 		right: 50px;
 	}
+
+	&__complete-task-button{
+		margin-left: 20px;
+	}
+}
+
+.set-score {
+	@extend .deadline-block;
+	align-items: flex-start;
+	flex-direction: column;
+
+	&__save-score {
+		margin-top: 20px;
+	}
 }
 
 .requirements-block {
@@ -52,6 +66,11 @@
 		margin-bottom: 30px;
 	}
 
+	&__score-block {
+		min-width: 100%;
+		display: flex;
+	}
+
 	&__score {
 		display: flex;
 		align-items: center;
@@ -60,8 +79,8 @@
 
 	&__score-text {
 		margin-left: 20px;
-		max-width: 900px;
 		max-height: 200px;
+		max-width: 500px;
 		word-wrap: break-word;
 		overflow: auto;
 		font-size: 18px;
@@ -72,6 +91,14 @@
 		width: 30px;
 		height: 30px;
 		border-radius: 15px;
+	}
+
+	&__button-block {
+		margin-left: 20px;
+		min-width: 150px;
+		button {
+			min-width: max-content;
+		}
 	}
 }
 
@@ -119,7 +146,8 @@
 }
 
 .solution-block {
-	@extend .deadline-block;
+	padding: 25px 30px 20px 30px;
+	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	&__title {
@@ -131,7 +159,6 @@
 	}
 
 	&__send-solution {
-		margin-left: 20px;
 		min-width: 17%;
 	}
 
@@ -141,6 +168,8 @@
 		align-items: center;
 	}
 	&__download {
+		color: white;
+		text-decoration: none;
 		&:hover {
 			color: white;
 		}
@@ -156,4 +185,15 @@
 	margin-bottom: 10px;
 	max-width: 120px;
 	word-break: break-word;
+}
+
+//overload
+.custom-input {
+	span {
+		bottom: 35%;
+	}
+}
+.custom-input input:placeholder-shown:focus ~ span,
+.custom-input input:not(:placeholder-shown) ~ span {
+	bottom: 60%;
 }

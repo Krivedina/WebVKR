@@ -1,14 +1,11 @@
 <nav class="content__border-bottom">
   <div class="navigation navigation__wrapper ">
     <a [routerLink]="['/']">
-      <span class="logo-block">WTF</span>
+      <span class="logo-block">Курсы УрФУ</span>
     </a>
     <ul *ngIf="isAuth()" class="navigation__main-menu">
       <li>
         <a [routerLink]="['/profile']" routerLinkActive="router-link-active">Профиль</a>
-      </li>
-      <li>
-        <a [routerLink]="['/user-list']" routerLinkActive="router-link-active">Список всех пользователей</a>
       </li>
       <li *ngIf="isStudent()">
         <a [routerLink]="['/course-list']" routerLinkActive="router-link-active">Список Курсов</a>
@@ -18,6 +15,9 @@
       </li>
       <li *ngIf="isAdmin()">
         <a [routerLink]="['/student-list']" routerLinkActive="router-link-active">Список Студентов</a>
+      </li>
+      <li>
+        <a [routerLink]="['/user-list']" routerLinkActive="router-link-active">Список всех пользователей</a>
       </li>
     </ul>
     <ul *ngIf="!isAuth()" class="navigation__auth-menu">
@@ -29,9 +29,8 @@
       </li>
     </ul>
     <div *ngIf="isAuth()" class="navigation__auth-menu">
-      <span class="navigation__profile-name">{{currentName}}</span>
-      <img class="navigation__profile-photo"
-        src="https://memepedia.ru/wp-content/uploads/2018/07/576552d6e73f015563cb97a3.png" alt="profile-photo">
+      <img [routerLink]="['/profile']" class="navigation__profile-photo" src="https://svgsilh.com/svg_v2/1363011.svg"
+        alt="profile-photo">
       <button (click)="logOut()" [routerLink]="['/login']" class="navigation__exit-logo"></button>
     </div>
   </div>

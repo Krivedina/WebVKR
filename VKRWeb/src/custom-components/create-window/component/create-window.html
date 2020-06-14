@@ -3,7 +3,7 @@
         <input formControlName="firstTitle" type="text" placeholder="&nbsp;" class="control-input" />
         <span>{{firstTitle}}</span>
     </label>
-    <label class="custom-input">
+    <label *ngIf="!needSecond" class="custom-input">
         <input formControlName="secondTitle" type="text" placeholder="&nbsp;" class="control-input" />
         <span>{{secondTitle}}</span>
     </label>

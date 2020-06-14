@@ -25,12 +25,12 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private taskBaseService: TaskBaseService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private wrapperMainBaseService: WrapperMainBaseService
   ) {}
 
   public ngOnInit(): void {
-    this.route.paramMap
+    this.activatedRoute.paramMap
       .pipe(
         mergeMap((params: ParamMap) => {
           const taskId = params.get("taskId");
@@ -61,7 +61,6 @@ export class TaskComponent implements OnInit {
       },error => {
         this.wrapperMainBaseService.showMessage('Отправить решение не удалось', false);
       });
-    console.log(this.uploadSolutionFrom);
     this.uploadSolutionFormData.delete("file");
   }
 

@@ -20,6 +20,9 @@ export class CreateWindowComponent {
 
   @Input()
   buttonName: string;
+  
+  @Input()
+  needSecond: string;
 
   @Output()
   inputValue = new EventEmitter<string>();

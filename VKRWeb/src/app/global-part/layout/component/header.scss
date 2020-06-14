@@ -72,9 +72,10 @@ $confirm: #05a3ff;
 
 	&__profile-photo {
 		margin-left: 28px;
-		border-radius: 25px;
-		width: 50px;
-		height: 50px;
+		border-radius: 100px;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
 	}
 
 	&__exit-logo {

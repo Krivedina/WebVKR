@@ -8,19 +8,21 @@ import { AuthenticationBaseService } from "src/app/global-part/authentication/da
 export class TaskBaseService {
   constructor(
     private httpService: HttpService,
-    private authenticationBaseService: AuthenticationBaseService
+    private authenticationBaseService: AuthenticationBaseService,
   ) {}
 
-  public getTask(taskId) {
+  public getTask(taskId, flag = true) {
     const userId = this.authenticationBaseService.getIsAuthenticated().userId;
     return this.httpService.getRequest(
       RequestPathList.getTask + `?taskId=${taskId}` + `&userId=${userId}`,
-      CacheListName.task + `${taskId}`
+      CacheListName.task + `${taskId}`,flag
     );
   }
 
   public postUploadSolution(solutionData, taskId) {
-    return this.httpService.postRequest(RequestPathList.sendSolution + `?taskId=${taskId}`, solutionData)
+    return this.httpService.postRequest(
+      RequestPathList.sendSolution + `?taskId=${taskId}`,
+      solutionData
+    );
   }
-
 }

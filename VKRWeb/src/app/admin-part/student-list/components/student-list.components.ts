@@ -2,9 +2,10 @@ import { Component, OnInit, HostListener } from "@angular/core";
 import { StudentListViewModel } from "../view-model/student-list.view-model";
 import { FormGroup, FormControl } from "@angular/forms";
 import { StudentListBaseService } from "../data/student-list.base.service";
-import { mergeMap } from "rxjs/operators";
+import { mergeMap, catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
-import { from, of, forkJoin } from "rxjs";
+import { forkJoin, of } from "rxjs";
+import { WrapperMainBaseService } from "src/app/global-part/wrapper-main/data/wrapper-main.base.service";
 
 @Component({
   selector: "student-list",
@@ -13,13 +14,12 @@ import { from, of, forkJoin } from "rxjs";
 })
 export class StudentListComponent implements OnInit {
   public isOpen: boolean = true;
-  public isDeleteGroup: boolean = false;
   public isCreateGroup: boolean = false;
-  public isEditGroupTitle: boolean = false;
-  public isDeleteStudent: boolean = false;
-  public isDeleteCourse: boolean = false;
+  public isStudentPageLoad: boolean = false;
 
   public currentGroup: any;
+  public currentStudent: any;
+  public currentCourse: any;
   public allCourseList: any;
 
   public modelStudentList: StudentListViewModel = new StudentListViewModel();
@@ -34,22 +34,28 @@ export class StudentListComponent implements OnInit {
 
   @HostListener("click", ["$event"]) onClick(e: any) {
     if (e.target.className.match("edit-block-wrapper")) {
-      this.isDeleteGroup = false;
       this.isCreateGroup = false;
-      this.isEditGroupTitle = false;
-      this.isDeleteStudent = false;
-      this.isDeleteCourse = false;
       if (this.currentGroup) {
         this.currentGroup.isEditGroupTitle = false;
         this.currentGroup.isDeleteGroup = false;
+        this.currentGroup.isDeleteCourse = false;
       }
+      if (this.currentStudent) {
+        this.currentStudent.isDeleteStudent = false;
+      }
+      if (this.currentCourse) {
+        this.currentCourse.isDeleteCourse = false;
+      }
+      this.currentCourse = null;
       this.currentGroup = null;
+      this.currentStudent = null;
     }
   }
 
   constructor(
     private studentListBaseService: StudentListBaseService,
-    private router: Router
+    private router: Router,
+    private wrapperMainBaseService: WrapperMainBaseService
   ) {}
 
   public ngOnInit(): void {
@@ -57,6 +63,7 @@ export class StudentListComponent implements OnInit {
   }
 
   public createStudentListPage(flag = true) {
+    this.isStudentPageLoad = true;
     forkJoin(
       this.studentListBaseService.getGroupList(flag),
       this.studentListBaseService.getCourseList()
@@ -64,6 +71,7 @@ export class StudentListComponent implements OnInit {
       const groupData = groupDataList[0];
       this.allCourseList = groupDataList[1];
       this.modelStudentList.fillModel(groupData);
+      this.isStudentPageLoad = false;
     });
   }
 
@@ -85,12 +93,14 @@ export class StudentListComponent implements OnInit {
     this.currentGroup.isEditGroupTitle = !this.currentGroup.isEditGroupTitle;
   }
 
-  public deleteUserModal() {
-    this.isDeleteStudent = !this.isDeleteStudent;
+  public deleteUserModal(student) {
+    this.currentStudent = student;
+    this.currentStudent.isDeleteStudent = !this.currentStudent.isDeleteStudent;
   }
 
-  public deleteCourseModal() {
-    this.isDeleteCourse = !this.isDeleteCourse;
+  public deleteCourseModal(course) {
+    this.currentCourse = course;
+    this.currentCourse.isDeleteCourse = !this.currentCourse.isDeleteCourse;
   }
 
   public deleteGroup(value: string) {
@@ -120,18 +130,74 @@ export class StudentListComponent implements OnInit {
     this.currentGroup.isEditGroupTitle = false;
   }
 
-  public deleteStudent(value: string) {}
+  public deleteStudent(value: string, group) {
+    if (!value) {
+      this.currentStudent.isDeleteStudent = false;
+    } else {
+      this.currentGroup = group;
+      this.studentListBaseService
+        .postDeleteStudent(group.id, this.addStudentGroupForm.value.email)
+        .pipe(
+          mergeMap(() => {
+            return this.studentListBaseService.getGroupList(false);
+          })
+        )
+        .subscribe((groupData) => {
+          this.modelStudentList.fillModel(groupData);
+          this.modelStudentList.groupList.forEach((group) => {
+            if (group.id === this.currentGroup.id) {
+              group.isOpenView = true;
+            }
+          });
+          this.currentGroup = null;
+        });
+    }
+    this.currentStudent = null;
+    console.log(value);
+  }
 
-  public deleteCourse(value: string) {}
+  public deleteCourse(value: string, group) {
+    if (!value) {
+      this.currentCourse.isDeleteCourse = false;
+      return;
+    }
+    this.currentGroup = group;
+    this.studentListBaseService
+      .postDeleteCourse(group.id, [this.addCourseGroupForm.value.course])
+      .pipe(
+        mergeMap(() => this.studentListBaseService.getGroupList(false)),
+        catchError((error) => {
+          return of(error);
+        })
+      )
+      .subscribe((groupData) => {
+        if (groupData.name === "HttpErrorResponse") {
+          this.wrapperMainBaseService.showMessage(
+            "Ошибка при удалении курса",
+            false
+          );
+        } else {
+          this.modelStudentList.fillModel(groupData);
+          this.modelStudentList.groupList.forEach((group) => {
+            if (group.id === this.currentGroup.id) {
+              group.isOpenView = true;
+            }
+          });
+          this.wrapperMainBaseService.showMessage(
+            "Курс удален",
+            true
+          );
+        }
+        this.currentCourse.isDeleteCourse = false;
+      });
+  }
 
   public addNewStudent(group) {
-    console.log(this.addStudentGroupForm.value, group);
     this.currentGroup = group;
     this.studentListBaseService
       .postInvite(group.id, this.addStudentGroupForm.value.email)
       .pipe(
-        mergeMap((res) => {
-          console.log(res);
+        mergeMap(() => {
           return this.studentListBaseService.getGroupList(false);
         })
       )
@@ -171,6 +237,11 @@ export class StudentListComponent implements OnInit {
         });
         this.currentGroup = null;
       });
+  }
+
+  public toCourseTasks(course) {
+    console.log(course);
+    this.router.navigate([`/edit-course`]);
   }
 
   public toCourseList(student) {

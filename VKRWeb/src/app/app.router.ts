@@ -17,6 +17,7 @@ import { NotFoundPageComponent } from "./global-part/http/not-found-page/not-fou
 import { NgModule } from "@angular/core";
 import { UserListComponent } from "./global-part/user-list/components/user-list.component";
 import { StudentResultComponent } from "./global-part/student-result/component/student-result.component";
+import { CheckTaskComponent } from './admin-part/check-task/component/check-task.component';
 
 const routers: Routes = [
   {
@@ -81,8 +82,8 @@ const routers: Routes = [
   },
   {
     path: "course-list/user/:name/:userId/:courseName/:taskId",
-    component: TaskComponent,
-    canActivate: [AuthicationGuard],
+    component: CheckTaskComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: "profile/user/:name/:userId",
