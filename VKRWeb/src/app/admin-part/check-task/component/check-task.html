@@ -9,7 +9,7 @@
             <span class="deadline-block__title">{{checkTaskModel.deadline}}</span>
             <button (click)="completeTask()" class="deadline-block__complete-task-button low-press-button">Зачесть задачу и требования</button>
             <span
-                class="deadline-block__status">{{checkTaskModel.currentScore === checkTaskModel.maxScore ? "Закрыт": "В работе"}}</span>
+                class="deadline-block__status">{{checkTaskModel.currentScore === checkTaskModel.maxScore ? "Закрыта": "В работе"}}</span>
         </article>
         <form class="set-score" [formGroup]="taskScoreForm">
             <label class="custom-input">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="requirements-block__button-block">
                         <button (click)="setRequirementValue(true, requirement)" *ngIf="!requirement.status"
-                            class="low-press-button">Засчитать</button>
+                            class="low-press-button">Сделано</button>
                         <button (click)="setRequirementValue(false, requirement)" *ngIf="requirement.status"
                             class="low-press-button">Не сделано</button>
                     </div>

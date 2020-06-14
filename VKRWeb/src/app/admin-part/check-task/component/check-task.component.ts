@@ -22,7 +22,9 @@ export class CheckTaskComponent implements OnInit {
   public downloadEntryURL: any;
   public downloadSolutionURL: any;
   public progress: any;
+
   public currentTaskId: any;
+  public currentStudentId: any;
 
   public isCheckTaskPageLoad: boolean = false;
 
@@ -45,15 +47,22 @@ export class CheckTaskComponent implements OnInit {
       .pipe(
         mergeMap((params: ParamMap) => {
           this.currentTaskId = params.get("taskId");
-          return this.taskBaseService.getTask(this.currentTaskId, false);
+          this.currentStudentId = params.get("userId");
+          return this.checkTaskBaseService.getTask(
+            this.currentTaskId,
+            this.currentStudentId
+          );
         })
       )
       .subscribe((taskData) => {
         this.checkTaskModel.fillModel(taskData);
 
-        this.downloadEntryURL =
-          RequestPathList.downloadEntryTaskData +
-          `?attachmentId=${this.checkTaskModel.input.id}`;
+        if (this.checkTaskModel.input) {
+          this.downloadEntryURL =
+            RequestPathList.downloadEntryTaskData +
+            `?attachmentId=${this.checkTaskModel.input.id}`;
+        }
+
         this.downloadSolutionURL =
           RequestPathList.downloadSolution +
           `?attachmentId=${this.checkTaskModel.id}`;
@@ -67,23 +76,32 @@ export class CheckTaskComponent implements OnInit {
       this.taskScoreForm.value.currentScore > this.checkTaskModel.maxScore
         ? this.checkTaskModel.maxScore
         : this.taskScoreForm.value.currentScore;
-    this.editTaskBaseService
-      .postSaveTask({
-        ...this.checkTaskModel,
-        currentScore: +newScore,
-      })
+    this.checkTaskBaseService
+      .postRateTask(
+        {
+          ...this.checkTaskModel,
+          currentScore: +newScore,
+        },
+        this.currentStudentId
+      )
       .pipe(
         mergeMap(() => {
-          return this.taskBaseService.getTask(this.currentTaskId, false);
+          return this.checkTaskBaseService.getTask(
+            this.currentTaskId,
+            this.currentStudentId
+          );
         })
       )
       .subscribe((taskData) => {
         this.checkTaskModel.fillModel(taskData);
         this.taskScoreForm.reset();
 
-        this.downloadEntryURL =
-          RequestPathList.downloadEntryTaskData +
-          `?attachmentId=${this.checkTaskModel.input.id}`;
+        if (this.checkTaskModel.input) {
+          this.downloadEntryURL =
+            RequestPathList.downloadEntryTaskData +
+            `?attachmentId=${this.checkTaskModel.input.id}`;
+        }
+
         this.downloadSolutionURL =
           RequestPathList.downloadSolution +
           `?attachmentId=${this.checkTaskModel.id}`;
@@ -97,24 +115,33 @@ export class CheckTaskComponent implements OnInit {
         return requirement;
       }
     );
-    this.editTaskBaseService
-      .postSaveTask({
-        ...this.checkTaskModel,
-        requirementList: requirementList,
-        currentScore: +this.checkTaskModel.maxScore,
-      })
+    this.checkTaskBaseService
+      .postRateTask(
+        {
+          ...this.checkTaskModel,
+          requirementList: requirementList,
+          currentScore: +this.checkTaskModel.maxScore,
+        },
+        this.currentStudentId
+      )
       .pipe(
         mergeMap(() => {
-          return this.taskBaseService.getTask(this.currentTaskId, false);
+          return this.checkTaskBaseService.getTask(
+            this.currentTaskId,
+            this.currentStudentId
+          );
         })
       )
       .subscribe((taskData) => {
         this.checkTaskModel.fillModel(taskData);
         this.taskScoreForm.reset();
 
-        this.downloadEntryURL =
-          RequestPathList.downloadEntryTaskData +
-          `?attachmentId=${this.checkTaskModel.input.id}`;
+        if (this.checkTaskModel.input) {
+          this.downloadEntryURL =
+            RequestPathList.downloadEntryTaskData +
+            `?attachmentId=${this.checkTaskModel.input.id}`;
+        }
+
         this.downloadSolutionURL =
           RequestPathList.downloadSolution +
           `?attachmentId=${this.checkTaskModel.id}`;
@@ -130,22 +157,31 @@ export class CheckTaskComponent implements OnInit {
         return requirement;
       }
     );
-    this.editTaskBaseService
-      .postSaveTask({
-        ...this.checkTaskModel,
-        requirementList: requirementList,
-      })
+    this.checkTaskBaseService
+      .postRateTask(
+        {
+          ...this.checkTaskModel,
+          requirementList: requirementList,
+        },
+        this.currentStudentId
+      )
       .pipe(
         mergeMap(() => {
-          return this.taskBaseService.getTask(this.currentTaskId, false);
+          return this.checkTaskBaseService.getTask(
+            this.currentTaskId,
+            this.currentStudentId
+          );
         })
       )
       .subscribe((taskData) => {
         this.checkTaskModel.fillModel(taskData);
 
-        this.downloadEntryURL =
-          RequestPathList.downloadEntryTaskData +
-          `?attachmentId=${this.checkTaskModel.input.id}`;
+        if (this.checkTaskModel.input) {
+          this.downloadEntryURL =
+            RequestPathList.downloadEntryTaskData +
+            `?attachmentId=${this.checkTaskModel.input.id}`;
+        }
+
         this.downloadSolutionURL =
           RequestPathList.downloadSolution +
           `?attachmentId=${this.checkTaskModel.id}`;

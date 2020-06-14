@@ -230,7 +230,7 @@ export class EditCourseComponent implements OnInit {
     console.log(courseModel);
     const newCourseModel = {
       name: courseModel.firstTitle,
-      maxScore: +courseModel.secondTitle,
+      maxScore: 0,
     };
     this.editCourseBaseService
       .postEditCourse(newCourseModel, this.currentCourse.id)
@@ -253,7 +253,7 @@ export class EditCourseComponent implements OnInit {
   public addNewCourse(courseModel: any) {
     const newCourseModel = {
       name: courseModel.firstTitle,
-      maxScore: +courseModel.secondTitle,
+      maxScore: 0,
       courseTasks: [],
     };
     this.editCourseBaseService.postCreateCourse(newCourseModel).subscribe(

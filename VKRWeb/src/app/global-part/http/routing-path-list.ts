@@ -37,6 +37,8 @@ export const RequestPathList = {
   sendSolution: "http://localhost:8080/task/uploadSolution",
   //post
   downloadSolution: "http://localhost:8080/task/downloadAttachment",
+  //post
+  markTask: "http://localhost:8080/task/rateSolution",
 
   //Course
   //get
